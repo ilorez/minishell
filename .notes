@@ -1,0 +1,9 @@
+git checkout -b abde/my_feature
+git --set_upstream origin....
+git add
+git commit
+git push
+
+go to github and merge your work with master after been tested "asap"
+
+
