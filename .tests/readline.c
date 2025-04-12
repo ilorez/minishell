@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <stdlib.h>
 
 int main()
 {
@@ -12,7 +13,9 @@ int main()
   {
     line = readline("minish> ");
     printf("str:%s\n", line);
+    free(line);
   }
+  rl_clear_history();
   return (0);
 }
 
