@@ -3,8 +3,6 @@
 [ ] - create Parser Algo
 [ ] - learn about strtok
 [ ] - algo abstract syntax tree
-[ ] - how it's possible to manage commands like "l""s" ?
-[ ] - something here 1...
-
-[ ] - something here 2...
+[x] - how it's possible to manage commands like "l""s" ?
+[x] - read about bash quotes
 
