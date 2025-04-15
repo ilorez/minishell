@@ -1,8 +1,9 @@
-[ ] - Get a good undestanding of subject
-[ ] - Understand and Analyse Parser part 
-[ ] - create Parser Algo
+[x] - Get a good undestanding of subject
+[x] - Understand and Analyse Parser part 
+[x] - create basic Parser Algo
 [ ] - learn about strtok
-[ ] - algo abstract syntax tree
+[x] - algo abstract syntax tree
 [x] - how it's possible to manage commands like "l""s" ?
 [x] - read about bash quotes
+[ ] - learn about Subject External functs
 
