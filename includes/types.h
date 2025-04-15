@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:18:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/15 12:53:41 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:39:16 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,24 @@ typedef struct s_env {
   char *value;
 } t_env;
 
-// this struct should change to handle this all this cases
-// >file
-// &>file
-// >>file
-// &>>file
-// <file
-// <<file
-// [number]>file --> example: 2>file
-// ...
+// fd type
 typedef struct s_fd {
   enum {
     IN,
     OUT,
-    HEREDOC
+    HEREDOC,
+    OUTAPPEND
   } type;
-  char *path;
-} t_fd; // no not like that
+  char *text; // path | EOF
+} t_fd; //WARN: are we required to handel redirections like 
+        // 2>file or &>file ... ?
 
 // simple command
 typedef struct s_simple_cmd {
 	char *cmd;
 	char **args;
-  t_fd out; // default NULL
-  char *in; // default NULL
+  t_fd out; // NOTE: you can redirect the output and input inside pipe for any command
+  t_fd in;
 } t_simple_cmd;
 
 // complex command
@@ -77,13 +71,11 @@ typedef struct s_complex_cmd {
 	void *next;
 } t_complex_cmd ;
 
-
-
 // data container 
 // Note: this is what will be passsed to execute function
 typedef struct s_data {
 	t_history *his;
 	t_complex_cmd *cmds;
   t_env **vars;
-  t_bool 
+  t_fd **fd_list; // those at begining and end of command with it's order
 } t_data;
