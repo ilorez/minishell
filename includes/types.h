@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:18:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/15 13:39:16 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:53:53 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ typedef struct s_fd {
 typedef struct s_simple_cmd {
 	char *cmd;
 	char **args;
-  t_fd out; // NOTE: you can redirect the output and input inside pipe for any command
-  t_fd in;
+  t_fd **fd_list; // those at begining and end of command with it's order
 } t_simple_cmd;
 
 // complex command
@@ -71,9 +70,15 @@ typedef struct s_complex_cmd {
 	void *next;
 } t_complex_cmd ;
 
+typedef struct s_prompt {
+  char *prompt;
+  char *path;
+} t_prompt;
+
 // data container 
 // Note: this is what will be passsed to execute function
 typedef struct s_data {
+  t_prompt prompt;
 	t_history *his;
 	t_complex_cmd *cmds;
   t_env **vars;
