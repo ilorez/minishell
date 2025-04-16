@@ -4,8 +4,10 @@ vpath %.c	utils
 BUILD_DR = ./build/
 NAME =	minishell
 
+LIBFT_DR = ./libft
+INCLUDES_DRS = -I./includes -I./libft/includes 
+
 FLAGS = -Wall -Wextra -Werror -lreadline # -fsanitize=address -g #-g3 #
-INCLUDES_DRS = -I./includes
 CC = cc
 RM = rm -f
 
@@ -29,10 +31,17 @@ $(BUILD_DR):
 
 clean:
 	$(RM) $(OBJS)
+	make -C $(LIBFT_DR) fclean
 
 fclean: clean
 	$(RM) $(NAME)
 
+
 re: fclean all
+
+test: 
+		make -C $(LIBFT_DR)
+		$(CC)  ./test_read_cmd/read_command.c ./test_read_cmd/string.c -lreadline -lhistory $(LIBFT_DR)/libft.a  -o read_test
+
 
 .PHONY: all clean fclean re
