@@ -6,4 +6,5 @@
 [x] - read about bash quotes
 [ ] - learn about Subject External functs
 [ ] - learn about strtok
+[ ] - create example of read command function
 
