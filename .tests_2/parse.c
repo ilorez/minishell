@@ -24,6 +24,15 @@ void ft_print_ast(cmd *node, int depth) {
 	ft_print_ast(node->right, depth + 1);
 }
 
+static int	ft_strcmp(char *a, char *b)
+{
+	while (*a && *a == *b)
+	{
+		a++;
+		b++;
+	}
+	return (*a - *b);
+}
 
 int		ft_isspace(char c)
 {
@@ -104,6 +113,7 @@ void	ft_next_token(void)
 	ptr = root->ptr;
 	str = ft_create_empty_str(10);
 	while (ft_isspace(*ptr)) ptr++;
+	if (ft_strcmp(ptr, "exit") == 0)	exit(0);
 	if (*ptr == '\0')
 	{
 		root->curr_token.type = EOL;
