@@ -1,6 +1,7 @@
 
 #include "header.h"
 
+
 void	ft_print_ast(cmd *node, int depth)
 {
 	if (!node)

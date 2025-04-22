@@ -21,4 +21,9 @@ cmd		*ft_parse_list(void);
 cmd		*ft_parse_cmd(void);
 cmd		*ft_new_node(t_token op,char *value, cmd *l, cmd *r);
 
+// Helpers
+void	ft_print_ast(cmd *node, int depth);
+int	ft_strcmp(char *a, char *b);
+int	ft_isspace(char c);
+
 #endif

@@ -83,14 +83,13 @@ void	ft_next_token(void)
 	char		*ptr;
 	t_token		tt;
 	t_string	*str;
-	
+
 	ptr = root->ptr;
-	tt = ft_get_token(ptr);
-	str = ft_create_empty_str(10);
 	while (ft_isspace(*ptr))
 		ptr++;
 	if (ft_strcmp(ptr, "exit") == 0)
 		exit(0);
+	tt = ft_get_token(ptr);
 	root->curr_token.type = tt;
 	if (tt == EOL)
 		return ;
@@ -100,6 +99,7 @@ void	ft_next_token(void)
 		ptr++;
 	else
 	{
+		str = ft_create_empty_str(10);
 		while (*ptr && *ptr != '&' && *ptr != '|' && *ptr != ')')
 			ft_string_append(str, *(ptr++));
 		root->curr_token.value = str->value;
@@ -112,13 +112,13 @@ t_token ft_get_token(char *ptr)
 	if (!ptr || !*ptr)
 		return EOL;
 	if (ptr[0] == '&')
-		return ((AND * (ptr[1] == '&')) || BACK);
+		return (AND * (ptr[1] == '&')) + (BACK * (ptr[1] != '&'));
 	if (ptr[0] == '|')
-		return ((OR * (ptr[1] == '|')) || PIPE);
+		return (OR * (ptr[1] == '|')) + (PIPE * (ptr[1] != '|'));
 	if (ptr[0] == '<')
-		return ((LESSL * (ptr[1] == '<')) || LESS);
+		return (LESSL * (ptr[1] == '<')) + (LESS * (ptr[1] != '<'));
 	if (ptr[0] == '>')
-		return ((GREATG * (ptr[1] == '>')) || GREAT);
+		return (GREATG * (ptr[1] == '>')) + (GREAT * (ptr[1] != '>'));
 	if (ptr[0] == '(')
 		return LPARENT;
 	if (ptr[0] == ')')
