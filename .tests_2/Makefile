@@ -1,7 +1,7 @@
-
+LIB=-lreadline
 
 all:
-	cc -g -lreadline *.c
+	cc -g $(LIB) *.c
 
 clean:
 	rm -rf a.out
