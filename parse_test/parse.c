@@ -33,7 +33,7 @@ cmd	*ft_parse_list(void)
 
 	left = ft_parse_cmd();
 	while (root->curr_token.type == AND || root->curr_token.type == OR
-		|| root->curr_token.type == PIPE)
+			|| root->curr_token.type == PIPE)
 	{
 		token = root->curr_token.type;
 		ft_next_token();
@@ -81,58 +81,52 @@ cmd	*ft_new_node(t_token op, char *value, cmd *l, cmd *r)
 void	ft_next_token(void)
 {
 	char		*ptr;
+	t_token		tt;
 	t_string	*str;
-
+	
 	ptr = root->ptr;
+	tt = ft_get_token(ptr);
 	str = ft_create_empty_str(10);
 	while (ft_isspace(*ptr))
 		ptr++;
 	if (ft_strcmp(ptr, "exit") == 0)
 		exit(0);
-	if (*ptr == '\0')
-	{
-		root->curr_token.type = EOL;
+	root->curr_token.type = tt;
+	if (tt == EOL)
 		return ;
-	}
-	if (ptr[0] == '|' && ptr[1] == '|')
-	{
-		root->curr_token.type = OR;
+	if (tt == OR || tt == AND || tt == LESSL || tt == GREATG)
 		ptr += 2;
-	}
-	else if (ptr[0] == '&' && ptr[1] == '&')
-	{
-		root->curr_token.type = AND;
-		ptr += 2;
-	}
-	else if (ptr[0] == '|')
-	{
-		root->curr_token.type = PIPE;
+	else if (tt != WORD)
 		ptr++;
-	}
-	else if (ptr[0] == '(')
-	{
-		root->curr_token.type = LPARENT;
-		ptr++;
-	}
-	else if (ptr[0] == ')')
-	{
-		root->curr_token.type = RPARENT;
-		ptr++;
-	}
 	else
 	{
 		while (*ptr && *ptr != '&' && *ptr != '|' && *ptr != ')')
 			ft_string_append(str, *(ptr++));
-		root->curr_token.type = WORD;
 		root->curr_token.value = str->value;
 	}
 	root->ptr = ptr;
 }
 
-t_token		ft_get_token(char *p)
+t_token ft_get_token(char *ptr)
 {
-	t_token	tt;
-	
-	
-	return (tt);
+	if (!ptr || !*ptr)
+		return EOL;
+	if (ptr[0] == '&')
+		return ((AND * (ptr[1] == '&')) || BACK);
+	if (ptr[0] == '|')
+		return ((OR * (ptr[1] == '|')) || PIPE);
+	if (ptr[0] == '<')
+		return ((LESSL * (ptr[1] == '<')) || LESS);
+	if (ptr[0] == '>')
+		return ((GREATG * (ptr[1] == '>')) || GREAT);
+	if (ptr[0] == '(')
+		return LPARENT;
+	if (ptr[0] == ')')
+		return RPARENT;
+	if (ptr[0] == '\'')
+		return SINGLE_Q;
+	if (ptr[0] == '"')
+		return DOUBLE_Q;
+	return WORD;
 }
+
