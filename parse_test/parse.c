@@ -87,8 +87,6 @@ void	ft_next_token(void)
 	ptr = root->ptr;
 	while (ft_isspace(*ptr))
 		ptr++;
-	if (ft_strcmp(ptr, "exit") == 0)
-		exit(0);
 	tt = ft_get_token(ptr);
 	root->curr_token.type = tt;
 	if (tt == EOL)
