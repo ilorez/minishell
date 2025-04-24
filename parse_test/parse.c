@@ -10,6 +10,9 @@ int	main(void)
 	while (1)
 	{
 		buffer = readline("=> ");
+		if (!buffer) break;
+		if (*buffer)
+			add_history(buffer);
 		ft_parse_line(buffer);
 		ft_print_ast(root->left, 0);
 		// TODO: free all the root and buffer
@@ -53,8 +56,8 @@ cmd	*ft_parse_cmd(void)
 		leaf = ft_parse_list();
 		if (root->curr_token.type != RPARENT)
 		{
-			printf("syntax err: expected %d\n", RPARENT);
-			exit(1);
+			printf("-Syntax err: unclosed \")\"\n");
+			return (NULL);
 		}
 		ft_next_token();
 		return (ft_new_node(LPARENT, NULL, leaf, NULL));
