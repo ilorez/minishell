@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:18:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/24 15:08:40 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:53:53 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,26 @@ typedef enum s_bool {
   true
 } t_bool;
 
+// commands type
+typedef enum s_type {
+	SIMPLE,
+	COMPLEX
+} t_type;
+
 // relations between commands
-typedef enum s_rel {
+typedef enum s_relation {
   END,
   PIPE,
   OR,
   AND
-} t_rel;
+} t_relation;
 
-typedef struct s_cmd {
-  t_rel type;
-  void *left;
-  void *right;
-} t_cmd;
-
-typedef struct s_exec 
-{
-  char **argv;
-  char **env;
-
-} t_exec;
-
-typedef struct s_redir {
-  int mode;
-  int fd;
-  char *path;
-} t_redir;
-
-
+// history
+typedef struct s_history {
+	char **list; // last element is NULL
+	int current_index;
+	int size;
+} t_history;
 
 // env
 typedef struct s_env {
@@ -51,11 +43,23 @@ typedef struct s_env {
   char *value;
 } t_env;
 
+// fd type
+typedef struct s_fd {
+  enum {
+    IN,
+    OUT,
+    HEREDOC,
+    OUTAPPEND
+  } type;
+  char *text; // path | EOF
+} t_fd; //WARN: are we required to handel redirections like 
+        // 2>file or &>file ... ?
 
 // simple command
 typedef struct s_simple_cmd {
 	char *cmd;
 	char **args;
+  t_fd **fd_list; // those at begining and end of command with it's order
 } t_simple_cmd;
 
 // complex command
