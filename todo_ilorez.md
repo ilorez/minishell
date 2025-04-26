@@ -4,7 +4,8 @@
 [x] - algo abstract syntax tree
 [x] - how it's possible to manage commands like "l""s" ?
 [x] - read about bash quotes
+[x] - create basic files struct
+[x] - create example of read command function
 [ ] - learn about Subject External functs
 [ ] - learn about strtok
-[ ] - create example of read command function
 

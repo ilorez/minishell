@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:18:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/26 15:29:57 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:54:58 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 // relations between commands
 typedef enum s_rel {
-  END,
-  PIPE,
   OR,
-  AND
+  AND,
+  PIPE,
+  REDIR // put redir value in left var
 } t_rel;
 
 typedef struct s_cmd {
@@ -31,8 +31,6 @@ typedef struct s_cmd {
 typedef struct s_exec 
 {
   char **argv;
-  char **env;
-
 } t_exec;
 
 // env
@@ -59,7 +57,7 @@ typedef struct s_redir {
 typedef struct s_data {
   t_prompt prompt;
   t_env **vars;
-  t_redir **fd_list; // those at begining and end of command with it's order
+  t_cmd *ast;
 } t_data;
 
 #endif
