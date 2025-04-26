@@ -2,15 +2,33 @@
 #include "header.h"
 
 
+
 void	ft_print_ast(cmd *node, int depth)
 {
+	char *arr[]={
+	"ROOT",
+	"WORD",
+	"AND",
+	"OR",
+	"PIPE",
+	"BACK",
+	"LESS",
+	"LESSL",
+	"GREAT",
+	"GREATG",
+	"LPARENT",
+	"RPARENT",
+	"SINGLE_Q",
+	"DOUBLE_Q",
+	"EOL"};
+
 	if (!node)
 		return ;
 	// Indent to show depth
 	for (int i = 0; i < depth; i++)
 		printf("  ");
 	// Print basic node info
-	printf("Node: token=%d", node->token);
+	printf("Node->["GREEN"%s"RESET"]", arr[node->token]);
 	if (node->value)
 		printf(", value='%s'", node->value);
 	printf("\n");

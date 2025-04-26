@@ -26,4 +26,13 @@ void	ft_print_ast(cmd *node, int depth);
 int	ft_strcmp(char *a, char *b);
 int	ft_isspace(char c);
 
+// Colors
+#define RED "\e[31m"
+#define GREEN "\e[32m"
+#define BLUE "\e[36m"
+#define RESET "\e[00m"
+#define RED_BOLD "\e[31;01m"
+#define GREEN_BOLD "\e[32;01m"
+#define BLUE_BOLD "\e[36;01m"
+
 #endif
