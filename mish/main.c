@@ -2,12 +2,12 @@
 #include "./includes/container.h"
 
 void handle_sigint(int sig) {
-    printf("signal: %d\n", sig);
-    // TODO: here it's should stop process it's running 
-    // if not it's should just show new prompt
-    rl_on_new_line();
-    rl_replace_line("", 0);  // Clear input buffer
+    (void) sig;
+    printf("\n"); // Move to a new line
+    rl_on_new_line(); // Regenerate the prompt on a newline
+    rl_replace_line("", 0); // Clear the previous text
     rl_redisplay();
+    // TODO: stop running process
 }
 
 void init_history() {
@@ -22,8 +22,10 @@ int main(int ac, char **av, char **env) {
     // the setup it's free memory and exit auto on error
     (void) ac, (void)av, (void)env;
     char *input;
-    
-    signal(SIGINT, handle_sigint);
+
+    if (signal(SIGINT, handle_sigint) == SIG_ERR) {
+        printf("failed to register interrupts with kernel\n");
+    }   
     init_history();
 
     while (1) {
