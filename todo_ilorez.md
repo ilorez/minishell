@@ -6,6 +6,7 @@
 [x] - read about bash quotes
 [x] - create basic files struct
 [x] - create example of read command function
+[ ] - ls | <<EOF cat -e this is error , << ls | cat -e <<EOF: this is not error (never mind)
 [ ] - learn about Subject External functs
 [ ] - learn about strtok
 
