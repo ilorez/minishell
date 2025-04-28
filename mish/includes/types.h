@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:18:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/27 17:06:59 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/04/28 12:27:15 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,23 @@
 #define FT_NAME "minishell> "
 
 // tokens 
-typedef enum	e_type{
-	ROOT,
-	LPAR,
-	RPAR,
-	AND,
-	OR,
-	PIPE,
-  REDIR,
-	WORD,
-	EOL
+typedef enum	s_type{
+	T_ROOT,
+	T_LPAR,
+	T_RPAR,
+	T_AND,
+	T_OR,
+	T_PIPE,
+  T_REDIR,
+	T_EXEC,
+	T_EOL
 }	t_type;
-
-typedef struct s_hdoc {
-  char *eof;
-} t_hdoc;
 
 typedef struct s_cmd {
   t_type type;
-  void *left;
-  void *right;
+  void *left; //possible types: 1- exec (char **) 2- redir (t_redir *) 3-others (t_cmd *) 
+  void *right; // -t_cmd *
 } t_cmd;
-
-typedef struct s_exec 
-{
-  char **argv;
-} t_exec;
 
 typedef struct s_redir {
   char *fpath;
