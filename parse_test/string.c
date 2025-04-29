@@ -6,14 +6,13 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:55:00 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/21 17:10:48 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/04/22 19:12:55 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./string.h"
+#include "header.h"
 
 //TODO: check for the use of calloc in this file
-
 
 size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
