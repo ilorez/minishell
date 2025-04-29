@@ -5,7 +5,7 @@ t_arr	*arr_new(void)
 {
 	t_arr	*arr;
 
-	arr = ft_calloc(1, sizeof(t_arr*));
+	arr = ft_calloc(1, sizeof(t_arr));
 	if (!arr)
 		return (NULL);
 	arr->index = 0;
