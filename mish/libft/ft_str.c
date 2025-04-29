@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.c                                           :+:      :+:    :+:   */
+/*   ft_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:55:00 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/28 15:06:23 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:38:47 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./string.h"
+#include "./includes/t_str.h"
 
 // expand string
 static int _str_expand(t_str *str, size_t size)
@@ -38,9 +38,24 @@ int str_append(t_str *str, char c)
 	if (str->size - str->_wi == 0)
 		if (!_str_expand(str, str->size/2))
       return (0);
-	str->value[str->i++] = c;
-	str->value[str->i] = 0;
-	str->_wi++;
+	str->value[str->_wi++] = c;
+	str->value[str->_wi] = 0;
+  return (1);
+}
+
+int str_append_list(t_str *str, char *list)
+{
+  size_t len;
+
+	if (!str || !*list)
+		return 0;
+  len = ft_strlen(list); 
+	if (str->size - str->_wi - len <= 0)
+		if (!_str_expand(str, len))
+      return (0);
+  while (*list)
+	  str->value[str->_wi++] = *list++;
+	str->value[str->_wi] = 0;
   return (1);
 }
 

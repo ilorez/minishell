@@ -1,4 +1,5 @@
 #include "../../includes/container.h"
+#include "../../libft/includes/t_str.h"
 
 /*
 typedef	struct	s_tokens{
@@ -97,7 +98,9 @@ t_redir *ft_get_redir(char *cmd)
 char *ft_get_cmplx_word(char *cmd)
 {
   int open;
-  char *word;
+  t_str *word;
+
+  word = str_new_empty(5);
   // complex word:
   //  -never start with delim < > | & , otherwase syntax error
   //  -never end with open quotes, otherwise error
@@ -105,18 +108,20 @@ char *ft_get_cmplx_word(char *cmd)
   open = 0;
   while (*cmd)
   {
-    if (ft_isdelimiter(*cmd))
-      break;
     if (!open && *cmd == '"')
-      // get_quotes_value(*cmd, 2)
+      // get_quotes_value(word, ++cmd++, 2)
     if (!open && *cmd == '\'')
-      // get_quotes_value(*cmd, 1)
-    
+      // get_quotes_value(word, ++cmd++, 1)// test if ++i++ works
+    if (ft_strchr(FT_DELIMITERS, *cmd) || ft_isspace(*cmd))
+      break;
+    // add current char to current word
+    if(str_append(word, *cmd))
+      return (str_clean(&word), NULL);
     // here the delimiters ( ) not acceptable
-    
-    while (ft_isspace(*cmd))
-      cmd++;
+    cmd++;
   }
+  if (*cmd == '\(' || *cmd == '\)')
+          // show syntax error
   return word;
 }
 
