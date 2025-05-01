@@ -18,5 +18,5 @@ t_arr	*arr_new(void)
 
 int		arr_append(void *ptr)
 {
-
+	return (0);
 }
