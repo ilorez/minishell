@@ -6,10 +6,11 @@
 [x] - read about bash quotes
 [x] - create basic files struct
 [x] - create example of read command function
+[ ] - fix git token use double pointer to move in child functions
 [ ] - working on double quotes get value
         - working on get_complex_word
         - get double quotes value
-        - check if that works ++i++ inside param of a function
+        - check if that works ++i++ inside param of a function : [NO]
         - go one by one and verify function by funciton take your time 
         - make sure that there's no leaks
         - teste all together to check everything done well
