@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/28 13:36:24 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/03 20:11:25 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "t_errno.h"
 # include "ft_malloc.h"
 # include "t_arr.h"
+# include "t_str.h"
 
 // memory functions
 void		*ft_memset(void *b, int c, size_t len);

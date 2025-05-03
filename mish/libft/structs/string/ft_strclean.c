@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_arr.h                                            :+:      :+:    :+:   */
+/*   ft_strclean.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdenasse <abdenasse@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 20:12:18 by abdenasse          #+#    #+#             */
-/*   Updated: 2025/05/03 20:17:49 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/03 20:24:11 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/03 20:24:14 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/t_str.h"
 
-#ifndef T_STR_H
-#define T_STR_H
-
-typedef	struct s_arr{
-	void	*content;
-	int		index;
-	int		size;
-	void	(*clean)(void *);
-} t_arr;
-
-t_arr	*arr_new(void);
-int		arr_append(void *ptr);
-int		arr_del_item(int index);
-void	arr_free(t_arr *arr);
+// str clean
+void str_clean(t_str **str)
+{
+  if (!str || !*str)
+    return ;
+  free((*str)->value);
+  free(*str);
+  *str = NULL;
+}
 
 
-#endif
