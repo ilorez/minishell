@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str.c                                           :+:      :+:    :+:   */
+/*   ft_strappend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:55:00 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/03 00:02:22 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/03 20:28:06 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/t_str.h"
+#include "../../includes/t_str.h"
 
 // expand string
 static int _str_expand(t_str *str, size_t size)
@@ -59,62 +59,4 @@ int str_append_list(t_str *str, char *list)
   return (1);
 }
 
-// create empty string
-t_str *str_new_emty(size_t size)
-{
-	t_str *str;
 
-	str = ft_calloc(sizeof(t_str), 1);
-	if (!str)
-		return (NULL);
-  if (size < 4)
-    size = 4;
-	str->value = ft_calloc(size + 1, 1);
-	if (!str->value)
-		return (free(str), NULL);
-	str->size = size;
-	str->value[0] = 0;
-	return (str);
-}
-
-// create string
-t_str *str_new(char *content)
-{
-	t_str *str;
-
-	str = ft_calloc(sizeof(t_str), 1);
-	if (!str)
-		return (NULL);
-  str->size = ft_strlen(content);
-  if (str->size < 4)
-    str->size = 4;
-	str->value = ft_calloc(str->size + 1, 1);
-	if (!str->value)
-		return (free(str), NULL);
-	ft_strlcpy(content, str->value, str->size);
-	str->value[0] = 0;
-	return (str);
-}
-
-// str clean
-void str_clean(t_str **str)
-{
-  if (!str || !*str)
-    return ;
-  free((*str)->value);
-  free(*str);
-  *str = NULL;
-}
-
-// str clean
-char *str_extract(t_str **str)
-{
-  char *tmp;
-
-  if (!str || !*str)
-    return NULL;
-  tmp = (*str)->value;
-  free(*str);
-  *str = NULL;
-  return (tmp);
-}
