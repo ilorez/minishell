@@ -21,11 +21,11 @@
 # include <unistd.h>
 
 // local libs
-# include "t_bool.h"
 # include "ft_linked_lst.h"
-# include "t_errno.h"
 # include "ft_malloc.h"
 # include "t_arr.h"
+# include "t_bool.h"
+# include "t_errno.h"
 # include "t_str.h"
 
 // memory functions

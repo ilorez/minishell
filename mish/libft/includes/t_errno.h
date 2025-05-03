@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef T_ERRNO_H
 # define T_ERRNO_H
 
@@ -23,7 +22,7 @@ typedef enum s_errno
 	ERR_MALLOC_FAIL,
 	ERR_UNKNOWN,
 	ERR_COUNT
-}			t_errno;
+}		t_errno;
 
 // Errno function
 void	ft_perror(char *msg, t_errno errno_num);

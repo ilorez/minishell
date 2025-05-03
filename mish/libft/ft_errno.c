@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/t_errno.h"
 #include "./includes/libft.h"
+#include "./includes/t_errno.h"
 
 static void	_ft_create_err_list(char *lst[ERR_COUNT])
 {
@@ -49,4 +49,3 @@ void	ft_perror(char *msg, t_errno error_code)
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd(err_msgs[error_code], STDERR_FILENO);
 }
-

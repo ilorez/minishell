@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdenasse <abdenasse@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: abdenasse <abdenasse@student.1337.ma>        +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 20:32:22 by abdenasse          #+#    #+#             */
-/*   Updated: 2025/05/03 20:32:45 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/03 21:34:56 by abdenasse          #+#    #+#            */
+/*   Updated: 2025/05/03 21:35:45 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../includes/libft.h"
 
 t_arr	*arr_new(void)
@@ -27,7 +26,7 @@ t_arr	*arr_new(void)
 	return (arr);
 }
 
-int		arr_append(void *ptr)
+int	arr_append(void *ptr)
 {
 	return (0);
 }
