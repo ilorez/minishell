@@ -52,7 +52,6 @@ t_type	ft_set_token(char *ptr, void *value)
   value = (void *)ft_get_exec(ptr);
 	return T_EXEC;
 }
-
 char **ft_get_exec(char *cmd)
 {
   char **arr = ft_calloc(sizeof(char *), 100); // for example: //TODO:t_arr
@@ -79,10 +78,9 @@ t_redir *ft_get_redir(char *cmd)
     // rd->fd = 0; // it's 0 by default because we use ft_calloc
     rd->mode = O_RDONLY;
     if (*(++cmd) == '<' && ++cmd)
-    {
-      // rd->fpath = ft_heredoc(ft_get_cmplx_word(cmd)), 
-    }
-    // rd->fpath = ft_get_cmplx_word(cmd);
+      rd->fpath = ft_heredoc(ft_get_cmplx_word(cmd));
+    else 
+      rd->fpath = ft_get_cmplx_word(cmd);
   }
   else
   {
@@ -90,39 +88,9 @@ t_redir *ft_get_redir(char *cmd)
     rd->mode = O_RDONLY | O_WRONLY;
     if (*(++cmd) == '>' && cmd++)
         rd->mode |= O_APPEND;
-    // rd->fpath = ft_get_cmplx_word(cmd);
+    rd->fpath = ft_get_cmplx_word(cmd);
   }
   return rd;
-}
-
-char *ft_get_cmplx_word(char *cmd)
-{
-  int open;
-  t_str *word;
-
-  word = str_new_empty(5);
-  // complex word:
-  //  -never start with delim < > | & , otherwase syntax error
-  //  -never end with open quotes, otherwise error
-  // complex word complete after found <sapce> or <null_term> or <delimiter>
-  open = 0;
-  while (*cmd)
-  {
-    if (!open && *cmd == '"')
-      // get_quotes_value(word, ++cmd++, 2)
-    if (!open && *cmd == '\'')
-      // get_quotes_value(word, ++cmd++, 1)// test if ++i++ works
-    if (ft_strchr(FT_DELIMITERS, *cmd) || ft_isspace(*cmd))
-      break;
-    // add current char to current word
-    if(str_append(word, *cmd))
-      return (str_clean(&word), NULL);
-    // here the delimiters ( ) not acceptable
-    cmd++;
-  }
-  if (*cmd == '\(' || *cmd == '\)')
-          // show syntax error
-  return word;
 }
 
 

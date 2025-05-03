@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:57:42 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/29 15:24:46 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/03 00:02:18 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_str *str_new_empty(size_t size);
 int str_append(t_str *str, char c);
 int str_append_list(t_str *str, char *list);
 void str_clean(t_str **str);
+char *str_extract(t_str **str);
 //size_t str_len(t_str str);
 
 #endif // !DEBUG

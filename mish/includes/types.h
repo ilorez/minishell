@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:18:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/01 11:05:08 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/03 02:54:28 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,18 @@ typedef enum	s_type{
 	T_EOL
 }	t_type;
 
-typedef struct s_cmd {
+typedef struct s_ast {
   t_type type;
-  void *left; //possible types: 1- exec (char **) 2- redir (t_redir *) 3-others (t_cmd *) 
-  void *right; // -t_cmd *
-} t_cmd;
+  void *value;
+  struct s_ast *left; //possible types: 1- exec (char *) 2- redir (t_redir *) 3-others (t_cmd *) 
+  struct s_ast *right; // -t_ast *
+} t_ast;
 
 typedef struct s_redir {
   char *fpath;
   int fd; // 0 for < and 1 for >
   int mode; 
-  t_cmd *cmd; // another struct of commands that the rediriction happen on it
+  t_ast *cmd; // another struct of commands that the rediriction happen on it
 } t_redir;
 
 typedef	struct	s_tokens{

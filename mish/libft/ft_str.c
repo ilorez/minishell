@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:55:00 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/04/29 14:38:47 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/03 00:02:22 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,17 @@ void str_clean(t_str **str)
   free((*str)->value);
   free(*str);
   *str = NULL;
+}
+
+// str clean
+char *str_extract(t_str **str)
+{
+  char *tmp;
+
+  if (!str || !*str)
+    return NULL;
+  tmp = (*str)->value;
+  free(*str);
+  *str = NULL;
+  return (tmp);
 }
