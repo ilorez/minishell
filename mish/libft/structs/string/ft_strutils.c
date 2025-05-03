@@ -13,14 +13,14 @@
 #include "../../includes/t_str.h"
 
 // str clean
-char *str_extract(t_str **str)
+char	*str_extract(t_str **str)
 {
-  char *tmp;
+	char	*tmp;
 
-  if (!str || !*str)
-    return NULL;
-  tmp = (*str)->value;
-  free(*str);
-  *str = NULL;
-  return (tmp);
+	if (!str || !*str)
+		return (NULL);
+	tmp = (*str)->value;
+	free(*str);
+	*str = NULL;
+	return (tmp);
 }

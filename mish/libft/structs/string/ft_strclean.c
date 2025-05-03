@@ -13,13 +13,11 @@
 #include "../../includes/t_str.h"
 
 // str clean
-void str_clean(t_str **str)
+void	str_clean(t_str **str)
 {
-  if (!str || !*str)
-    return ;
-  free((*str)->value);
-  free(*str);
-  *str = NULL;
+	if (!str || !*str)
+		return ;
+	free((*str)->value);
+	free(*str);
+	*str = NULL;
 }
-
-
