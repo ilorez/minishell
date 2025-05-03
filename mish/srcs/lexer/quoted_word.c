@@ -1,10 +1,11 @@
 #include "../../includes/container.h"
-#include "../../libft/includes/t_str.h"
 
 static void _get_quote_value(t_str *word, char *cmd, char quote)
 {
-  while (*cmd && *cmd != '"')
+  str_append(word, *cmd++);
+  while (*cmd && *cmd != quote)
         str_append(word, *cmd++);
+  str_append(word, *cmd++);
 }
 
 char *ft_get_quoted_word(char *cmd)
@@ -27,8 +28,7 @@ char *ft_get_quoted_word(char *cmd)
     }
     if (!open && *cmd == '\'')
     {
-      while (*cmd && *cmd != '\'')
-        str_append(word, *cmd++);
+      _get_quote_value(word, cmd, '\'');
       continue;
     }
     // check if the current char is a delimiter or space
@@ -39,5 +39,5 @@ char *ft_get_quoted_word(char *cmd)
       return (str_clean(&word), NULL);
     cmd++;
   }
-  return str_extract(&word);
+  return (str_extract(&word));
 }

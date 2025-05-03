@@ -1,7 +1,6 @@
 
 
 #include "../../includes/container.h"
-#include "../../libft/includes/t_str.h"
 
 void ft_add_var_value(t_str *str, char *cmd);
 int ft_add_squote_value(t_str *str, char *cmd)

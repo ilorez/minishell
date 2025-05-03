@@ -1,5 +1,4 @@
 #include "../../includes/container.h"
-#include "../../libft/includes/t_str.h"
 
 /*
 typedef	struct	s_tokens{
@@ -52,16 +51,16 @@ t_type	ft_set_token(char *ptr, void *value)
   value = (void *)ft_get_exec(ptr);
 	return T_EXEC;
 }
+
 char **ft_get_exec(char *cmd)
 {
-  char **arr = ft_calloc(sizeof(char *), 100); // for example: //TODO:t_arr
-  int i = 0;
-  while (1)
+  t_str *str;
+  int i;
+
+  str = str_new_empty(5);
+  i = 0;
+  while (*cmd && ft_strchar(FT_DELIMITERS, *cmd))
   {
-    arr[i] = ft_get_cmplx_word(cmd);
-    // check if next char 
-    if (!arr[i++])
-      break;
   }
   return arr;
 }
