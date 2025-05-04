@@ -29,7 +29,7 @@ int main(int ac, char **av, char **env) {
     init_history();
 
     while (1) {
-        input = readline(FT_PROMPT);
+        input = readline("minishell$");
         
         // Ctrl+D for exit
         if (!input) break;

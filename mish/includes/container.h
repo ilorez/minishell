@@ -3,7 +3,7 @@
 #define CONTAINER_H
 
 
-// inclues
+// includes
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
@@ -12,8 +12,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "./types.h"
 #include "../libft/includes/libft.h"
+#include "./types.h"
 
 #endif
 

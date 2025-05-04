@@ -6,7 +6,6 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:18:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/04 12:11:48 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +67,10 @@ typedef	struct	s_token{
 // data container 
 // Note: this is what will be passsed to execute function
 typedef struct s_data {
-	char *curr_dir;
-	char **paths; // double pointer array of paths 
-	t_cmd *ast;
-	bool is_bg;
+  char *curr_dir;
+  char **paths; // double pointer array of paths 
+  t_ast *ast;
+  bool is_bg;
 } t_data;
 
 #endif
