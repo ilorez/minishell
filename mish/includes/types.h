@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:18:55 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/03 02:54:28 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/04 09:52:05 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef	struct	s_tokens{
 typedef struct s_data {
   char *curr_dir;
   char **paths; // double pointer array of paths 
-  t_cmd *ast;
+  t_ast *ast;
   bool is_bg;
 } t_data;
 
