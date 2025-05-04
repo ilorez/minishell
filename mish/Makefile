@@ -10,6 +10,7 @@ BUILD_DR = ./build/
 NAME =	minishell
 
 LIBFT_DR = ./libft
+LIBFT = -L$(LIBFT_DR) -lft
 INCLUDES_DRS = -I./includes -I./libft/includes 
 HEADERS = ./includes/lexer.h ./includes/parser.h ./includes/container.h ./includes/types.h ./includes/executor.h ./includes/buildins.h
 
@@ -30,7 +31,8 @@ $(BUILD_DR)%.o: %.c $(HEADERS) | $(BUILD_DR)
 	$(CC) $(FLAGS) $(INCLUDES_DRS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) -lreadline -lhistory $(OBJS) $(INCLUDES_DRS) -o $(NAME)
+	@make -C $(LIBFT_DR)
+	$(CC) $(FLAGS) -lreadline -lhistory $(OBJS) $(INCLUDES_DRS) $(LIBFT) -o $(NAME)
 
 $(BUILD_DR):
 	mkdir -p $@
