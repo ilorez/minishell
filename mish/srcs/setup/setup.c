@@ -6,7 +6,7 @@ t_data *ft_setup(char **envp)
 	t_data *data;
 	char	*path;
 
-	data = ft_calloc(sizeof(t_data));
+	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 		exit(1);
 	path = getenv("PATH"); // this function is allowed  
