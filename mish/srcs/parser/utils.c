@@ -1,17 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 13:51:24 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/06 16:27:59 by abdnasse         ###   ########.fr       */
+/*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
+/*   Updated: 2025/05/06 16:21:47 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "container.h"
+#include "container.h" 
 
-// OR => AND => PIPE => REDIR => WORD => LIST
+int		exit_err(char *msg)
+{
+	// TODO: should free the memory
+	perror(msg);
+	exit(1);
+}
 
-t_ast	*parse_
+void	next_token(t_token **lst)
+{
+	if (*lst && (*lst)->next)
+		*lst = (*lst)->next;
+}
+
+int		match(t_token **lst, t_type tt)
+{
+	if (*lst && (*lst)->type == tt)
+		return (next_token(lst), 1);
+	return (0);
+}

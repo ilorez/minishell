@@ -6,30 +6,28 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 12:00:00 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/04 14:14:15 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:21:06 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "container.h"
 
-static int	exit_err(char *msg)
-{
-	// TODO: should free the memory
-	perror(msg);
-	exit(1);
-}
 
-static void	next_token(t_token **lst)
-{
-	if (*lst && (*lst)->next)
-		*lst = (*lst)->next;
-}
+static t_type	command(t_token **lst);
+int		exit_err(char *msg);
+void	next_token(t_token **lst);
+int		match(t_token **lst, t_type tt);
 
-static int	match(t_token **lst, t_type tt)
+int	ft_grammar(t_token *lst)
 {
-	if (*lst && (*lst)->type == tt)
-		return (next_token(lst), 1);
+	if (!command(&lst))
+		exit_err("syntax error!\n");
 	return (0);
+}
+
+t_ast	*ft_parse_ast(t_token **lst)
+{
+		return (parse_or(lst));
 }
 
 static t_type	command(t_token **lst)
@@ -53,11 +51,4 @@ static t_type	command(t_token **lst)
 	else
 		return (0);
 	return (1);
-}
-
-int	ft_grammar(t_token *lst)
-{
-	if (!command(&lst))
-		exit_err("syntax error!\n");
-	return (0);
 }
