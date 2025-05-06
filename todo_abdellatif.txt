@@ -1,0 +1,20 @@
+
+
+Hello, World!
+
+======> Quoting <====
+
+There are three quoting mechanisms: the escape character, single quotes, and double quotes.
+
+->The escape charcater: is a non-quoted backslash (\) it set the real value of the next character.
+->The single quotes: is set the real value of the character within the quotes. note the single quote wont never apppear inside the single quotes(even using the \).
+->The double quotes:
+
+======> Grammar <====
+
+list    :  	<pipeline> and_or *
+
+pipline :	<command> pipe *
+
+command :   <word> blank *
+
