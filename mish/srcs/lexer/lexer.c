@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:48:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 04:51:52 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/07 13:07:29 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*ft_get_tokens(char *cmd)
 			return (tmp);
 		tk->type = _set_token(&cmd, &(tk->word));
 		if (tk->type == T_UNKNOW)
-			return (ft_free_tokens(tmp), NULL);
+			return (ft_free_tokens(&tmp), NULL);
 	}
 	return (tmp);
 }
@@ -73,12 +73,7 @@ static t_word	*_get_word(char **cmd)
 	while (**cmd)
 	{
 		if (**cmd == '"' || **cmd == '\'')
-		{
-			if (!open)
-				open = **cmd;
-			else if (open == **cmd)
-				open = 0;
-		}
+        open = (**cmd) * (open == **cmd);
 		else if (**cmd == '&' && *((*cmd) + 1) != '&')
 			;
 		else if (!open && (ft_strchr(FT_DELIMS, **cmd) || ft_isspace(**cmd)))
