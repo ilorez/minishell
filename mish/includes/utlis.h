@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handel_exit.c                                      :+:      :+:    :+:   */
+/*   utlis.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 02:42:40 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/07 02:19:26 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/07 02:20:05 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef UTILS_H
+#define UTILS_H
 
-#include "../../includes/container.h"
+#include "./container.h"
 
+void ft_free_tokens(t_token *tks);
 
-void ft_free_tokens(t_token *tks)
-{
-  t_token *tmp;
-
-  if (!tks)
-    return;
-  while (tks)
-  {
-    tmp = tks->next;
-    if (tks->type == T_WORD && tks->word)
-      free(tks->word);
-    free(tks);
-    tks = tmp;
-  }
-}
-
+#endif

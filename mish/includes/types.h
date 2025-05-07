@@ -23,7 +23,7 @@
 // includes
 // ==================================
 
-#include <stdbool.h>
+#include <stdlib.h>
 
 // ==================================
 // types
@@ -37,9 +37,13 @@ typedef enum	s_type{
 	T_AND,
 	T_OR,
 	T_PIPE,
-	T_REDIR,
-	T_EXEC,
-	T_EOL
+	T_LESS,
+	T_LLESS,
+	T_GREAT,
+	T_GGREAT,
+	T_WORD,
+	T_EOL,
+  T_UNKNOW
 }	t_type;
 
 typedef struct s_ast {
@@ -48,6 +52,11 @@ typedef struct s_ast {
 	struct s_ast *left; //possible types: 1- exec (char *) 2- redir (t_redir *) 3-others (t_cmd *) 
 	struct s_ast *right; // -t_ast *
 } t_ast;
+
+typedef struct s_word {
+  char *ptr;
+  size_t len;
+} t_word;
 
 typedef struct s_redir {
 	char *fpath;
@@ -58,7 +67,7 @@ typedef struct s_redir {
 
 typedef	struct	s_token{
 	t_type	type;
-	void	*value;
+	t_word	*word;
 	struct s_token *next;
 }	t_token;
 
@@ -70,7 +79,6 @@ typedef struct s_data {
   char *curr_dir;
   char **paths; // double pointer array of paths 
   t_ast *ast;
-  bool is_bg;
 } t_data;
 
 #endif
