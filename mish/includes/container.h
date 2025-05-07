@@ -1,21 +1,18 @@
 
 #ifndef CONTAINER_H
-#define CONTAINER_H
-
+# define CONTAINER_H
 
 // includes
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
-#include "../libft/includes/libft.h"
-#include "./types.h"
-#include "./lexer.h"
-#include "./utlis.h"
+# include "../libft/includes/libft.h"
+# include "./lexer.h"
+# include "./types.h"
+# include "./utlis.h"
+# include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/stat.h>
 
 #endif
-

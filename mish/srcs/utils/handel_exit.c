@@ -10,23 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/container.h"
 
-
-void ft_free_tokens(t_token *tks)
+void	ft_free_tokens(t_token *tks)
 {
-  t_token *tmp;
+	t_token	*tmp;
 
-  if (!tks)
-    return;
-  while (tks)
-  {
-    tmp = tks->next;
-    if (tks->type == T_WORD && tks->word)
-      free(tks->word);
-    free(tks);
-    tks = tmp;
-  }
+	if (!tks)
+		return ;
+	while (tks)
+	{
+		tmp = tks->next;
+		if (tks->type == T_WORD && tks->word)
+			free(tks->word);
+		free(tks);
+		tks = tmp;
+	}
 }
-

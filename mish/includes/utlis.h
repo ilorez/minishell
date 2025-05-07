@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #ifndef UTILS_H
-#define UTILS_H
+# define UTILS_H
 
-#include "./container.h"
+# include "./container.h"
 
-void ft_free_tokens(t_token *tks);
+void	ft_free_tokens(t_token *tks);
 
 #endif

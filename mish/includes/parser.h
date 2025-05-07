@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #ifndef PARSER_H
-#define PARSER_H
+# define PARSER_H
 
-int		ft_grammar(t_token *lst);
+int	ft_grammar(t_token *lst);
 
 #endif

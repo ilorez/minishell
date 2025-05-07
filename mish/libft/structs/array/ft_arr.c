@@ -26,13 +26,13 @@ t_arr	*arr_new(void)
 	return (arr);
 }
 
-int 	arr_append(t_arr *arr, void *ptr)
+int	arr_append(t_arr *arr, void *ptr)
 {
 	void	**new;
 
 	if (!arr || !ptr)
 		return (0);
-	if(arr->index >= arr->size)
+	if (arr->index >= arr->size)
 	{
 		arr->size += (arr->size / 2);
 		new = ft_calloc(arr->size, sizeof(void *));
@@ -46,7 +46,7 @@ int 	arr_append(t_arr *arr, void *ptr)
 	return (1);
 }
 
-int		arr_del_item(t_arr *arr, int index)
+int	arr_del_item(t_arr *arr, int index)
 {
 	if (!arr || index < 0 || index >= arr->index)
 		return (0);
@@ -60,7 +60,7 @@ int		arr_del_item(t_arr *arr, int index)
 
 void	arr_free(t_arr *arr)
 {
-	int i;
+	int	i;
 
 	if (!arr)
 		return ;

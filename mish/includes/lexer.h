@@ -6,14 +6,14 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 01:12:02 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 01:13:20 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/07 04:59:02 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_LEXER_H
-#define T_LEXER_H
-#include "./container.h"
+#ifndef LEXER_H
+# define LEXER_H
+# include "./container.h"
 
-t_token *ft_get_tokens(char *cmd);
+t_token	*ft_get_tokens(char *cmd);
 
 #endif
