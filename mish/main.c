@@ -1,6 +1,7 @@
 
 #include "container.h"
 #include "debug/debug.h"
+#include "utlis.h"
 
 void handle_sigint(int sig) {
     (void) sig;
@@ -41,8 +42,7 @@ int main(int ac, char **av, char **env) {
             // printf("cmd: %s\n", input);
             token = ft_get_tokens(input);
             print_tokens(token);
-            
-            
+            ft_free_tokens(token);
             // send input to lexer
             // get tokenzation array
             // check if lexer has everthing done well
