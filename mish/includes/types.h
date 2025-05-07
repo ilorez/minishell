@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 05:00:01 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:36:23 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,19 @@
 typedef enum s_type
 {
 	T_ROOT,
-	T_LPAR,
-	T_RPAR,
+	T_LPAR, // token
+	T_RPAR, // token
 	T_AND,
 	T_OR,
 	T_PIPE,
-	T_LESS,
-	T_LLESS,
-	T_GREAT,
-	T_GGREAT,
-	T_WORD,
+	T_LESS, // token
+	T_LLESS, // token
+	T_GREAT, // token
+	T_GGREAT, // token
+	T_WORD, // token
+  T_REDIR,// ast
+  T_EXEC, // ast
+  T_SUBSH, // ast
 	T_EOL,
 	T_UNKNOW
 }					t_type;
@@ -68,7 +71,6 @@ typedef struct s_redir
 	char			*fpath;
 	int fd; // 0 for < and 1 for >
 	int				mode;
-	t_ast *cmd; // another struct of commands that the rediriction happen on it
 }					t_redir;
 
 typedef struct s_token

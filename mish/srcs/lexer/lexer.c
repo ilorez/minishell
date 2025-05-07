@@ -73,7 +73,7 @@ static t_word	*_get_word(char **cmd)
 	while (**cmd)
 	{
 		if (**cmd == '"' || **cmd == '\'')
-        open = (**cmd) * (open == **cmd);
+			open = (**cmd) * (open == **cmd);
 		else if (**cmd == '&' && *((*cmd) + 1) != '&')
 			;
 		else if (!open && (ft_strchr(FT_DELIMS, **cmd) || ft_isspace(**cmd)))
