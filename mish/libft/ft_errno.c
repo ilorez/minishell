@@ -80,11 +80,10 @@ void	ft_pserror(char *prefix, t_errno error_code, char suffix)
 		ft_putstr_fd(prefix, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd(err_msgs[error_code], STDERR_FILENO);
-  if (suffix)
-  {
+	if (suffix)
+	{
 		write(STDERR_FILENO, " ", 1);
 		write(STDERR_FILENO, &suffix, 1);
-  }
+	}
 	write(STDERR_FILENO, "\n", 1);
 }
-
