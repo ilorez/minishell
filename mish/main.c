@@ -37,8 +37,8 @@ int	main(int ac, char **av, char **env)
 	{
 		input = readline("minishell$");
 
-    ft_heredoc(input);
-    return (0);
+    //ft_heredoc(input);
+    //return (0);
 		// Ctrl+D for exit
 		if (!input)
 			break ;
