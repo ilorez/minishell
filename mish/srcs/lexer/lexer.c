@@ -1,98 +1,96 @@
 #include "../../includes/container.h"
 
-/*
-typedef	struct	s_tokens{
-	t_type	type;
-	void	*value;
-  struct s_tokens *next;
-}	t_tokens;
-*/
-t_type	ft_set_token(char *ptr, void *value);
-char **ft_get_exec(char *cmd);
-t_redir *ft_get_redir(char *cmd);
-char *ft_get_cmplx_word(char *cmd);
+static t_type	_set_token(char **ptr, t_word **word);
+static t_type _redir_type(char **cmd);
+static t_word *_get_word(char **cmd);
 
-t_tokens *ft_get_tokens(char *cmd)
+t_token *ft_get_tokens(char *cmd)
 {
-  t_tokens *tk;
+  t_token *tk;
+  t_token *tmp;
 
-  tk = NULL;
+  tk = ft_calloc(sizeof(t_token), 1);
+  tmp = tk;
   while (*cmd)
   {
-    // skip spaces
     while (ft_isspace(*cmd))
       cmd++;
     if (!*cmd)
       break;
-    tk = ft_calloc(sizeof(t_tokens), 1);
-    tk->type = ft_set_token(cmd, tk->value);
+    tk->next = ft_calloc(sizeof(t_token), 1);
     tk = tk->next;
+    if (!tk)
+      return (tmp);
+    tk->type = _set_token(&cmd, &(tk->word));
+    if (tk->type == T_UNKNOW)
+      return (ft_free_tokens(tmp), NULL);
   }
-  return tk;
+  return tmp;
 }
 
-t_type	ft_set_token(char *ptr, void *value)
+static t_type	_set_token(char **ptr, t_word **word)
 {
-  if (ptr[0] == '|' && *(++ptr) == '|' && ptr++)
+  if ((*ptr)[0] == '|' && (*ptr)[1] == '|' && (*ptr)++ && (*ptr)++)
 		return T_OR;
-	if (ptr[0] == '&' && *(++ptr) == '&' && ptr++)
+	if ((*ptr)[0] == '&' && (*ptr)[1] == '&' && (*ptr)++ && (*ptr)++)
 		return T_AND;
-	if (ptr[0] == '|' && ptr++)
+	if ((*ptr)[0] == '|' && (*ptr)++)
 		return T_PIPE;
-	if (ptr[0] == '(' && ptr++)
+	if ((*ptr)[0] == '(' && (*ptr)++)
 		return T_LPAR;
-	if (ptr[0] == ')' && ptr++)
+	if ((*ptr)[0] == ')' && (*ptr)++)
 		return T_RPAR;
-  if (*ptr == '<' || *ptr == '>')
-  {
-    value = (void *)ft_get_redir(ptr);
-    return T_REDIR;
-  }
-  value = (void *)ft_get_exec(ptr);
-	return T_EXEC;
+  if (*(*ptr) == '<' || *(*ptr) == '>')
+    return _redir_type(ptr);
+  *word = _get_word(ptr);
+  if (!*word)
+    return (T_UNKNOW);
+	return T_WORD;
 }
 
-char **ft_get_exec(char *cmd)
+static t_word *_get_word(char **cmd)
 {
-  t_str *str;
-  int i;
+  t_word *word;
+  char open;
 
-  str = str_new_empty(5);
-  i = 0;
-  while (*cmd && ft_strchar(FT_DELIMITERS, *cmd))
-  {
-  }
-  return arr;
-}
-
-t_redir *ft_get_redir(char *cmd)
-{
-  t_redir *rd;
-
-  rd = ft_calloc(sizeof(t_redir), 1);
-  if (!rd)
+  word = ft_calloc(sizeof(t_word), 1);
+  if (!word)
     return (NULL);
-  else if (*cmd =='<')
+  word->ptr = *cmd;
+  open = 0;
+  while (**cmd)
   {
-    // rd->fd = 0; // it's 0 by default because we use ft_calloc
-    rd->mode = O_RDONLY;
-    if (*(++cmd) == '<' && ++cmd)
-      rd->fpath = ft_heredoc(ft_get_cmplx_word(cmd));
-    else 
-      rd->fpath = ft_get_cmplx_word(cmd);
+    if (**cmd == '"' || **cmd == '\'')
+    {
+      if (!open)
+        open = **cmd;
+      else if (open == **cmd)
+        open = 0;
+    }
+    else if (!open && (ft_strchr(FT_DELIMITERS, **cmd) || ft_isspace(**cmd)))
+      break;
+    ++*cmd;
   }
-  else
+  if (open)
   {
-    rd->fd = 1;
-    rd->mode = O_RDONLY | O_WRONLY;
-    if (*(++cmd) == '>' && cmd++)
-        rd->mode |= O_APPEND;
-    rd->fpath = ft_get_cmplx_word(cmd);
+    ft_pserror(NULL, ERR_SYNTAX, open);
+    free(word);
+    return (NULL);
   }
-  return rd;
+  word->len = (size_t)(*cmd - word->ptr);
+  return (word);
 }
 
+static t_type _redir_type(char **cmd)
+{
+  if (**cmd == '<')
+  {
+    if (*(++*cmd) == '<' && ++*cmd)
+      return (T_LLESS);
+    return (T_LESS);
+  }
+  if (*(++*cmd) == '>' && ++*cmd)
+    return (T_GGREAT);
+  return T_GREAT;
+}
 
-// get_quotes_value
-//  for 2:
-//    - if it found $ only should accept it as char

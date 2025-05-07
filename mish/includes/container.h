@@ -14,6 +14,8 @@
 
 #include "../libft/includes/libft.h"
 #include "./types.h"
+#include "./lexer.h"
+#include "./utlis.h"
 
 #endif
 
