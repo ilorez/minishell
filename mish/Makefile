@@ -19,7 +19,7 @@ CC = cc
 RM = rm -f
 
 SRCS= main.c lexer.c \
-			handel_exit.c \
+			handel_exit.c ft_heredoc.c\
 			print_lexer.c 
 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))

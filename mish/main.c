@@ -36,6 +36,9 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		input = readline("minishell$");
+
+    ft_heredoc(input);
+    return (0);
 		// Ctrl+D for exit
 		if (!input)
 			break ;
@@ -45,7 +48,7 @@ int	main(int ac, char **av, char **env)
 			// printf("cmd: %s\n", input);
 			token = ft_get_tokens(input);
 			print_tokens(token);
-			ft_free_tokens(token);
+			ft_free_tokens(&token);
 			// send input to lexer
 			// get tokenzation array
 			// check if lexer has everthing done well
