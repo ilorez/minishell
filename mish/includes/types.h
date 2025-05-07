@@ -17,7 +17,7 @@
 // ==================================
 
 #define FT_NAME "minishell> "
-#define FT_DELIMITERS "$<>()|&"
+#define FT_DELIMITERS "<>()|&"
 
 // ==================================
 // includes

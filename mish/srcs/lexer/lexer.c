@@ -67,6 +67,8 @@ static t_word *_get_word(char **cmd)
       else if (open == **cmd)
         open = 0;
     }
+    else if (**cmd == '&' && *((*cmd)+1) != '&')
+      ;
     else if (!open && (ft_strchr(FT_DELIMITERS, **cmd) || ft_isspace(**cmd)))
       break;
     ++*cmd;
