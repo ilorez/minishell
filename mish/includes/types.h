@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 15:36:23 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/08 10:37:00 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // tokens
 typedef enum s_type
 {
-	T_ROOT,
+	T_ROOT, // token
 	T_LPAR, // token
 	T_RPAR, // token
 	T_AND,
@@ -88,7 +88,9 @@ typedef struct s_data
 {
 	char			*curr_dir;
 	char **paths; // double pointer array of paths
+	char **envp;
 	t_ast			*ast;
+  int fd[2]; // in deault: fd = [STDIN, STDOUT]
 }					t_data;
 
 #endif
