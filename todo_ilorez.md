@@ -6,7 +6,7 @@
 [x] - read about bash quotes
 [x] - create basic files struct
 [x] - create example of read command function
-[ ] - fix git token use double pointer to move in child functions
+[x] - fix git token use double pointer to move in child functions
 [ ] - working on double quotes get value
         - working on get_complex_word
         - get double quotes value
@@ -15,7 +15,8 @@
         - make sure that there's no leaks
         - teste all together to check everything done well
         - take your time in this part please i will give it 50% of my all time in project and 1week at least no less then that
-[ ] - ls | <<EOF cat -e this is error , << ls | cat -e <<EOF: this is not error (never mind)
-[ ] - learn about Subject External functs
+[x] - ls | <<EOF cat -e this is error , << ls | cat -e <<EOF: this is not error (never mind)
+[x] - learn about Subject External functs
+[ ] - create a list called ind **wpids; that should waited everytime before run ast->right in all of OR|AND
 [ ] - learn about strtok
 

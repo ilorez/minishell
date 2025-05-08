@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   utlis.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 01:12:02 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 04:59:02 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/07 02:19:26 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/07 13:41:02 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef UTILS_H
+# define UTILS_H
+
 # include "./container.h"
 
-t_token	*ft_get_tokens(char *cmd);
+void	ft_free_tokens(t_token **tks);
+t_redir	*ft_heredoc(char *eof);
 
 #endif

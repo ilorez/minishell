@@ -4,7 +4,7 @@ vpath %.c	./srcs/lexer
 vpath %.c	./srcs/parser
 vpath %.c	./srcs/executor
 vpath %.c	./srcs/setup
-vpath %.c .
+vpath %.c	./debug
 
 BUILD_DR = ./build/
 NAME =	minishell
@@ -12,13 +12,15 @@ NAME =	minishell
 LIBFT_DR = ./libft
 LIBFT = -L$(LIBFT_DR) -lft
 INCLUDES_DRS = -I./includes -I./libft/includes 
-HEADERS = ./includes/lexer.h ./includes/parser.h ./includes/container.h ./includes/types.h ./includes/executor.h ./includes/buildins.h
+HEADERS = ./includes/utlis.h ./debug/debug.h ./includes/lexer.h ./includes/parser.h ./includes/container.h ./includes/types.h ./includes/executor.h ./includes/buildins.h
 
-FLAGS = -Wall -Wextra -Werror #-lreadline #-lhistory#-g3
+FLAGS = -Wall -Wextra -Werror -g
 CC = cc
 RM = rm -f
 
-SRCS= main.c
+SRCS= main.c lexer.c \
+			handel_exit.c ft_heredoc.c\
+			print_lexer.c 
 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
 green = \033[32m
@@ -45,5 +47,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+vg:
+	 valgrind --suppressions=../ignore_readline_leaks.supp --leak-check=full --show-leak-kinds=all ./minishell
 
 .PHONY: all clean fclean re
