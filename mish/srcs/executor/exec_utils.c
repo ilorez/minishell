@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:02:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/09 03:02:10 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/09 11:18:46 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_bool	ft_change_fd(int fd, int to, t_data *data)
 	if (dup2(fd, to) == -1)
 	{
 		perror("dup2");
-		// ft_handle_exit(data, 1);
+    ft_handel_exit(data, 2);
 	}
 	close(fd);
 	return (true);
@@ -60,6 +60,19 @@ int	ft_waitpids(t_arr *pid)
 		else
 			status = 0;
 	}
+  arr_empty(pid);
+	return (status);
+}
+
+int	ft_killpids(t_arr *pid)
+{
+	int	i;
+  int status;
+
+	i = -1;
+  status = 0;
+	while (++i <= pid->index)
+    kill(*(int*)(pid->content[i]), SIGTERM);
   arr_empty(pid);
 	return (status);
 }

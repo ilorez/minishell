@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/09 03:29:54 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/09 11:09:49 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 void ft_exec(t_data *data, t_ast *ast);
 int ft_pipe(t_data *data, t_ast *ast);
-void ft_redir(t_data *data, t_redir *r);
+int ft_redir(t_data *data, t_ast *ast, t_redir *r);
+static int _or_and(t_data *data, t_ast *ast, int cond);
 
 int ft_executor(t_data *data, t_ast *ast)
 {
@@ -25,35 +26,31 @@ int ft_executor(t_data *data, t_ast *ast)
   if (!ast || ast->type == T_EOL)
     return (0);
   if (ast->type == T_OR)
-  {
-    status = ft_executor(data, ast->left);
-    if (data->wpids->index)
-      status = ft_waitpids(data->wpids);
-    if (status != 0)
-      status = ft_executor(data, ast->right);
-  }
+    status = _or_and(data, ast, 0);
   else if (ast->type == T_AND)
-  {
-    status = ft_executor(data, ast->left);
-    if (status == 0)
-      status = ft_executor(data, ast->right);
-  }
+    status = _or_and(data, ast, 1);
   else if (ast->type == T_PIPE)
     ft_pipe(data, ast);
   else if (ast->type == T_SUBSH)
     status = ft_executor(data, ast->left);
   else if (ast->type == T_REDIR)
-  {
-    ft_redir(data, (t_redir*)ast->value);
-    status = ft_executor(data, ast->left);
-  }
+    status = ft_redir(data, ast, (t_redir*)ast->value);
   else if (ast->type == T_EXEC)
     ft_exec(data, ast);
   return (status);
 }
 
+static int _or_and(t_data *data, t_ast *ast, int cond)
+{
+  int status;
 
-
+  status = ft_executor(data, ast->left);
+  if (data->wpids->index)
+    status = ft_waitpids(data->wpids);
+  if ((status == 0) == cond)
+    status = ft_executor(data, ast->right);
+  return status;
+}
 
 int ft_pipe(t_data *data, t_ast *ast)
 {
@@ -66,9 +63,8 @@ int ft_pipe(t_data *data, t_ast *ast)
   if (pipe(pfd) < 0)
   {
     perror("pipe");
-    // free memory and stop cmd execution
+    ft_handel_exit(data, status);
   }
-
   data->fd[1] = pfd[1];
   status = ft_executor(data, ast->left);
   close(pfd[1]);
@@ -97,9 +93,9 @@ void ft_exec(t_data *data, t_ast *ast)
   if (*pid == -1)
   {
     perror("fork");
-    // free memory and stop full cmd
+    ft_handel_exit(data, 2);
   }
-  if (*pid == 0)
+  else if (*pid == 0)
   {
     path = ft_get_right_path(argv[0], data->paths);
     ft_change_fd(data->fd[0], STDIN_FILENO, data);
@@ -112,7 +108,7 @@ void ft_exec(t_data *data, t_ast *ast)
   arr_append(data->wpids, pid);
 }
 
-void ft_redir(t_data *data, t_redir *r)
+int ft_redir(t_data *data, t_ast *ast, t_redir *r)
 {
   int fd;
 
@@ -120,7 +116,8 @@ void ft_redir(t_data *data, t_redir *r)
   if (fd < 0)
   {
     perror("open");
-    // free memory and stop full cmd
+    return (1);
   }
   ft_change_fd(fd, r->fd, data);
+  return (ft_executor(data, ast->left));
 }

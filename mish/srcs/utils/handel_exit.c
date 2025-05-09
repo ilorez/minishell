@@ -6,11 +6,13 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 13:01:03 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/09 11:17:43 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 void	ft_free_tokens(t_token **tks)
 {
@@ -26,4 +28,60 @@ void	ft_free_tokens(t_token **tks)
 		free((*tks));
 		(*tks) = tmp;
 	}
+}
+
+int restore_std(int std, int flags, int status)
+{
+  int fd;
+
+  if (isatty(std))
+  {
+    close(std);
+    fd = open("/dev/tty", flags);
+    if (fd == -1)
+    {
+        perror("open /dev/tty");
+        return (1);
+    }
+    else if (fd != std)
+        return (ft_change_fd(fd, std, NULL));
+  }
+  return (status);
+}
+
+int handel_cmd_end(t_data *data)
+{
+  int fd;
+  int status;
+
+  status = 0;
+  if (!data)
+    return 0;
+  if (data->wpids->index)
+    status = ft_killpids(data->wpids);
+  if (data->ast)
+    ;//ft_free_ast(data->ast);
+  status = restore_std(STDIN_FILENO, O_RDONLY, status);
+  if (data->fd[0] != STDIN_FILENO)
+    close(data->fd[0]);
+  status = restore_std(STDOUT_FILENO, O_WRONLY, status);
+  if (data->fd[1] != STDOUT_FILENO)
+    close(data->fd[1]);
+  return (status);
+}
+
+void ft_handel_exit(t_data *data, int status)
+{
+  if (!data)
+    exit(status);
+  handel_cmd_end(data);
+  if (data->envp)
+    ft_free_str_lst(data->envp);
+  if (data->paths)
+    ft_free_str_lst(data->paths);
+  if (data->curr_dir)
+    free(data->curr_dir);
+  if (data->wpids)
+    arr_free(data->wpids);
+  exit(status);
 }
