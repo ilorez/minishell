@@ -6,25 +6,29 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/08 10:40:02 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/09 03:29:54 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
 #include <stdio.h>
-#include <unistd.h>
 
-// TODO:
-//  - create a list called ind **wpids; that should waited everytime before run ast->right in all of OR|AND
+void ft_exec(t_data *data, t_ast *ast);
+int ft_pipe(t_data *data, t_ast *ast);
+void ft_redir(t_data *data, t_redir *r);
+
 int ft_executor(t_data *data, t_ast *ast)
 {
   int status;
   
+  status = 0;
   if (!ast || ast->type == T_EOL)
     return (0);
   if (ast->type == T_OR)
   {
     status = ft_executor(data, ast->left);
+    if (data->wpids->index)
+      status = ft_waitpids(data->wpids);
     if (status != 0)
       status = ft_executor(data, ast->right);
   }
@@ -35,33 +39,19 @@ int ft_executor(t_data *data, t_ast *ast)
       status = ft_executor(data, ast->right);
   }
   else if (ast->type == T_PIPE)
-  {
-    // original_in = data->in;
-    // original_out = data->out;
-    
-    // dup pipe after open it in data->in/out
-
-    //ft_pipe();
-    // close read pipe
-    status = ft_executor(data, ast->left);
-    // close write pipe 
-    status = ft_executor(data, ast->right);
-    // restore original in and out
-  }
+    ft_pipe(data, ast);
   else if (ast->type == T_SUBSH)
     status = ft_executor(data, ast->left);
   else if (ast->type == T_REDIR)
   {
-    // TODO: redirect 
-    // ft_redirect((t_redir *)ast->value);
+    ft_redir(data, (t_redir*)ast->value);
     status = ft_executor(data, ast->left);
   }
   else if (ast->type == T_EXEC)
-  {
-    // TODO: execute
-  }
+    ft_exec(data, ast);
   return (status);
 }
+
 
 
 
@@ -90,25 +80,26 @@ int ft_pipe(t_data *data, t_ast *ast)
   return status;
 }
 
-int ft_exec(t_data *data, t_ast *ast)
+void ft_exec(t_data *data, t_ast *ast)
 {
-  int pid;
+  int *pid;
   char **argv;
   char *path;
 
+  pid = ft_calloc(sizeof(int), 1);
   argv = (char **)ast->value;
   if (argv || argv[0])
   {
     // make sure this error not happen
   }
-  pid = fork();
+  *pid = fork();
 
-  if (pid == -1)
+  if (*pid == -1)
   {
     perror("fork");
-    // free memory and stop cmd
+    // free memory and stop full cmd
   }
-  if (pid == 0)
+  if (*pid == 0)
   {
     path = ft_get_right_path(argv[0], data->paths);
     ft_change_fd(data->fd[0], STDIN_FILENO, data);
@@ -118,5 +109,18 @@ int ft_exec(t_data *data, t_ast *ast)
     perror("execve");
     exit(126);
   }
-  return 
+  arr_append(data->wpids, pid);
+}
+
+void ft_redir(t_data *data, t_redir *r)
+{
+  int fd;
+
+  fd = open(r->fpath, r->flags, r->mode);
+  if (fd < 0)
+  {
+    perror("open");
+    // free memory and stop full cmd
+  }
+  ft_change_fd(fd, r->fd, data);
 }

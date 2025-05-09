@@ -6,9 +6,10 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:56:32 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 13:42:03 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/09 03:20:33 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../../includes/container.h"
 #include <fcntl.h>
 
@@ -34,7 +35,8 @@ t_redir	*ft_heredoc(char *eof)
   }
 	_here_doc(r->fd, eof);
   r->fd = 0;
-  r->mode = O_RDONLY;
+  r->flags = O_RDONLY;
+  r->mode = 0644;
   free(eof);
 	return (r);
 }
