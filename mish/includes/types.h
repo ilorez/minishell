@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/08 10:37:00 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/09 03:14:15 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 // ==================================
 
 # include <stdlib.h>
+# include "../libft/includes/libft.h"
 
 // ==================================
 // types
@@ -70,6 +71,7 @@ typedef struct s_redir
 {
 	char			*fpath;
 	int fd; // 0 for < and 1 for >
+  int flags;
 	int				mode;
 }					t_redir;
 
@@ -90,7 +92,8 @@ typedef struct s_data
 	char **paths; // double pointer array of paths
 	char **envp;
 	t_ast			*ast;
-  int fd[2]; // in deault: fd = [STDIN, STDOUT]
+  int fd[2]; // used by executor: in deault: fd = [STDIN, STDOUT]
+  t_arr *wpids; // used by executor
 }					t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abdenasse <abdenasse@student.1337.ma>        +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 21:34:56 by abdenasse          #+#    #+#            */
-/*   Updated: 2025/05/04 09:46:17 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/09 03:01:13 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/libft.h"
@@ -20,9 +20,10 @@ t_arr	*arr_new(void)
 		return (NULL);
 	arr->index = 0;
 	arr->size = 10;
+  arr->clean = free;
 	arr->content = ft_calloc(arr->size, sizeof(void *));
 	if (!(arr->content))
-		return (NULL);
+		return (free(arr), NULL);
 	return (arr);
 }
 
@@ -73,4 +74,24 @@ void	arr_free(t_arr *arr)
 		free(arr->content);
 	}
 	free(arr);
+}
+
+void	arr_empty(t_arr *arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	if (arr->content)
+	{
+		i = -1;
+		while (++i < arr->index)
+    {
+			if (arr->clean && arr->content[i])
+				arr->clean(arr->content[i]);
+      arr->content[i] = NULL;
+    }
+		free(arr->content);
+	}
+  arr->index = 0;
 }
