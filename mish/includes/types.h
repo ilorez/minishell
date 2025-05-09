@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/08 10:37:00 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/09 11:03:38 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef enum s_type
 typedef struct s_ast
 {
 	t_type			type;
-	void			*value;
+	char			**argv; // for the extution args
 	struct s_ast	*left;
 	// possible types: 1- exec (char *) 2- redir (t_redir *) 3-others (t_cmd *)
 	struct s_ast *right; // -t_ast *
@@ -80,17 +80,14 @@ typedef struct s_token
 	struct s_token	*next;
 }					t_token;
 
-// t_tokens **tokens;
-
-// data container
-// Note: this is what will be passsed to execute function
+// data container for the exucution part
 typedef struct s_data
 {
 	char			*curr_dir;
 	char **paths; // double pointer array of paths
 	char **envp;
 	t_ast			*ast;
-  int fd[2]; // in deault: fd = [STDIN, STDOUT]
+	int fd[2]; // in deault: fd = [STDIN, STDOUT]
 }					t_data;
 
 #endif
