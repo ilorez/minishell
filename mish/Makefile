@@ -18,9 +18,9 @@ FLAGS = -Wall -Wextra -Werror -g
 CC = cc
 RM = rm -f
 
- SRCS= main.c lexer.c \
- 			handel_exit.c ft_heredoc.c\
- 			print_lexer.c 
+SRCS= main.c lexer.c \
+			handel_exit.c ft_heredoc.c\
+			print_lexer.c 
 
 #SRCS = ast_examples.c handel_exit.c exec_utils.c executor.c wait_macros.c 
 
