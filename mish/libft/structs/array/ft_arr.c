@@ -6,7 +6,7 @@
 /*   By: abdenasse <abdenasse@student.1337.ma>        +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 21:34:56 by abdenasse          #+#    #+#            */
-/*   Updated: 2025/05/09 03:01:13 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/10 01:28:02 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/libft.h"
@@ -91,7 +91,6 @@ void	arr_empty(t_arr *arr)
 				arr->clean(arr->content[i]);
       arr->content[i] = NULL;
     }
-		free(arr->content);
 	}
   arr->index = 0;
 }

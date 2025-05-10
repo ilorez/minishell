@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/09 11:17:43 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/10 01:39:56 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int restore_std(int std, int flags, int status)
 
 int handel_cmd_end(t_data *data)
 {
-  int fd;
   int status;
 
   status = 0;
