@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:09:51 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/09 11:17:41 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/10 01:36:26 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #define EXECUTOR_H
 
 #include "./container.h"
+#include "./types.h"
+
+// executor
+int ft_executor(t_data *data, t_ast *ast);
 
 // exec_utils.c
 char	*ft_get_right_path(char *cmd, char **paths);
