@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/10 01:40:33 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/10 11:03:36 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int ft_pipe(t_data *data, t_ast *ast)
   close(pfd[1]);
   data->fd[1] = org[1];
   data->fd[0] = pfd[0];
-  status = ft_executor(data, ast->left);
+  status = ft_executor(data, ast->right);
   close(pfd[0]);
   data->fd[0] = org[0];
   return status;
