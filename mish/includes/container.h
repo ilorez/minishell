@@ -6,10 +6,11 @@
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/stat.h>
+#include <sys/wait.h>
+# include <signal.h>
 
 # include "../libft/includes/libft.h"
 // THIS SHOULD BE ABOVE ALL THE HEADER CUZ IT CONTAINS ALL THE DATA TYPES
