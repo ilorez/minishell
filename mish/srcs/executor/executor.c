@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/10 11:03:36 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/10 18:14:09 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ int ft_executor(t_data *data, t_ast *ast)
   else if (ast->type == T_PIPE)
     ft_pipe(data, ast);
   else if (ast->type == T_SUBSH)
+  {
+    t_arr *tmp;
+    tmp = data->wpids;
+    data->wpids = arr_new();
     status = ft_executor(data, ast->left);
+    data->wpids = arr_merge(tmp, data->wpids);
+  }
   else if (ast->type == T_REDIR)
     status = ft_redir(data, ast, (t_redir*)ast->value);
   else if (ast->type == T_EXEC)
