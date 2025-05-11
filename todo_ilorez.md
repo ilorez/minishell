@@ -17,6 +17,10 @@
         - take your time in this part please i will give it 50% of my all time in project and 1week at least no less then that
 [x] - ls | <<EOF cat -e this is error , << ls | cat -e <<EOF: this is not error (never mind)
 [x] - learn about Subject External functs
-[ ] - create a list called ind **wpids; that should waited everytime before run ast->right in all of OR|AND
+[x] - create a list called ind **wpids; that should waited everytime before run ast->right in all of OR|AND
+[x] - create stop full cmd function
+[x] - create example data
+[x] - test && fix errors
+[ ] - norminette
 [ ] - learn about strtok
 

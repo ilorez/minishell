@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/10 18:14:09 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/11 01:56:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int ft_executor(t_data *data, t_ast *ast)
     data->wpids = arr_merge(tmp, data->wpids);
   }
   else if (ast->type == T_REDIR)
-    status = ft_redir(data, ast, (t_redir*)ast->value);
+    status = ft_redir(data, ast, ast->redir);
   else if (ast->type == T_EXEC)
     ft_exec(data, ast);
   return (status);
@@ -90,7 +90,7 @@ void ft_exec(t_data *data, t_ast *ast)
   char *path;
 
   pid = ft_calloc(sizeof(int), 1);
-  argv = (char **)ast->value;
+  argv = ast->argv;
   if (argv || argv[0])
   {
     // make sure this error not happen
