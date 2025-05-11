@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 17:55:47 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/10 18:11:08 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/11 02:18:18 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ t_arr	*arr_merge(t_arr *arr1, t_arr *arr2)
 		arr1->size += arr2->index + (arr1->size / 2);
 		new = ft_calloc(arr1->size, sizeof(void *));
 		if (!new)
-			return (0);
+			return (NULL);
 		ft_memcpy(new, arr1->content, arr1->index * sizeof(void *));
 		free(arr1->content);
 		arr1->content = new;
 	}
-	ft_memcpy(&new[arr1->index], arr2->content, arr2->index * sizeof(void *));
+	ft_memcpy(&(arr1->content[arr1->index]), arr2->content, arr2->index * sizeof(void *));
+  arr1->index += arr2->index;
   free(arr2->content);
   free(arr2);
-  arr1->index += arr2->index;
 	return (arr1);
 }

@@ -14,7 +14,7 @@ LIBFT = -L$(LIBFT_DR) -lft
 INCLUDES_DRS = -I./includes -I./libft/includes 
 HEADERS = ./includes/utlis.h ./debug/debug.h ./includes/lexer.h ./includes/parser.h ./includes/container.h ./includes/types.h ./includes/executor.h ./includes/buildins.h
 
-FLAGS = # -Wall -Wextra -Werror -g
+FLAGS =  -Wall -Wextra -Werror -g
 CC = cc
 RM = rm -f
 

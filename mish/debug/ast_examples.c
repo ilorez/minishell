@@ -12,11 +12,11 @@ t_ast *example1() {
 
 	ast->left = calloc(1, sizeof(t_ast));
 	ast->left->type = T_EXEC;
-	ast->left->value = (void *)ft_split(ft_strdup("ls -la"), ' ');
+	ast->left->argv = ft_split(ft_strdup("echo hi"), ' ');
 
 	ast->right = calloc(1, sizeof(t_ast));
 	ast->right->type = T_EXEC;
-	ast->right->value = (void *)ft_split(ft_strdup("echo hi"), ' ');
+	ast->right->argv = ft_split(ft_strdup("cat -e"), ' ');
 
 	return ast;
 }
@@ -34,11 +34,11 @@ t_ast *example2() {
 	char **argv = ft_split(ft_strdup("cat -e"), ' ');
 
 	ast->type = T_REDIR;
-	ast->value = (void *)redir;
+	ast->redir = redir;
 
 	ast->left = calloc(1, sizeof(t_ast));
 	ast->left->type = T_EXEC;
-	ast->left->value = (void *)argv;
+	ast->left->argv = argv;
 
 	return ast;
 }
@@ -56,11 +56,11 @@ t_ast *example2_1() {
 	char **argv = ft_split(ft_strdup("cat -e"), ' ');
 
 	ast->type = T_REDIR;
-	ast->value = (void *)redir;
+	ast->redir = redir;
 
 	ast->left = calloc(1, sizeof(t_ast));
 	ast->left->type = T_EXEC;
-	ast->left->value = (void *)argv;
+	ast->left->argv = argv;
 
 	return ast;
 }
@@ -72,11 +72,11 @@ t_ast *example3() {
 	ast->type = T_PIPE;
 	ast->left = calloc(1, sizeof(t_ast));
 	ast->left->type = T_EXEC;
-	ast->left->value = (void *)ft_split(ft_strdup("ls"), ' ');
+	ast->left->argv = ft_split(ft_strdup("ls"), ' ');
 
 	ast->right = calloc(1, sizeof(t_ast));
 	ast->right->type = T_EXEC;
-	ast->right->value = (void *)ft_split(ft_strdup("cat -e"), ' ');
+	ast->right->argv = ft_split(ft_strdup("cat -e"), ' ');
 
 	return ast;
 }
@@ -87,11 +87,11 @@ t_ast *example_pipe(char *cmd1, char *cmd2) {
 	ast->type = T_PIPE;
 	ast->left = calloc(1, sizeof(t_ast));
 	ast->left->type = T_EXEC;
-	ast->left->value = (void *)ft_split(ft_strdup(cmd1), ' ');
+	ast->left->argv = ft_split(ft_strdup(cmd1), ' ');
 
 	ast->right = calloc(1, sizeof(t_ast));
 	ast->right->type = T_EXEC;
-	ast->right->value = (void *)ft_split(ft_strdup(cmd2), ' ');
+	ast->right->argv = ft_split(ft_strdup(cmd2), ' ');
 
 	return ast;
 }
@@ -121,8 +121,18 @@ t_ast *example_subshell() {
 	if (!ast) return NULL;
 
 	ast->type = T_SUBSH;
-	ast->left = example2();
+	ast->left = example1();
 	return ast;
+}
+
+t_ast *example_exec(char *cmd)
+{
+  t_ast *ast;
+
+  ast = calloc(1, sizeof(t_ast));
+	ast->type = T_EXEC;
+	ast->argv = ft_split(ft_strdup(cmd), ' ');
+  return (ast);
 }
 
 t_ast *example5() {
@@ -130,8 +140,8 @@ t_ast *example5() {
 	if (!ast) return NULL;
 
 	ast->type = T_PIPE;
-	ast->left = example_subshell();
-	ast->right = example2_1();
+	ast->left = example_exec("sleep 3");
+	ast->right = example_subshell();
 	return ast;
 }
 
@@ -184,6 +194,7 @@ int main(int ac, char **av, char **envp) {
 	t_ast *ast = example5(); // Change to example2() to test redirection
 
 	ft_executor(data, ast);
+  ft_waitpids(data->wpids);
 
 	return 0;
 }
