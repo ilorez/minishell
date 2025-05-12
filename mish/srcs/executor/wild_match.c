@@ -57,7 +57,7 @@ t_arr *_get_match(t_arr *wild, DIR *dir)
   struct dirent *dir_read;
 
   mlst = arr_new();
-  if (mlst)
+  if (!mlst)
   {
     ft_perror(NULL, ERR_MALLOC_FAIL);
     return (NULL);
