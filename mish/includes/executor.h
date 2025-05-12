@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:09:51 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/10 01:36:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/12 10:15:01 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ int	ft_killpids(t_arr *pid);
 // wait macors
 int	ft_wexitstatus(int status);
 int	ft_wifexited(int status);
+
+// wild match
+t_arr *ft_wild_match(t_arr *wild);
 
 #endif // !EXECUTOR_H

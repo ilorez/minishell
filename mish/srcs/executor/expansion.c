@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:37:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/12 00:16:46 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/12 09:57:34 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static char *_get_word(char **str);
 //  - norminete
 
 void arr_print_str(t_arr *arr);
-char *ft_word_expansion(char *word)
+
+t_arr *ft_word_expansion(char *word)
 {
   t_str *r;
   t_arr *wild;
@@ -31,18 +32,17 @@ char *ft_word_expansion(char *word)
 
 
   r = str_new_empty(6);
+  if (!r)
+    return NULL;
   wild = arr_new();
+  if (!wild)
+    return (str_clean(&r), NULL);
   start = 0;
-  if (!word)
-    return ft_strdup("");
   while (*word)
   {
     if (*word == '\'')
-    {
-      while (*++word != '\'')
+      while (*++word != '\'' || (word++ && 0))
         str_append(r, *word);
-      word++;
-    }
     else if (*word == '"')
       _double_quote(r, &word);
     else if (*word == '$')
@@ -60,11 +60,17 @@ char *ft_word_expansion(char *word)
   if (wild->index)
   {
       arr_append(wild, ft_strdup(&(r->value[start])));
-      // TODO: print wild for test
-      arr_print_str(wild);
+      // get match files
+      // wild = ft_get_wild_match(wild);
+      if (wild->index)
+        return (str_clean(&r), wild);
   }
-  return str_extract(&r);
+  arr_append(wild, str_extract(&r));
+  arr_print_str(wild);// WARN: print
+  return (wild);
 }
+
+t_str *_get_new_word(t_arr)
 
 void arr_print_str(t_arr *arr)
 {
