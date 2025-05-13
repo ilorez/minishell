@@ -6,7 +6,7 @@
 /*   By: abdenasse <abdenasse@student.1337.ma>        +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 21:34:56 by abdenasse          #+#    #+#            */
-/*   Updated: 2025/05/10 01:28:02 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:48:35 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/libft.h"
@@ -93,4 +93,16 @@ void	arr_empty(t_arr *arr)
     }
 	}
   arr->index = 0;
+}
+
+void	**arr_extract(t_arr **arr)
+{
+  void **r;
+
+	if (!arr || !*arr)
+		return NULL;
+  r = (*arr)->content;
+	free(*arr);
+  *arr = NULL;
+  return (r);
 }

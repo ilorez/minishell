@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:37:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/13 01:19:14 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:58:58 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,31 @@ static char *_get_word(char **str);
 
 // TODO:
 //  - more tests
-//  - ask your teamate about it's opinion in the logic
 //  - norminete
+char **ft_extract(char **argv)
+{
+  t_arr *tmp;
+  t_arr *all;
 
-void arr_print_str(t_arr *arr);
+  all = ft_calloc(sizeof(t_arr), 1);
+  if (all)
+    return (NULL);
+  while (argv)
+  {
+    tmp = ft_word_expansion(*argv++);
+    if (!tmp)
+      return (arr_free(all), NULL); 
+    if (!arr_merge(all, tmp))
+      return (arr_free(all), NULL);
+  }
+  return ((char **)arr_extract(&all));
+}
 
 t_arr *ft_word_expansion(char *word)
 {
   t_str *r;
   t_arr *wild;
   size_t start;
-
 
   r = str_new_empty(6);
   if (!r)
@@ -135,12 +149,14 @@ int main(void) {
 		NULL
 	};
 
-	for (int i = 0; tests[i]; i++) {
-		char *expanded = ft_word_expansion(tests[i]);
-		printf("Input:    %s\n", tests[i]);
-		printf("Expanded: %s\n", expanded);
-		free(expanded);
-		puts("------");
+  for (int i = 0; tests[i]; i++) {
+		printf("[%d]-%s\n", i, tests[i]);
+	}
+  puts("---------------------------");
+	char **expanded = ft_extract(tests);
+	for (int i = 0; expanded[i]; i++) {
+		printf("Expanded: %s\n", expanded[i]);
+		ft_free_str_lst(expanded);
 	}
 	return 0;
 }
