@@ -5,3 +5,6 @@ all:
 
 clean:
 	rm -rf a.out
+
+e: 
+	vi Makefile

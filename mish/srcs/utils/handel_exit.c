@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/10 01:39:56 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/10 14:05:29 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	ft_free_tokens(t_token **tks)
 		free((*tks));
 		(*tks) = tmp;
 	}
+}
+
+void	exit_err(char *msg, t_errno code)
+{
+	ft_perror(msg, code);
+	exit(code);
 }
 
 int restore_std(int std, int flags, int status)
