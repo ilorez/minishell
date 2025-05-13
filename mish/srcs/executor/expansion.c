@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:37:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/12 09:57:34 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/13 01:19:14 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,12 @@ t_arr *ft_word_expansion(char *word)
   {
       arr_append(wild, ft_strdup(&(r->value[start])));
       // get match files
-      // wild = ft_get_wild_match(wild);
+      wild = ft_wild_match(wild);
       if (wild->index)
         return (str_clean(&r), wild);
   }
   arr_append(wild, str_extract(&r));
-  arr_print_str(wild);// WARN: print
   return (wild);
-}
-
-t_str *_get_new_word(t_arr)
-
-void arr_print_str(t_arr *arr)
-{
-	if (!arr || !arr->content)
-		return;
-
-	for (int i = 0; i < arr->index; i++)
-	{
-		char *str = (char *)arr->content[i];
-		if (str)
-			printf("[%d]: %s\n", i, str);
-		else
-			printf("[%d]: (null)\n", i);
-	}
 }
 
 static void _double_quote(t_str *r, char **word)

@@ -3,7 +3,8 @@
 #include <dirent.h>
 #include <stdio.h>
 
-t_arr *_get_match(t_arr *wild, DIR *dir);
+static t_arr *_get_match(t_arr *wild, DIR *dir);
+
 t_arr *ft_wild_match(t_arr *wild)
 {
   DIR *dir_ptr;
@@ -30,28 +31,14 @@ t_arr *ft_wild_match(t_arr *wild)
 }
 
 // TODO: is_match think about it
-int _is_match(t_arr *wild, char *name)
+static int _is_match(t_arr *wild, char *name)
 {
-  int i;
-  int j;
-  char **parts;
-
-  parts = (char **)wild->content;
-  i = 0;
-  j = -1;
-  while (parts[i][++j])
-    if (parts[i][j] != *name)
-      return (1);
-  while (++i < wild->index)
-  {
-
-
-  }
-  
+  (void)wild;
+  (void)name;
   return (0);
 }
 
-t_arr *_get_match(t_arr *wild, DIR *dir)
+static t_arr *_get_match(t_arr *wild, DIR *dir)
 {
   t_arr *mlst;
   struct dirent *dir_read;
@@ -72,8 +59,3 @@ t_arr *_get_match(t_arr *wild, DIR *dir)
   return (mlst);
 }
 
-
-int main()
-{
-  ft_wild_match(NULL);
-}
