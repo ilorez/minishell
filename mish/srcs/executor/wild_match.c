@@ -30,14 +30,6 @@ t_arr *ft_wild_match(t_arr *wild)
   return (match_list);
 }
 
-// TODO: is_match think about it
-static int _is_match(t_arr *wild, char *name)
-{
-  (void)wild;
-  (void)name;
-  return (0);
-}
-
 static t_arr *_get_match(t_arr *wild, DIR *dir)
 {
   t_arr *mlst;
@@ -45,15 +37,14 @@ static t_arr *_get_match(t_arr *wild, DIR *dir)
 
   mlst = arr_new();
   if (!mlst)
-  {
-    ft_perror(NULL, ERR_MALLOC_FAIL);
     return (NULL);
-  }
   dir_read = readdir(dir);
   while (dir_read)
   {
-    if (_is_match(wild, dir_read->d_name))
-      arr_append(mlst, dir_read->d_name);
+    if (dir_read->d_name[0] == '.' && **(char **)(wild->content) != '.')
+      ;
+    else if (!_is_match(wild, dir_read->d_name))
+      arr_append(mlst, ft_strdup(dir_read->d_name));
     dir_read = readdir(dir);
   }
   return (mlst);

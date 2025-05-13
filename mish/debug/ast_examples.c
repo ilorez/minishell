@@ -26,7 +26,7 @@ t_ast *example2() {
 	if (!ast) return NULL;
 
 	t_redir *redir = calloc(1, sizeof(t_redir));
-	redir->fpath = ft_strdup("./in2");
+	redir->fpath = ft_strdup("in2*");
 	redir->fd = 0;
 	redir->flags = O_RDONLY;
 	redir->mode = 0644;
@@ -140,8 +140,8 @@ t_ast *example5() {
 	if (!ast) return NULL;
 
 	ast->type = T_PIPE;
-	ast->left = example_exec("sleep 3");
-	ast->right = example_subshell();
+	ast->left = example_exec("echo $A$$");
+	ast->right =  example_exec("echo $USER \"i'm\" here $PWD now");
 	return ast;
 }
 
@@ -191,7 +191,7 @@ int main(int ac, char **av, char **envp) {
 	t_data *data = init_example_data(envp);
 	if (!data) return 1;
 
-	t_ast *ast = example5(); // Change to example2() to test redirection
+	t_ast *ast = example_pipe_redir(); // Change to example2() to test redirection
 
 	ft_executor(data, ast);
   ft_waitpids(data->wpids);

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:44:36 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 02:38:06 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/13 23:09:46 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef enum s_errno
 	ERR_EMPTY_ARG,
 	ERR_MALLOC_FAIL,
 	ERR_SYNTAX,
+  ERR_AMB_REDIR,
 	ERR_UNKNOWN,
 	ERR_COUNT
 }		t_errno;
