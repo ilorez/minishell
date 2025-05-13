@@ -11,23 +11,24 @@
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_H
-#define EXECUTOR_H
+# define EXECUTOR_H
 
-#include "./container.h"
-#include "./types.h"
+# include "./container.h"
+# include "./types.h"
 
 // executor
-int ft_executor(t_data *data, t_ast *ast);
+int		ft_executor(t_data *data, t_ast *ast);
 
 // exec_utils.c
 char	*ft_get_right_path(char *cmd, char **paths);
-int	ft_change_fd(int fd, int to, t_data *data);
-int	ft_waitpids(t_arr *pid);
-int	ft_killpids(t_arr *pid);
+int		ft_change_fd(int fd, int to, t_data *data);
+int		ft_waitpids(t_arr *pid);
+int		ft_killpids(t_arr *pid);
+int		_is_match(t_arr *wild, char *name);
 
 // wait macors
-int	ft_wexitstatus(int status);
-int	ft_wifexited(int status);
+int		ft_wexitstatus(int status);
+int		ft_wifexited(int status);
 
 // expansion
 char **ft_extract(char **argv);
