@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:09:51 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/13 20:47:30 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/13 20:52:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,12 @@ int		_is_match(t_arr *wild, char *name);
 // wait macors
 int		ft_wexitstatus(int status);
 int		ft_wifexited(int status);
+
+// expansion
+char **ft_extract(char **argv);
+t_arr *ft_word_expansion(char *word);
+
+// wild match
+t_arr *ft_wild_match(t_arr *wild);
 
 #endif // !EXECUTOR_H

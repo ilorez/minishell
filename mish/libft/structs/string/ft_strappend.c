@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:55:00 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/03 21:25:52 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/11 23:38:10 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	str_append_list(t_str *str, char *list)
 {
 	size_t	len;
 
-	if (!str || !*list)
+	if (!str || !list)
 		return (0);
 	len = ft_strlen(list);
 	if (str->size - str->_wi <= len)

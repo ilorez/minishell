@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/11 01:56:57 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/11 03:33:09 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,16 @@ void ft_exec(t_data *data, t_ast *ast)
   }
   else if (*pid == 0)
   {
+    // TODO: replace ./ with data->curr_path
     path = ft_get_right_path(argv[0], data->paths);
+    // expand var
+    // expand wildcards
     ft_change_fd(data->fd[0], STDIN_FILENO, data);
     ft_change_fd(data->fd[1], STDOUT_FILENO, data);
     // execute program
     execve(path, argv, data->envp);
     perror("execve");
+    // TODO: free
     exit(126);
   }
   arr_append(data->wpids, pid);
@@ -119,6 +123,7 @@ int ft_redir(t_data *data, t_ast *ast, t_redir *r)
 {
   int fd;
 
+  // expand $var/wildcards in fpath
   fd = open(r->fpath, r->flags, r->mode);
   if (fd < 0)
   {

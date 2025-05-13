@@ -22,7 +22,8 @@ RM = rm -f
 # 			handel_exit.c ft_heredoc.c\
 # 			print_lexer.c 
 
-SRCS = ast_examples.c handel_exit.c exec_utils.c executor.c wait_macros.c 
+SRCS = expansion.c # handel_exit.c exec_utils.c executor.c wait_macros.c 
+#SRCS = wild_match.c # handel_exit.c exec_utils.c executor.c wait_macros.c 
 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
 green = \033[32m
