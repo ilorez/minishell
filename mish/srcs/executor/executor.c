@@ -6,13 +6,18 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/11 03:33:09 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/14 00:20:10 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
+#include <math.h>
 #include <stdio.h>
 
+// TODO: test expand path name
+//        - for current dir this ./main.c sould work as main.c so just skip ./
+//        - more tests
+//        - norm
 void ft_exec(t_data *data, t_ast *ast);
 int ft_pipe(t_data *data, t_ast *ast);
 int ft_redir(t_data *data, t_ast *ast, t_redir *r);
@@ -90,11 +95,6 @@ void ft_exec(t_data *data, t_ast *ast)
   char *path;
 
   pid = ft_calloc(sizeof(int), 1);
-  argv = ast->argv;
-  if (argv || argv[0])
-  {
-    // make sure this error not happen
-  }
   *pid = fork();
 
   if (*pid == -1)
@@ -105,9 +105,10 @@ void ft_exec(t_data *data, t_ast *ast)
   else if (*pid == 0)
   {
     // TODO: replace ./ with data->curr_path
+    argv = ft_extract(ast->argv);
     path = ft_get_right_path(argv[0], data->paths);
-    // expand var
-    // expand wildcards
+    if (!argv)
+      return (ft_perror(NULL, ERR_MALLOC_FAIL), exit(3));
     ft_change_fd(data->fd[0], STDIN_FILENO, data);
     ft_change_fd(data->fd[1], STDOUT_FILENO, data);
     // execute program
@@ -122,8 +123,17 @@ void ft_exec(t_data *data, t_ast *ast)
 int ft_redir(t_data *data, t_ast *ast, t_redir *r)
 {
   int fd;
+  t_arr *wild_paths;
 
-  // expand $var/wildcards in fpath
+  wild_paths = ft_word_expansion(r->fpath);
+  if (!wild_paths)
+      return (ft_perror(NULL, ERR_MALLOC_FAIL) , 1);
+  if (wild_paths->index > 1)
+    return (arr_free(wild_paths), ft_perror(r->fpath, ERR_AMB_REDIR), 1);
+  free(r->fpath);
+  r->fpath = wild_paths->content[0];
+  free(wild_paths->content);
+  free(wild_paths);
   fd = open(r->fpath, r->flags, r->mode);
   if (fd < 0)
   {

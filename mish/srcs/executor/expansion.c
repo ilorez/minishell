@@ -6,11 +6,12 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:37:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/13 20:58:58 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/13 23:50:47 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 static void _double_quote(t_str *r, char **word);
@@ -25,10 +26,13 @@ char **ft_extract(char **argv)
   t_arr *tmp;
   t_arr *all;
 
-  all = ft_calloc(sizeof(t_arr), 1);
-  if (all)
+  if (!argv || !*argv)
     return (NULL);
-  while (argv)
+  all = ft_calloc(sizeof(t_arr), 1);
+  if (!all)
+    return (NULL);
+  all = arr_new();
+  while (*argv)
   {
     tmp = ft_word_expansion(*argv++);
     if (!tmp)
@@ -109,8 +113,8 @@ static char *_get_word(char **str)
   if (!str || !*str)
     return (NULL);
   tmp = *str;
-  while ((ft_isalnum(*tmp) || *tmp == '_') && *++tmp)
-    i++;
+  while ((ft_isalnum(*tmp) || *tmp == '_') && ++i)
+    tmp++;
   word = ft_calloc(i, sizeof(char));
   if (!word)
     return NULL;
@@ -134,18 +138,20 @@ static void _get_env(t_str *r, char **word)
   str_append_list(r, getenv(var)); 
   free(var);
 }
-
+/*
 // --- Main ---
 int main(void) {
+  char **expanded;
+	//	"hello",
+	//	"'no expand'",
+	//	"\"$USER home\"",
+	//	"$HOME/dir",
+	//	"\"$HOME/$USER\"",
+
 	char *tests[] = {
-		"hello",
-		"'no expand'",
-		"\"$USER home\"",
-		"$HOME/dir",
-		"\"$HOME/$USER\"",
 		"foo*bar",
-		"****foo****bar****",
-		"\"$1SER home\"",
+	//	"****foo****bar****",
+	//	"\"$1SER home\"",
 		NULL
 	};
 
@@ -153,10 +159,12 @@ int main(void) {
 		printf("[%d]-%s\n", i, tests[i]);
 	}
   puts("---------------------------");
-	char **expanded = ft_extract(tests);
+	expanded = ft_extract(tests);
+  if (!expanded)
+    return (ft_perror(NULL, ERR_MALLOC_FAIL), 1);
 	for (int i = 0; expanded[i]; i++) {
-		printf("Expanded: %s\n", expanded[i]);
-		ft_free_str_lst(expanded);
+		printf("- %s\n", expanded[i]);
 	}
+	ft_free_str_lst(expanded);
 	return 0;
-}
+}*/

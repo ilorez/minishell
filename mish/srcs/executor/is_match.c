@@ -6,11 +6,11 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:45:04 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/13 20:46:12 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/13 21:30:18 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "conatainer.h"
+#include "../../includes/container.h"
 
 static int	find_word(char *name, int *i, char *word)
 {
@@ -39,7 +39,7 @@ int	_is_match(t_arr *wild, char *name)
 	int		j;
 	char	**parts;
 
-	**parts = (char **)wild->content;
+	parts = (char **)wild->content;
 	i = 0;
 	j = 0;
 	if (wild->index == 1 && parts[0][0] == 0)

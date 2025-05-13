@@ -22,7 +22,7 @@ RM = rm -f
 # 			handel_exit.c ft_heredoc.c\
 # 			print_lexer.c 
 
-SRCS = expansion.c # handel_exit.c exec_utils.c executor.c wait_macros.c 
+SRCS = ast_examples.c expansion.c is_match.c wild_match.c  handel_exit.c exec_utils.c executor.c wait_macros.c 
 #SRCS = wild_match.c # handel_exit.c exec_utils.c executor.c wait_macros.c 
 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
