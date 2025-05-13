@@ -15,7 +15,7 @@
 
 # include "./container.h"
 
-void ft_handel_exit(t_data *data, int status);
+void	ft_handel_exit(t_data *data, int status);
 void	ft_free_tokens(t_token **tks);
 t_redir	*ft_heredoc(char *eof);
 void	exit_err(char *msg, t_errno code);
