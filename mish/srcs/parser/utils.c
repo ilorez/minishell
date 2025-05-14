@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/14 12:13:31 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:31:01 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	next_token(t_token **lst)
 {
-	if (*lst && (*lst)->next)
+	if (*lst)
 		*lst = (*lst)->next;
 }
 
 int	match(t_token **lst, t_type tt)
 {
 	if (*lst && (*lst)->type == tt)
-		return (next_token(lst), 1);
+		return (1);
 	return (0);
 }
 

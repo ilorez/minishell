@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 12:00:00 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/09 11:30:12 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:22:10 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_grammar(t_token *lst)
 
 t_ast	*ft_parse_ast(t_token **lst)
 {
+	if (match(lst, T_ROOT))
+		next_token(lst);
 	return (parse_or(lst));
 }
 

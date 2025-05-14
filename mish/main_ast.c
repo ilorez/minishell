@@ -36,7 +36,7 @@ int	main(int ac, char **av, char **env)
 	init_history();
 	while (1)
 	{
-		input = readline("minishell$");
+		input = readline("minishell$ ");
 
     //ft_heredoc(input);
     //return (0);
@@ -48,7 +48,7 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 			// printf("cmd: %s\n", input);
 			token = ft_get_tokens(input);
-			print_tokens(token);
+			//print_tokens(token);
 			//ft_grammar(token);
 			ast = ft_parse_ast(&token);
 			print_ast(ast, 0);
