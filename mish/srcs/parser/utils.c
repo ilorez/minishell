@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/10 14:00:46 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:13:31 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	match(t_token **lst, t_type tt)
 	return (0);
 }
 
-// TODO: complete the function
 t_ast	*new_node(t_type tt, void **value, t_ast *r, t_ast *l)
 {
 	t_ast	*node;
@@ -33,4 +32,12 @@ t_ast	*new_node(t_type tt, void **value, t_ast *r, t_ast *l)
 	node = malloc(sizeof(t_ast));
 	if (!node)
 		return (NULL);
+	node->type = tt;
+	if (tt == T_REDIR)
+		node->redir = (t_redir *)value;
+	else
+		node->argv = (char **)value;
+	node->right = r;
+	node->left = l;
+	return (node);
 }

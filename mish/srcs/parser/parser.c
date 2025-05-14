@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:12:46 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/13 21:14:29 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:28:59 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_ast	*parse_or(t_token **lst)
 {
 	t_ast	*left;
-	t_ast	**rihgt;
+	t_ast	*right;
 
 	left = parse_and(lst);
 	while (match(lst, T_OR))
@@ -46,10 +46,10 @@ t_ast	*parse_pipe(t_token **lst)
 	t_ast	*right;
 
 	left = parse_redir(lst);
-	while (match(lst, T_PIEP))
+	while (match(lst, T_PIPE))
 	{
 		right = parse_redir(lst);
-		left = new_node(T_PIEP, NULL, right, left);
+		left = new_node(T_PIPE, NULL, right, left);
 	}
 	return (left);
 }
@@ -74,8 +74,8 @@ t_ast	*parse_word(t_token **lst)
 
 	if (match(lst, T_LPAR))
 		return (parse_list(lst));
-	exec = arr_new(void);
+	exec = arr_new();
 	while (match(lst, T_WORD))
-		arr_append(exec, lst->word->ptr);
+		arr_append(exec, (*lst)->word->ptr);
 	return (new_node(T_EXEC, exec->content, NULL, NULL));
 }

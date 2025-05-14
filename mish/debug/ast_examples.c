@@ -186,7 +186,7 @@ t_data *init_example_data(char **envp) {
 	return data;
 }
 
-int main(int ac, char **av, char **envp) {
+/*int main(int ac, char **av, char **envp) {
   (void )ac, (void)av;
 	t_data *data = init_example_data(envp);
 	if (!data) return 1;
@@ -197,4 +197,4 @@ int main(int ac, char **av, char **envp) {
   ft_waitpids(data->wpids);
 
 	return 0;
-}
+}*/
