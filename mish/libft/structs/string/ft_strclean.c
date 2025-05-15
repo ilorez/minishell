@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:24:11 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 11:36:11 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:43:41 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ void	str_clean(t_str **str)
 	free((*str)->value);
 	free(*str);
 	*str = NULL;
+}
+
+// str free is str_clean by get just single pointer
+void	str_free(void *ptr)
+{
+  t_str *str;
+
+  str = (t_str *)ptr;
+	if (!str)
+		return ;
+	free(str->value);
+	free(str);
 }
 
 // str empty or free value

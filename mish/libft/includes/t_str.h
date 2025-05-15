@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:57:42 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 21:10:12 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:43:54 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,7 @@ size_t str_len(t_str *str);
 int str_drop_item(t_str *str, size_t at_index);
 int str_drop_list(t_str *str, size_t from, size_t to);
 int str_set(t_str *str, size_t at_index, int c);
+t_str *str_split_at(t_str *str, size_t at_index);
+void	str_free(void *ptr);
+
 #endif

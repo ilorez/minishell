@@ -35,6 +35,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			 ./structs/string/ft_strutils.c \
 			 ./structs/string/ft_strinsert.c \
 			 ./structs/string/ft_strdrop.c \
+			 ./structs/string/ft_strsplit_at.c \
 			 ./structs/array/ft_arr.c \
 			 ./structs/array/ft_arr_merge.c
 

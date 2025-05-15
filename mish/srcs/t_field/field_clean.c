@@ -12,6 +12,20 @@ void	field_clean(t_field **field)
 	*field = NULL;
 }
 
+void	field_free(void *ptr)
+{
+  t_field *field;
+
+  field = (t_field *)ptr;
+	if (!field)
+  {
+		return ;
+  }
+  str_free(field->str);
+  str_free(field->flags);
+  free(field);
+}
+
 void	field_empty(t_field *field)
 {
 	if (!field)

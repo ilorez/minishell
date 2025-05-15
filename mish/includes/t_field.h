@@ -6,13 +6,14 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:56:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 21:12:07 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:44:55 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef T_FIELD_H
 # define T_FIELD_H
+
 
 #include "./container.h"
 
@@ -32,6 +33,8 @@ int	field_insert(t_field *field, size_t at, char *txt, int tag);
 int field_drop_item(t_field *field, size_t at_index);
 int field_drop_list(t_field *field, size_t from, size_t to);
 int field_flags_set(t_field *field, size_t at_index, int c);
+t_field *field_split_at(t_field *field, size_t at_index);
+void	field_free(void *ptr);
 
 
 # endif 
