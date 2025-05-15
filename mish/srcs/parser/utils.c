@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/15 12:01:12 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/15 20:09:32 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,25 @@
 t_redri		*fill_redir(t_token **lst)
 {
 	t_redir	*redir;
+	t_token	tt;
+	char	*str;
 
-	redir = malloc(sizeof(t_redir));
-	if (!redir)
-		exit_err("malloc failed fill_redir", 2);
-	redir->fd = 1 * (match(lst, T_GREAT) || match(lst, T_GGREAT))
+	tt = lst->type;
+	next_token(lst);
+	ft_strlcpy(str, (*lst)-word->ptr, (*lst)->word->len);
+	next_token(lst);
+	if (tt != T_LLESS)
+	{
+		redir = ft_callocc(1, sizeof(t_redir));
+		if (!redir)
+			exit_err("malloc failed fill_redir", 2);
+		redir->fpath = str;
+		redir->fd = 1 * (tt == T_GREAT || tt == T_GGREAT);
+		redir->flags = O_RDONLY;
+		redir->mode = 0644;
+		return (redir);
+	}
+	return (ft_heredoc(str));
 }
 
 void	next_token(t_token **lst)
