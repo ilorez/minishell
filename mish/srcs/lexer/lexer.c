@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:48:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/07 13:07:29 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 09:59:19 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ static t_word	*_get_word(char **cmd)
 	open = 0;
 	while (**cmd)
 	{
-		if (**cmd == '"' || **cmd == '\'')
-			open = (**cmd) * (open == **cmd);
+		if (**cmd == '\'' || **cmd == '"')
+		{
+			if (!open || open == **cmd)
+				open = **cmd * !(open == **cmd);
+		}
 		else if (**cmd == '&' && *((*cmd) + 1) != '&')
 			;
 		else if (!open && (ft_strchr(FT_DELIMS, **cmd) || ft_isspace(**cmd)))

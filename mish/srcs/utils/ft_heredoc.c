@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:56:32 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/09 03:20:33 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 09:26:12 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_redir	*ft_heredoc(char *eof)
     return (NULL);
   }
 	r->fpath = _randtmp_file("/tmp/", "mish_herdoc_");
-	r->fd = open(r->fpath, O_WRONLY | O_CREAT, 0777);
+	r->fd = open(r->fpath, O_WRONLY | O_CREAT | O_APPEND, 0777);
 	if (r->fd < 0)
   {
 			perror("open failed");
