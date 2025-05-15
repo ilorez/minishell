@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:09:51 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 20:00:48 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 21:54:07 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ int		ft_killpids(t_arr *pid);
 
 // expansion
 char **ft_extract(char **argv);
+
+// field exec expand 
+void field_expand(t_field *field)
+
 //t_arr *ft_word_expansion(char *word);
 
 // wild match

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:37:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 18:37:17 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 21:54:53 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ t_field *ft_extract_arg(char *arg)
   t_arr *fields;
   t_arr *args;
 
-  field = field_new(arg, 0);
+  field = field_new(arg, '0');
+  if (!field)
+    return (NULL);
   field_expand(field); // expand vars
-  fields = field_split(field, 0, ft_isspace);
+  fields = field_split(field, '0', ft_isspace);
   while (item in fields);
   {
     // wilds = filed_split(field, 0, ft_iswild());

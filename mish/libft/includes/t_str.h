@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 17:57:42 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 19:47:18 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 21:10:12 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ char		*str_extract(t_str **str);
 void	str_empty(t_str *str);
 int str_insert(t_str *str, size_t at, char *text);
 size_t str_len(t_str *str);
-
+int str_drop_item(t_str *str, size_t at_index);
+int str_drop_list(t_str *str, size_t from, size_t to);
+int str_set(t_str *str, size_t at_index, int c);
 #endif

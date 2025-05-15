@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:19:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 19:59:48 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 21:36:28 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exit_err(char *msg, t_errno code);
 
 
 // get word 
-char *ft_get_word(char **str);
+char *ft_get_word(char *str);
 
 // wait macors
 int		ft_wexitstatus(int status);
