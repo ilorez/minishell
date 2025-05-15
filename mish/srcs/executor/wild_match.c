@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wild_match.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/13 20:45:04 by abdnasse          #+#    #+#             */
+/*   Updated: 2025/05/15 18:41:54 by znajdaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/container.h"
-#include <dirent.h>
-#include <stdio.h>
 
 static t_arr *_get_match(t_arr *wild, DIR *dir);
+static int	_is_match(t_arr *wild, char *name);
+static int	_find_word(char *name, int *i, char *word);
 
 t_arr *ft_wild_match(t_arr *wild)
 {
@@ -50,3 +61,52 @@ static t_arr *_get_match(t_arr *wild, DIR *dir)
   return (mlst);
 }
 
+static int	_find_word(char *name, int *i, char *word)
+{
+	int	j;
+
+	if (!*word)
+		return (1);
+	while (name[*i])
+	{
+		j = 0;
+		while (word[j] && name[*i + j] == word[j])
+			j++;
+		if (!*(word + j))
+		{
+			*i = *i + j;
+			return (1);
+		}
+		(*i)++;
+	}
+	return (0);
+}
+
+static int	_is_match(t_arr *wild, char *name)
+{
+	int		i;
+	int		j;
+	char	**parts;
+
+	parts = (char **)wild->content;
+	i = 0;
+	j = 0;
+	if (wild->index == 1 && parts[0][0] == 0)
+		return (0);
+	if (parts[0][0] == 0)
+	{
+		if (!_find_word(name, &i, parts[++j]))
+			return (1);
+	}
+	else if (strncmp(name, parts[0], strlen(parts[0])))
+		return (1);
+	while (++j < wild->index)
+		if (!_find_word(name, &i, parts[j]))
+			return (1);
+	i = strlen(name) - strlen(parts[j - 1]);
+	if (parts[j - 1][0] == 0)
+		return (0);
+	else if (name[i] != 0 && !_find_word(name, &i, parts[j - 1]))
+		return (1);
+	return (0);
+}

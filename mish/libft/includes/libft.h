@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/04 10:01:06 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/15 11:26:15 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ void		ft_putnbr_fd(int n, int fd);
 // arrays functions
 char		*ft_strjoin(char const *s1, char const *s2, char const *c);
 char		**ft_split(char const *s, char c);
+char	**ft_split_cond(char const *s, int (f)(int));
 
 #endif

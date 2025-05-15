@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 20:25:03 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/03 20:28:22 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 19:34:54 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,11 @@ char	*str_extract(t_str **str)
 	free(*str);
 	*str = NULL;
 	return (tmp);
+}
+
+size_t str_len(t_str *str)
+{
+  if (!str)
+    return (0);
+  return (str->_wi);
 }

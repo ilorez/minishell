@@ -6,13 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/14 00:20:10 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:17:04 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
-#include <math.h>
-#include <stdio.h>
 
 // TODO: test expand path name
 //        - for current dir this ./main.c sould work as main.c so just skip ./

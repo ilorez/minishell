@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:37:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/13 23:50:47 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/15 11:58:41 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void _double_quote(t_str *r, char **word);
+static void _double_quote(t_str *r, char **word, int skip);
 static void _get_env(t_str *r, char **word);
 static char *_get_word(char **str);
 
@@ -25,6 +25,7 @@ char **ft_extract(char **argv)
 {
   t_arr *tmp;
   t_arr *all;
+  char **exargv;
 
   if (!argv || !*argv)
     return (NULL);
@@ -32,9 +33,11 @@ char **ft_extract(char **argv)
   if (!all)
     return (NULL);
   all = arr_new();
-  while (*argv)
+  exargv = ft_expan_vars(argv);
+  ft_free_str_lst(argv);
+  while (*exargv)
   {
-    tmp = ft_word_expansion(*argv++);
+    tmp = ft_word_expansion(*exargv++);
     if (!tmp)
       return (arr_free(all), NULL); 
     if (!arr_merge(all, tmp))
@@ -43,12 +46,15 @@ char **ft_extract(char **argv)
   return ((char **)arr_extract(&all));
 }
 
+
+
 t_arr *ft_word_expansion(char *word)
 {
   t_str *r;
   t_arr *wild;
   size_t start;
 
+  word = ft_expan_var(word);
   r = str_new_empty(6);
   if (!r)
     return NULL;
@@ -62,9 +68,8 @@ t_arr *ft_word_expansion(char *word)
       while (*++word != '\'' || (word++ && 0))
         str_append(r, *word);
     else if (*word == '"')
-      _double_quote(r, &word);
-    else if (*word == '$')
-      _get_env(r, &word);
+      while (*++word != '\"' || (word++ && 0))
+        str_append(r, *word);
     else if (*word == '*')
     {
       if (start != r->_wi || !r->_wi) // so it's will count the serie of wilds as one wild
@@ -87,57 +92,9 @@ t_arr *ft_word_expansion(char *word)
   return (wild);
 }
 
-static void _double_quote(t_str *r, char **word)
-{
-  while (*(++*word) != '"')
-  {
-    if (**word == '$')
-    {
-      _get_env(r, word);
-      --*word; // because we are increment in loop condition
-      continue;
-    }
-    str_append(r, **word);
-  }
-  ++*word;
-}
 
-static char *_get_word(char **str)
-{
-  int i;
-  char *word;
-  char *tmp;
 
-  i = 1;
-  word = NULL;
-  if (!str || !*str)
-    return (NULL);
-  tmp = *str;
-  while ((ft_isalnum(*tmp) || *tmp == '_') && ++i)
-    tmp++;
-  word = ft_calloc(i, sizeof(char));
-  if (!word)
-    return NULL;
-  ft_strlcpy(word, *str, i);
-  *str = tmp;
-  return (word);
-}
 
-static void _get_env(t_str *r, char **word)
-{
-  char *var;
-
-  if (!ft_isalpha(*++*word) && **word != '_')
-  {
-      str_append(r, '$');
-      return;
-  }
-  var = _get_word(word);
-  if (!var)
-     return;
-  str_append_list(r, getenv(var)); 
-  free(var);
-}
 /*
 // --- Main ---
 int main(void) {
