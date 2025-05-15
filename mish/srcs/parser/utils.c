@@ -6,11 +6,21 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/14 19:58:23 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:01:12 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "container.h"
+
+t_redri		*fill_redir(t_token **lst)
+{
+	t_redir	*redir;
+
+	redir = malloc(sizeof(t_redir));
+	if (!redir)
+		exit_err("malloc failed fill_redir", 2);
+	redir->fd = 1 * (match(lst, T_GREAT) || match(lst, T_GGREAT))
+}
 
 void	next_token(t_token **lst)
 {
