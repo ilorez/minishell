@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:12:46 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/15 12:02:00 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:35:50 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,17 @@ t_ast	*parse_pipe(t_token **lst)
 t_ast	*parse_redir(t_token **lst)
 {
 	t_ast	*left;
+	t_ast	*right;
 	t_redir	*redir;
 
 	left = parse_word(lst);
-	while (match(lst, T_LESS) || match(lst, T_LLESS) ||match(lst, T_GREAT) ||match(lst, T_GGREAT))
+	right = NULL;
+	while (match_redir(lst))
 	{
 		redir = fill_redir(lst);
-		left = new_node(T_REDIR, redir, NULL, left);
+		if (!match_redir(lst))
+			right = parse_or(lst);
+		left = new_node(T_REDIR, redir, right, left);
 	}
 	return (left);
 }
@@ -75,10 +79,12 @@ t_ast	*parse_word(t_token **lst)
 {
 	t_arr	*exec;
 	char	*arg;
+	int		done;
 
 	if (match(lst, T_LPAR))
 		return (parse_list(lst));
 	exec = arr_new();
+	done = 0;
 	while (match(lst, T_WORD))
 	{
 		arg = (char *)malloc(((*lst)->word->len + 1) * sizeof(char));
@@ -87,6 +93,9 @@ t_ast	*parse_word(t_token **lst)
 		ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
 		arr_append(exec, arg);
 		next_token(lst);
+		done++;
 	}
-	return (new_node(T_EXEC, exec->content, NULL, NULL));
+	if (done)
+		return (new_node(T_EXEC, exec->content, NULL, NULL));
+	return (NULL);
 }
