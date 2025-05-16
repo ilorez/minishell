@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:18:25 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 16:35:47 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:40:31 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@
 
 # include "../libft/includes/libft.h"
 // THIS SHOULD BE ABOVE ALL THE HEADER CUZ IT CONTAINS ALL THE DATA TYPES
+# include "./types.h"
 # include "./t_field.h"
+# include "./utils.h"
 # include "./executor.h"
 # include "./lexer.h"
-# include "./types.h"
-# include "./utils.h"
 
 #endif

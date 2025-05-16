@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 15:56:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 16:32:36 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:41:12 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define T_FIELD_H
 
 # include "../libft/includes/libft.h"
-# include "./container.h"
 
 typedef struct s_field
 {
