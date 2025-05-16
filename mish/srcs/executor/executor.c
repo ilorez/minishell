@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 16:17:04 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:48:17 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int ft_pipe(t_data *data, t_ast *ast)
   return status;
 }
 
+#include "../../debug/debug.h"
 void ft_exec(t_data *data, t_ast *ast)
 {
   int *pid;
@@ -104,6 +105,7 @@ void ft_exec(t_data *data, t_ast *ast)
   {
     // TODO: replace ./ with data->curr_path
     argv = ft_extract(ast->argv);
+    arr_print_str_list(argv);
     path = ft_get_right_path(argv[0], data->paths);
     if (!argv)
       return (ft_perror(NULL, ERR_MALLOC_FAIL), exit(3));
@@ -123,15 +125,14 @@ int ft_redir(t_data *data, t_ast *ast, t_redir *r)
   int fd;
   t_arr *wild_paths;
 
-  wild_paths = ft_word_expansion(r->fpath);
+  wild_paths = ft_extract_arg(r->fpath);
   if (!wild_paths)
       return (ft_perror(NULL, ERR_MALLOC_FAIL) , 1);
   if (wild_paths->index > 1)
-    return (arr_free(wild_paths), ft_perror(r->fpath, ERR_AMB_REDIR), 1);
+    return (ft_perror(r->fpath, ERR_AMB_REDIR), arr_free(wild_paths), 1);
   free(r->fpath);
   r->fpath = wild_paths->content[0];
-  free(wild_paths->content);
-  free(wild_paths);
+  arr_free_body(wild_paths);
   fd = open(r->fpath, r->flags, r->mode);
   if (fd < 0)
   {

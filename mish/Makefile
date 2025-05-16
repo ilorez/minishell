@@ -4,6 +4,7 @@ vpath %.c	./srcs/lexer
 vpath %.c	./srcs/parser
 vpath %.c	./srcs/executor
 vpath %.c	./srcs/setup
+vpath %.c	./srcs/t_field
 vpath %.c	./debug
 
 BUILD_DR = ./build/
@@ -12,7 +13,7 @@ NAME =	minishell
 LIBFT_DR = ./libft
 LIBFT = -L$(LIBFT_DR) -lft
 INCLUDES_DRS = -I./includes -I./libft/includes 
-HEADERS = ./includes/utlis.h ./debug/debug.h ./includes/lexer.h ./includes/parser.h ./includes/container.h ./includes/types.h ./includes/executor.h ./includes/buildins.h
+HEADERS = ./debug/debug.h ./includes/utlis.h ./includes/t_field.h  ./includes/lexer.h ./includes/parser.h ./includes/container.h ./includes/types.h ./includes/executor.h ./includes/buildins.h
 
 FLAGS =  -Wall -Wextra -Werror -g
 CC = cc
@@ -22,7 +23,8 @@ RM = rm -f
 # 			handel_exit.c ft_heredoc.c\
 # 			print_lexer.c 
 
-SRCS = ast_examples.c expansion.c is_match.c wild_match.c  handel_exit.c exec_utils.c executor.c wait_macros.c 
+SRCS = ast_examples.c extract.c field_exec_expand.c field_exec_split.c wild_match.c ft_get_word.c  handel_exit.c exec_utils.c executor.c wait_macros.c \
+			 field_append.c field_clean.c field_drop.c field_extract.c field_insert.c field_new.c field_set.c field_split_at.c
 #SRCS = wild_match.c # handel_exit.c exec_utils.c executor.c wait_macros.c 
 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))

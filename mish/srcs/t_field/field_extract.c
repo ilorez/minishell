@@ -1,6 +1,6 @@
 #include "../../includes/t_field.h"
 
-// str clean
+// extract the value 
 char	*field_extract(t_field **field)
 {
 	char	*tmp;
@@ -14,4 +14,13 @@ char	*field_extract(t_field **field)
   free(*field);
   *field = NULL;
 	return (tmp);
+}
+
+char	*field_extract_copy(t_field *field)
+{
+	if (!field)
+  {
+		return (NULL);
+  }
+	return (str_extract_copy(field->str));
 }
