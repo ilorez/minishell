@@ -14,10 +14,10 @@
 
 void	arr_free(void *ptr)
 {
-	int	i;
-  t_arr *arr;
+	int		i;
+	t_arr	*arr;
 
-  arr = ptr;
+	arr = ptr;
 	if (!arr)
 		return ;
 	if (arr->content)
@@ -46,7 +46,7 @@ void	arr_clean(t_arr **arr)
 		free((*arr)->content);
 	}
 	free(*arr);
-  *arr = NULL;
+	*arr = NULL;
 }
 
 void	arr_free_body(t_arr *arr)
@@ -68,11 +68,11 @@ void	arr_empty(t_arr *arr)
 	{
 		i = -1;
 		while (++i < arr->index)
-    {
+		{
 			if (arr->clean && arr->content[i])
 				arr->clean(arr->content[i]);
-      arr->content[i] = NULL;
-    }
+			arr->content[i] = NULL;
+		}
 	}
-  arr->index = 0;
+	arr->index = 0;
 }

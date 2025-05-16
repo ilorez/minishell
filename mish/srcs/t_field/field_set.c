@@ -12,11 +12,11 @@
 
 #include "../../includes/t_field.h"
 
-int field_flags_set(t_field *field, size_t at_index, int c)
+int	field_flags_set(t_field *field, size_t at_index, int c)
 {
-  if (!field)
-    return (0);
-  if (!str_set(field->flags, at_index, c))
-    return (0);
-  return (1);
+	if (!field)
+		return (0);
+	if (!str_set(field->flags, at_index, c))
+		return (0);
+	return (1);
 }

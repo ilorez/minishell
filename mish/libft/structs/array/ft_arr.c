@@ -20,7 +20,7 @@ t_arr	*arr_new(void)
 		return (NULL);
 	arr->index = 0;
 	arr->size = 10;
-  arr->clean = free;
+	arr->clean = free;
 	arr->content = ft_calloc(arr->size, sizeof(void *));
 	if (!(arr->content))
 		return (free(arr), NULL);
@@ -62,12 +62,12 @@ int	arr_del_item(t_arr *arr, int index)
 
 void	**arr_extract(t_arr **arr)
 {
-  void **r;
+	void	**r;
 
 	if (!arr || !*arr)
-		return NULL;
-  r = (*arr)->content;
+		return (NULL);
+	r = (*arr)->content;
 	free(*arr);
-  *arr = NULL;
-  return (r);
+	*arr = NULL;
+	return (r);
 }

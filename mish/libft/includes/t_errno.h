@@ -21,7 +21,7 @@ typedef enum s_errno
 	ERR_EMPTY_ARG,
 	ERR_MALLOC_FAIL,
 	ERR_SYNTAX,
-  ERR_AMB_REDIR,
+	ERR_AMB_REDIR,
 	ERR_UNKNOWN,
 	ERR_COUNT
 }		t_errno;

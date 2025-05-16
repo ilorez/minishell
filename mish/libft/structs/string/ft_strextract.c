@@ -12,7 +12,7 @@
 
 #include "../../includes/t_str.h"
 
-// extract value 
+// extract value
 char	*str_extract(t_str **str)
 {
 	char	*tmp;
@@ -32,4 +32,3 @@ char	*str_extract_copy(t_str *str)
 		return (NULL);
 	return (ft_strdup(str->value));
 }
-

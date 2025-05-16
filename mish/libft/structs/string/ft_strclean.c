@@ -25,9 +25,9 @@ void	str_clean(t_str **str)
 // str free is str_clean by get just single pointer
 void	str_free(void *ptr)
 {
-  t_str *str;
+	t_str	*str;
 
-  str = (t_str *)ptr;
+	str = (t_str *)ptr;
 	if (!str)
 		return ;
 	free(str->value);
@@ -39,7 +39,7 @@ void	str_empty(t_str *str)
 {
 	if (!str)
 		return ;
-  ft_bzero(str->value, str->_wi);
-  str->i = 0;
-  str->_wi = 0;
+	ft_bzero(str->value, str->_wi);
+	str->i = 0;
+	str->_wi = 0;
 }

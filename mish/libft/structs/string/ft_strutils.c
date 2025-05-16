@@ -12,9 +12,9 @@
 
 #include "../../includes/t_str.h"
 
-size_t str_len(t_str *str)
+size_t	str_len(t_str *str)
 {
-  if (!str)
-    return (0);
-  return (str->_wi);
+	if (!str)
+		return (0);
+	return (str->_wi);
 }

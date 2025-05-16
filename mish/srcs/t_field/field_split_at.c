@@ -12,18 +12,18 @@
 
 #include "../../includes/t_field.h"
 
-t_field *field_split_at(t_field **field, size_t at_index)
+t_field	*field_split_at(t_field **field, size_t at_index)
 {
-  t_field *second;
-  t_field *tmp;
+	t_field	*second;
+	t_field	*tmp;
 
-  if (!field)
-    return (NULL);
-  second = ft_calloc(1, sizeof(t_field));
-  second->str = str_split_at((*field)->str, at_index); 
-  second->flags = str_split_at((*field)->flags, at_index); 
-  tmp = second;
-  second = *field;
-  *field = tmp;
-  return (second);
+	if (!field)
+		return (NULL);
+	second = ft_calloc(1, sizeof(t_field));
+	second->str = str_split_at((*field)->str, at_index);
+	second->flags = str_split_at((*field)->flags, at_index);
+	tmp = second;
+	second = *field;
+	*field = tmp;
+	return (second);
 }

@@ -12,53 +12,53 @@
 
 #include "../../includes/container.h"
 
-static t_arr *_get_match(t_arr *wild, DIR *dir);
-static int	_is_match(t_arr *wild, char *name);
-static int	_find_word(char *name, int *i, char *word);
+static t_arr	*_get_match(t_arr *wild, DIR *dir);
+static int		_is_match(t_arr *wild, char *name);
+static int		_find_word(char *name, int *i, char *word);
 
-t_arr *ft_wild_match(t_arr *wild)
+t_arr	*ft_wild_match(t_arr *wild)
 {
-  DIR *dir_ptr;
-  t_arr *match_list;
-  
-  if (!wild)
-    return (NULL);
-  dir_ptr = opendir(".");
-  if (!dir_ptr)
-  {
-    perror("Can't open dir");
-    return (NULL);
-  }
-  match_list = _get_match(wild, dir_ptr);
-  if (!match_list)
-    return (NULL);
-  if (closedir(dir_ptr))
-  {
-    perror("Can't close dir");
-    return (NULL);
-  }
-  arr_free(wild);
-  return (match_list);
+	DIR		*dir_ptr;
+	t_arr	*match_list;
+
+	if (!wild)
+		return (NULL);
+	dir_ptr = opendir(".");
+	if (!dir_ptr)
+	{
+		perror("Can't open dir");
+		return (NULL);
+	}
+	match_list = _get_match(wild, dir_ptr);
+	if (!match_list)
+		return (NULL);
+	if (closedir(dir_ptr))
+	{
+		perror("Can't close dir");
+		return (NULL);
+	}
+	arr_free(wild);
+	return (match_list);
 }
 
-static t_arr *_get_match(t_arr *wild, DIR *dir)
+static t_arr	*_get_match(t_arr *wild, DIR *dir)
 {
-  t_arr *mlst;
-  struct dirent *dir_read;
+	t_arr			*mlst;
+	struct dirent	*dir_read;
 
-  mlst = arr_new();
-  if (!mlst)
-    return (NULL);
-  dir_read = readdir(dir);
-  while (dir_read)
-  {
-    if (dir_read->d_name[0] == '.' && **(char **)(wild->content) != '.')
-      ;
-    else if (!_is_match(wild, dir_read->d_name))
-      arr_append(mlst, ft_strdup(dir_read->d_name));
-    dir_read = readdir(dir);
-  }
-  return (mlst);
+	mlst = arr_new();
+	if (!mlst)
+		return (NULL);
+	dir_read = readdir(dir);
+	while (dir_read)
+	{
+		if (dir_read->d_name[0] == '.' && **(char **)(wild->content) != '.')
+			;
+		else if (!_is_match(wild, dir_read->d_name))
+			arr_append(mlst, ft_strdup(dir_read->d_name));
+		dir_read = readdir(dir);
+	}
+	return (mlst);
 }
 
 static int	_find_word(char *name, int *i, char *word)
