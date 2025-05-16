@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handel_exit.c                                      :+:      :+:    :+:   */
+/*   ft_strsplit_at.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:28:08 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/15 22:10:47 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/15 22:16:42 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/libft.h"
 
-void	exit_err(char *msg, t_errno code)
+t_str	*str_split_at(t_str *str, size_t at_index)
 {
-	ft_perror(msg, code);
-	exit(code);
-}
+	t_str	*second;
 
-void	ft_handel_exit(t_data *data, int status)
-{
-	ft_free_data(data);
-	exit(status);
+	if (!str || str->_wi <= at_index)
+		return (NULL);
+	second = str_new(&(str->value[at_index]));
+	str->_wi = at_index;
+	str->value[at_index] = 0;
+	str->i = 0;
+	return (second);
 }

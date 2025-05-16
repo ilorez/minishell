@@ -1,45 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclean.c                                      :+:      :+:    :+:   */
+/*   field_clean.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 20:24:11 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 23:43:41 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/16 15:46:35 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/16 15:46:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/t_str.h"
+#include "../../includes/t_field.h"
 
-// str clean
-void	str_clean(t_str **str)
+void	field_clean(t_field **field)
 {
-	if (!str || !*str)
+	if (!field || !*field)
+	{
 		return ;
-	free((*str)->value);
-	free(*str);
-	*str = NULL;
+	}
+	str_clean(&((*field)->str));
+	str_clean(&((*field)->flags));
+	free(*field);
+	*field = NULL;
 }
 
-// str free is str_clean by get just single pointer
-void	str_free(void *ptr)
+void	field_free(void *ptr)
 {
-	t_str	*str;
+	t_field	*field;
 
-	str = (t_str *)ptr;
-	if (!str)
+	field = (t_field *)ptr;
+	if (!field)
+	{
 		return ;
-	free(str->value);
-	free(str);
+	}
+	str_free(field->str);
+	str_free(field->flags);
+	free(field);
 }
 
-// str empty or free value
-void	str_empty(t_str *str)
+void	field_empty(t_field *field)
 {
-	if (!str)
+	if (!field)
+	{
 		return ;
-	ft_bzero(str->value, str->_wi);
-	str->i = 0;
-	str->_wi = 0;
+	}
+	str_empty(field->str);
+	str_empty(field->flags);
 }

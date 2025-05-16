@@ -6,7 +6,7 @@
 /*   By: abdenasse <abdenasse@student.1337.ma>        +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 21:34:56 by abdenasse          #+#    #+#            */
-/*   Updated: 2025/05/13 20:48:35 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:22:32 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/libft.h"
@@ -20,7 +20,7 @@ t_arr	*arr_new(void)
 		return (NULL);
 	arr->index = 0;
 	arr->size = 10;
-  arr->clean = free;
+	arr->clean = free;
 	arr->content = ft_calloc(arr->size, sizeof(void *));
 	if (!(arr->content))
 		return (free(arr), NULL);
@@ -47,6 +47,7 @@ int	arr_append(t_arr *arr, void *ptr)
 	return (1);
 }
 
+// del item at <index> and set the last item in arr in place of deleted item
 int	arr_del_item(t_arr *arr, int index)
 {
 	if (!arr || index < 0 || index >= arr->index)
@@ -59,50 +60,14 @@ int	arr_del_item(t_arr *arr, int index)
 	return (1);
 }
 
-void	arr_free(t_arr *arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	if (arr->content)
-	{
-		i = -1;
-		while (++i < arr->index)
-			if (arr->clean && arr->content[i])
-				arr->clean(arr->content[i]);
-		free(arr->content);
-	}
-	free(arr);
-}
-
-void	arr_empty(t_arr *arr)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	if (arr->content)
-	{
-		i = -1;
-		while (++i < arr->index)
-    {
-			if (arr->clean && arr->content[i])
-				arr->clean(arr->content[i]);
-      arr->content[i] = NULL;
-    }
-	}
-  arr->index = 0;
-}
-
 void	**arr_extract(t_arr **arr)
 {
-  void **r;
+	void	**r;
 
 	if (!arr || !*arr)
-		return NULL;
-  r = (*arr)->content;
+		return (NULL);
+	r = (*arr)->content;
 	free(*arr);
-  *arr = NULL;
-  return (r);
+	*arr = NULL;
+	return (r);
 }

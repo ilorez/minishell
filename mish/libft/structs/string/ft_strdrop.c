@@ -1,45 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclean.c                                      :+:      :+:    :+:   */
+/*   ft_strdrop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/03 20:24:11 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 23:43:41 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/15 20:17:15 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/16 12:05:04 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/t_str.h"
 
-// str clean
-void	str_clean(t_str **str)
+// create empty string
+int	str_drop_item(t_str *str, size_t at_index)
 {
-	if (!str || !*str)
-		return ;
-	free((*str)->value);
-	free(*str);
-	*str = NULL;
+	char	*tmp;
+
+	if (!str || str->_wi <= at_index)
+		return (0);
+	tmp = &str->value[at_index + 1];
+	str->_wi = at_index;
+	str_append_list(str, tmp);
+	return (1);
 }
 
-// str free is str_clean by get just single pointer
-void	str_free(void *ptr)
+int	str_drop_list(t_str *str, size_t from, size_t to)
 {
-	t_str	*str;
+	char	*tmp;
 
-	str = (t_str *)ptr;
-	if (!str)
-		return ;
-	free(str->value);
-	free(str);
-}
-
-// str empty or free value
-void	str_empty(t_str *str)
-{
-	if (!str)
-		return ;
-	ft_bzero(str->value, str->_wi);
-	str->i = 0;
-	str->_wi = 0;
+	if (!str || from >= to || str->_wi < to)
+		return (0);
+	tmp = &(str->value[to]);
+	str->_wi = from;
+	str_append_list(str, tmp);
+	return (1);
 }

@@ -26,7 +26,7 @@ t_ast *example2() {
 	if (!ast) return NULL;
 
 	t_redir *redir = calloc(1, sizeof(t_redir));
-	redir->fpath = ft_strdup("in2*");
+	redir->fpath = ft_strdup("in*");
 	redir->fd = 0;
 	redir->flags = O_RDONLY;
 	redir->mode = 0644;
@@ -135,6 +135,7 @@ t_ast *example_exec(char *cmd)
   return (ast);
 }
 
+
 t_ast *example5() {
 	t_ast *ast = calloc(1, sizeof(t_ast));
 	if (!ast) return NULL;
@@ -186,12 +187,21 @@ t_data *init_example_data(char **envp) {
 	return data;
 }
 
+void arr_print_str_list(char **list)
+{
+  int i;
+
+  i = -1;
+  while (list[++i])
+    printf("[%d]->%s\n", i, list[i]);
+}
+
 int main(int ac, char **av, char **envp) {
   (void )ac, (void)av;
 	t_data *data = init_example_data(envp);
 	if (!data) return 1;
 
-	t_ast *ast = example_pipe_redir(); // Change to example2() to test redirection
+	t_ast *ast = example_exec("$a"); // Change to example2() to test redirection
 
 	ft_executor(data, ast);
   ft_waitpids(data->wpids);

@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handel_exit.c                                      :+:      :+:    :+:   */
+/*   field_extract.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:28:08 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/16 15:46:46 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/16 15:46:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/t_field.h"
 
-void	exit_err(char *msg, t_errno code)
+// extract the value
+char	*field_extract(t_field **field)
 {
-	ft_perror(msg, code);
-	exit(code);
+	char	*tmp;
+
+	if (!field || !*field)
+	{
+		return (NULL);
+	}
+	tmp = str_extract(&((*field)->str));
+	str_clean(&((*field)->flags));
+	free(*field);
+	*field = NULL;
+	return (tmp);
 }
 
-void	ft_handel_exit(t_data *data, int status)
+char	*field_extract_copy(t_field *field)
 {
-	ft_free_data(data);
-	exit(status);
+	if (!field)
+	{
+		return (NULL);
+	}
+	return (str_extract_copy(field->str));
 }
