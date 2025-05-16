@@ -6,25 +6,26 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/15 20:09:32 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/16 13:17:07 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "container.h"
 
-t_redri		*fill_redir(t_token **lst)
+t_redir		*fill_redir(t_token **lst)
 {
 	t_redir	*redir;
-	t_token	tt;
+	t_type	tt;
 	char	*str;
 
-	tt = lst->type;
+	str = NULL;
+	tt = (*lst)->type;
 	next_token(lst);
-	ft_strlcpy(str, (*lst)-word->ptr, (*lst)->word->len);
+	ft_strlcpy(str, (*lst)->word->ptr, (*lst)->word->len);
 	next_token(lst);
 	if (tt != T_LLESS)
 	{
-		redir = ft_callocc(1, sizeof(t_redir));
+		redir = ft_calloc(1, sizeof(t_redir));
 		if (!redir)
 			exit_err("malloc failed fill_redir", 2);
 		redir->fpath = str;
@@ -49,7 +50,7 @@ int	match(t_token **lst, t_type tt)
 	return (0);
 }
 
-t_ast	*new_node(t_type tt, void **value, t_ast *r, t_ast *l)
+t_ast	*new_node(t_type tt, void *value, t_ast *r, t_ast *l)
 {
 	t_ast	*node;
 

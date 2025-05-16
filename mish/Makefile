@@ -25,7 +25,7 @@ RM = rm -f
 #SRCS = ast_examples.c expansion.c is_match.c wild_match.c  handel_exit.c exec_utils.c executor.c wait_macros.c 
 #SRCS = wild_match.c # handel_exit.c exec_utils.c executor.c wait_macros.c 
 SRCS =  main_ast.c grammar.c  parser_1.c  parser.c  utils.c handel_exit.c print_lexer.c lexer.c \
-		exec_utils.c executor.c wait_macros.c expansion.c wild_match.c is_match.c print_ast.c
+		exec_utils.c executor.c wait_macros.c expansion.c wild_match.c is_match.c print_ast.c ft_heredoc.c
 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
 green = \033[32m
