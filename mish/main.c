@@ -3,6 +3,8 @@
 #include "debug/debug.h"
 #include "utils.h"
 
+t_mish mish;
+
 void	handle_sigint(int sig)
 {
 	(void)sig;
@@ -24,6 +26,8 @@ int	main(int ac, char **av, char **env)
 	t_token	*token;
 	char	*input;
 
+  mish.envp = env;
+  mish.exit_status = 0;
 	// setup data and envirnoment varibale
 	// using ft_setup() form ./setup/setup.c
 	// the setup it's free memory and exit auto on error

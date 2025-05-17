@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buildins.h                                         :+:      :+:    :+:   */
+/*   ft_ref_errno.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 18:29:25 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 19:12:35 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/01/31 10:51:57 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/17 18:04:08 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILDINS_H 
-#define BUILDINS_H
+#include "./includes/libft.h"
+#include "./includes/t_errno.h"
+#include <unistd.h>
 
-#include "./container.h"
-#include <linux/limits.h>
+void	ft_ref_perror(char *subref, char *msg, t_errno error_code)
+{
+	ft_putstr_fd(FT_EXEC_NAME, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putstr_fd(subref, STDERR_FILENO);
+  ft_perror(msg, error_code);
+}
 
-int ft_echo(char **argv);
-int ft_cd(char **argv);
-int ft_env(char **argv);
-int ft_pwd(char **argv);
-int ft_unset(char **argv);
-int ft_exit(char **argv); 
 
-#endif 

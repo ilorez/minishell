@@ -7,13 +7,13 @@ static void _print_list_cmd(char *cmd)
   printf("%s\n", cmd);
   printf("================================================\n");
 }
-// [x] - (ls | echo hi) && (sleep 2 && echo hi2)
+// [x] - 
 t_ast *example_list_1() 
 {
 	t_ast *ast = calloc(1, sizeof(t_ast));
 	if (!ast) return NULL;
 
-  _print_list_cmd("(ls | echo hi) && (sleep 2 && echo hi2)");
+  _print_list_cmd("(sleep 2 | echo hi1) && (sleep 2 && echo hi2)");
 	ast->type = T_AND;
 	ast->left = ex_subshell(ex_bi(T_PIPE, ex_exec("sleep 2"), ex_exec("echo hi1")));
 	ast->right = ex_subshell(ex_bi(T_AND, ex_exec("sleep 2"), ex_exec("echo hi2")));
@@ -40,7 +40,7 @@ t_ast *example_list_3()
 }
 
 // [x] - hard test for quotes with wild card
-t_ast *example_list_4_1()
+t_ast *example_list_4()
 {
 	t_ast *ast;
   _print_list_cmd("echo *'ai'*.c *'*'* *\"*\"* *\"$wild\"* Ma$wild'file'");
@@ -48,12 +48,20 @@ t_ast *example_list_4_1()
 	return ast;
 }
 
-// [ ]
-t_ast *example_list_4()
+// [x]
+t_ast *example_list_5()
 {
 	t_ast *ast;
-  _print_list_cmd("echo $1b");
-	ast = ex_exec("echo $1b");
+  _print_list_cmd("echo $? $1b  $~ $$ $HOME $PWD $-");
+	ast = ex_exec("echo $? $1b  $~ $$ $HOME $PWD $-");
 	return ast;
 }
 
+// [ ]
+t_ast *example_list_6()
+{
+	t_ast *ast;
+  _print_list_cmd("cd Desktop | pwd");
+	ast = ex_bi(T_PIPE, ex_exec("cd Desktop"), ex_exec("pwd"));
+	return ast;
+}

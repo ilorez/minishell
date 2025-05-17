@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 18:44:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 14:09:43 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/17 15:35:42 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,13 @@ static void	_get_env(t_field *r, char *word, int tag)
 
 	if (!ft_isalpha(*++word) && *word != '_')
 	{
-		r->str->i++;
+    if (*word == '?')
+    {
+	    field_drop_list(r, r->str->i, r->str->i + 2);
+	    field_insert(r, r->str->i++, ft_itoa(100), tag); // todo replace 100 with exit status
+    }
+    else
+		  r->str->i++;
 		return ;
 	}
 	var = ft_get_word(word);

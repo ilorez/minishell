@@ -9,7 +9,7 @@ int main(int ac, char **av, char **envp) {
 	t_data *data = init_example_data(envp);
 	if (!data) return 1;
 
-	t_ast *ast = example_list_4();
+	t_ast *ast = example_list_6();
 
 	ft_executor(data, ast);
   ft_waitpids(data->wpids);

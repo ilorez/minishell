@@ -19,5 +19,7 @@ t_ast *example_list_1();
 t_ast *example_list_2();
 t_ast *example_list_3();
 t_ast *example_list_4();
+t_ast *example_list_5();
+t_ast *example_list_6();
 
 #endif
