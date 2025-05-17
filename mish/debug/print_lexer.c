@@ -45,9 +45,11 @@ void	print_token_type(t_token *token)
 
 void	print_tokens(t_token *tk)
 {
+	while (tk->next)
+		tk = tk->next;
 	while (tk)
 	{
 		print_token_type(tk);
-		tk = tk->next;
+		tk = tk->prev;
 	}
 }

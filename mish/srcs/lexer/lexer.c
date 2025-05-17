@@ -15,29 +15,39 @@
 static t_type	_set_token(char **ptr, t_word **word);
 static t_type	_redir_type(char **cmd);
 static t_word	*_get_word(char **cmd);
+static void		add_node(t_token **tmp, t_token **new_tk);
 
 t_token	*ft_get_tokens(char *cmd)
 {
-	t_token	*tk;
-	t_token	*tmp;
-
-	tk = ft_calloc(sizeof(t_token), 1);
-	tmp = tk;
+	t_token(*tmp), (*new_tk), (*head);
+	head = NULL;
+	tmp = NULL;
 	while (*cmd)
 	{
 		while (ft_isspace(*cmd))
 			cmd++;
 		if (!*cmd)
 			break ;
-		tk->next = ft_calloc(sizeof(t_token), 1);
-		tk = tk->next;
-		if (!tk)
-			return (tmp);
-		tk->type = _set_token(&cmd, &(tk->word));
-		if (tk->type == T_UNKNOW)
-			return (ft_free_tokens(&tmp), NULL);
+		new_tk = ft_calloc(sizeof(t_token), 1);
+		new_tk->type = _set_token(&cmd, &(new_tk->word));
+		if (new_tk->type == T_UNKNOW)
+			return (ft_free_tokens(&head), NULL);
+		if (!head)
+		{
+			head = new_tk;
+			tmp = new_tk;
+		}
+		else
+			add_node(&tmp, &new_tk);
 	}
-	return (tmp);
+	return (head);
+}
+
+static void	add_node(t_token **tmp, t_token **new_tk)
+{
+	(*tmp)->next = *new_tk;
+	(*new_tk)->prev = *tmp;
+	*tmp = *new_tk;
 }
 
 static t_type	_set_token(char **ptr, t_word **word)

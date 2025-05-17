@@ -71,6 +71,7 @@ typedef struct s_token
 	t_type			type;
 	t_word			*word;
 	struct s_token	*next;
+	struct s_token	*prev;
 }					t_token;
 
 // data container for the exucution part
