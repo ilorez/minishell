@@ -6,8 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:18:25 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 16:40:31 by znajdaou         ###   ########.fr       */
-/*                                 https://github.com/ilorez/minishell/pull/57/conflict?name=mish%252Fincludes%252Fcontainer.h&ancestor_oid=9722325057d5695170f236375d5b9a228acdf830&base_oid=04803ef2e8d27c9576878af2aebd1bd0328bd86a&head_oid=a626dd3a57cc3af9c97d27c508a7e6e26c5567f6                                           */
+/*   Updated: 2025/05/17 11:09:40 by abdnasse         ###   ########.fr       */
 /* ************************************************************************** */
 
 #ifndef CONTAINER_H

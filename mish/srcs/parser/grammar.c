@@ -16,6 +16,7 @@ static t_type	command(t_token **lst);
 
 int	ft_grammar(t_token *lst)
 {
+	lst = lst->next;
 	if (!command(&lst))
 		exit_err("ft_grammer", ERR_SYNTAX);
 	return (0);
