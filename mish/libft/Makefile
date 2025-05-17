@@ -17,6 +17,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			 ft_strjoin.c ft_strtrim.c ft_split.c ft_split_cond.c ft_itoa.c \
 			 ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
 			 ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+			 ft_print_str_arr.c \
 			 ft_isspace.c ft_free_str_lst.c ft_atol.c \
 			 ft_lstnew.c ft_lstadd_front.c \
 			 ft_lstsize.c ft_lstlast.c \
@@ -27,6 +28,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			 ft_strndup.c \
 			 ft_malloc.c \
 			 ft_errno.c \
+			 ft_ref_errno.c \
 			 ft_strlowcase.c ft_strupcase.c \
 			 ft_strtod.c \
 			 ./structs/string/ft_strappend.c \

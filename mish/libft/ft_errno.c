@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:51:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/13 23:09:43 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:05:04 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ static void	_ft_create_err_list(char *lst[ERR_COUNT])
 	err_msgs[ERR_SUCCESS] = "OK";
 	err_msgs[ERR_INVALID_ARG] = "invalid argument";
 	err_msgs[ERR_EMPTY_ARG] = "Empty argumnet";
+	err_msgs[ERR_EARGS] = "not enough arguments";
+	err_msgs[ERR_TO_MANY_ARG] = "too many arguments";
+	err_msgs[ERR_ENOENT] = "No such file or directory";
 	err_msgs[ERR_MALLOC_FAIL] = "an allocation failed";
 	err_msgs[ERR_SYNTAX] = "syntax error";
+
 	err_msgs[ERR_AMB_REDIR] = "ambiguous redirect";
 	err_msgs[ERR_UNKNOWN] = "Unknown error occurred";
 	ft_memcpy(lst, err_msgs, sizeof(char *) * ERR_COUNT);

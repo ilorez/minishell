@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buildins.h                                         :+:      :+:    :+:   */
+/*   ft_print_str_arr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 18:29:25 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 19:12:35 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/17 18:32:51 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/17 18:37:19 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILDINS_H 
-#define BUILDINS_H
+#include "./includes/libft.h"
 
-#include "./container.h"
-#include <linux/limits.h>
+void ft_print_str_arr(char **arr)
+{
+  int i;
 
-int ft_echo(char **argv);
-int ft_cd(char **argv);
-int ft_env(char **argv);
-int ft_pwd(char **argv);
-int ft_unset(char **argv);
-int ft_exit(char **argv); 
-
-#endif 
+  if (!arr || !*arr)
+    return;
+  i = -1;
+  while (arr[++i])
+  {
+    ft_putstr_fd(arr[i], STDOUT_FILENO);
+    write(STDOUT_FILENO, "\n", 1);
+  }
+}
