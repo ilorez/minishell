@@ -1,4 +1,4 @@
-vpath %.c ./srcs/buildins
+
 vpath %.c	./srcs/utils 
 vpath %.c	./srcs/lexer 
 vpath %.c	./srcs/parser
@@ -39,7 +39,9 @@ green = \033[32m
 reset = \033[0m
 
 all: $(NAME)
+	@clear;
 	@echo "$(green)SUCCESS!!!$(reset)"
+	@./$(NAME)
 
 debug: $(NAME)
 	clear
@@ -67,5 +69,7 @@ re: fclean all
 
 vg:
 	 valgrind --suppressions=../ignore_readline_leaks.supp --leak-check=full --show-leak-kinds=all ./minishell
+d:
+	gdbtui ./$(NAME)
 
 .PHONY: all clean fclean re
