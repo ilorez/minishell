@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 18:44:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 13:06:49 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:09:43 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	field_expand(t_field *field)
 			_double_quotes(field, str);
 		else if (str->value[str->i] == '$')
 			_get_env(field, &(str->value[str->i]), '0');
-    else
-      str->i++;
+		else
+			str->i++;
 	}
 }
 
@@ -46,8 +46,8 @@ static void	_double_quotes(t_field *field, t_str *str)
 	{
 		if (str->value[str->i] == '$')
 			_get_env(field, &(str->value[str->i]), '1');
-    else
-		  field_flags_set(field, str->i++, '1');
+		else
+			field_flags_set(field, str->i++, '1');
 	}
 	field_drop_item(field, str->i);
 }
@@ -59,10 +59,16 @@ static void	_get_env(t_field *r, char *word, int tag)
 	char	*env;
 
 	if (!ft_isalpha(*++word) && *word != '_')
+	{
+		r->str->i++;
 		return ;
+	}
 	var = ft_get_word(word);
 	if (!var)
-		return ;
+	{
+		r->str->i++;
+		return (ft_perror(NULL, ERR_MALLOC_FAIL));
+	}
 	field_drop_list(r, r->str->i, r->str->i + 1 + ft_strlen(var));
 	env = getenv(var);
 	free(var);

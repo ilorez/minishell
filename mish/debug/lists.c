@@ -39,12 +39,21 @@ t_ast *example_list_3()
 	return ast;
 }
 
-// [ ] - hard test for quotes with wild card
-t_ast *example_list_4()
+// [x] - hard test for quotes with wild card
+t_ast *example_list_4_1()
 {
 	t_ast *ast;
   _print_list_cmd("echo *'ai'*.c *'*'* *\"*\"* *\"$wild\"* Ma$wild'file'");
 	ast = ex_exec("echo *'ai'*.c *'*'* *\"*\"* *\"$wild\"* Ma$wild'file'");
+	return ast;
+}
+
+// [ ]
+t_ast *example_list_4()
+{
+	t_ast *ast;
+  _print_list_cmd("echo $1b");
+	ast = ex_exec("echo $1b");
 	return ast;
 }
 
