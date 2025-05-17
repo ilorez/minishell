@@ -49,7 +49,7 @@ int	main(int ac, char **av, char **env)
 			// printf("cmd: %s\n", input);
 			token = ft_get_tokens(input);
 			//print_tokens(token);
-			//ft_grammar(token);
+			ft_grammar(token);
 			ast = ft_parse_ast(&token);
 			print_ast(ast, 0);
 			ft_free_tokens(&token);

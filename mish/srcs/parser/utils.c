@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/16 14:18:46 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/17 09:47:46 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_redir		*fill_redir(t_token **lst)
 		redir->fpath = str;
 		redir->fd = 1 * (tt == T_GREAT || tt == T_GGREAT);
 		redir->flags = O_RDONLY;
-		redir->mode = 644;
+		redir->mode = 0644;
 		return (redir);
 	}
 	return (ft_heredoc(str));

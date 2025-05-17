@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:12:46 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/16 14:35:50 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/17 09:41:21 by abdnasse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,13 @@ t_ast	*parse_pipe(t_token **lst)
 t_ast	*parse_redir(t_token **lst)
 {
 	t_ast	*left;
-	t_ast	*right;
 	t_redir	*redir;
 
 	left = parse_word(lst);
-	right = NULL;
 	while (match_redir(lst))
 	{
 		redir = fill_redir(lst);
-		if (!match_redir(lst))
-			right = parse_or(lst);
-		left = new_node(T_REDIR, redir, right, left);
+		left = new_node(T_REDIR, redir, NULL, left);
 	}
 	return (left);
 }
