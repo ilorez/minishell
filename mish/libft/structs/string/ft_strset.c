@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handel_exit.c                                      :+:      :+:    :+:   */
+/*   ft_strset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:28:08 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/15 21:02:45 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/15 21:06:06 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/libft.h"
 
-void	exit_err(char *msg, t_errno code)
+int	str_set(t_str *str, size_t at_index, int c)
 {
-	ft_perror(msg, code);
-	exit(code);
-}
-
-void	ft_handel_exit(t_data *data, int status)
-{
-	ft_free_data(data);
-	exit(status);
+	if (!str || str->_wi <= at_index)
+		return (0);
+	str->value[at_index] = c;
+	return (1);
 }

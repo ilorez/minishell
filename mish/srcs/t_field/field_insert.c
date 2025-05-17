@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handel_exit.c                                      :+:      :+:    :+:   */
+/*   field_insert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:28:08 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/16 15:46:49 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/16 15:46:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/t_field.h"
 
-void	exit_err(char *msg, t_errno code)
+int	field_insert(t_field *field, size_t at, char *txt, int tag)
 {
-	ft_perror(msg, code);
-	exit(code);
-}
-
-void	ft_handel_exit(t_data *data, int status)
-{
-	ft_free_data(data);
-	exit(status);
+	if (!field || !txt)
+		return (0);
+	if (!str_insert(field->str, at, txt))
+		return (0);
+	if (!str_insert(field->flags, at, ft_memset(txt, tag, ft_strlen(txt))))
+		return (0);
+	return (1);
 }

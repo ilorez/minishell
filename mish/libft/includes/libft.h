@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/04 10:01:06 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:43:22 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 // local libs
 # include "ft_linked_lst.h"
 # include "ft_malloc.h"
+# include "t_arr.h"
 # include "t_bool.h"
 # include "t_errno.h"
 # include "t_str.h"
-# include "t_arr.h"
 
 // memory functions
 void		*ft_memset(void *b, int c, size_t len);
@@ -97,5 +97,6 @@ void		ft_putnbr_fd(int n, int fd);
 // arrays functions
 char		*ft_strjoin(char const *s1, char const *s2, char const *c);
 char		**ft_split(char const *s, char c);
+char		**ft_split_cond(char const *s, int (f)(int));
 
 #endif
