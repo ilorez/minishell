@@ -16,6 +16,7 @@ static t_type	command(t_token **lst);
 
 int	ft_grammar(t_token *lst)
 {
+	lst = lst->next;
 	if (!command(&lst))
 		exit_err("ft_grammer", ERR_SYNTAX);
 	return (0);
@@ -33,15 +34,17 @@ static t_type	command(t_token **lst)
 	if (!*lst)
 		return (0);
 	if (match(lst, T_LPAR))
+	{
 		if (!command(lst))
 			exit_err("nothing after '('\n", ERR_SYNTAX);
-	if (!match(lst, T_RPAR))
-		exit_err("unclosed '('\n", ERR_SYNTAX);
+		if (!match(lst, T_RPAR))
+			exit_err("unclosed '('\n", ERR_SYNTAX);
+	}
 	else if (match(lst, T_WORD))
 	{
 		while (match(lst, T_WORD))
-			;
-		if (match(lst, T_AND) || match(lst, T_OR) || match(lst, T_PIPE)
+			next_token(lst);
+		if (match(lst, T_LPAR) || match(lst, T_AND) || match(lst, T_OR) || match(lst, T_PIPE)
 			|| match(lst, T_REDIR))
 			if (!command(lst))
 				exit_err("expected a command after an operator\n", ERR_SYNTAX);

@@ -1,7 +1,7 @@
 
 #include "container.h"
 #include "debug/debug.h"
-#include "utlis.h"
+#include "utils.h"
 
 void	handle_sigint(int sig)
 {
@@ -48,8 +48,8 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 			// printf("cmd: %s\n", input);
 			token = ft_get_tokens(input);
-			//print_tokens(token);
-			ft_grammar(token);
+			print_tokens(token);
+			//ft_grammar(token);
 			ast = ft_parse_ast(&token);
 			print_ast(ast, 0);
 			ft_free_tokens(&token);

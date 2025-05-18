@@ -63,8 +63,9 @@ t_ast	*parse_redir(t_token **lst)
 	t_redir	*redir;
 
 	left = parse_word(lst);
-	while (match_redir(lst))
+	if (match_redir(lst))
 	{
+		left = parse_redir(lst);
 		redir = fill_redir(lst);
 		left = new_node(T_REDIR, redir, NULL, left);
 	}
