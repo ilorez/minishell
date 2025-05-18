@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:29:25 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 19:12:35 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:30:56 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int ft_cd(char **argv);
 int ft_env(char **argv);
 int ft_pwd(char **argv);
 int ft_unset(char **argv);
-int ft_exit(char **argv); 
+void ft_exit(char **argv, t_data *data);
 
 #endif 

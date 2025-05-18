@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:28:22 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 18:59:13 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:04:55 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,25 @@
 
 int ft_cd(char **argv)
 {
-  char cwd[PATH_MAX];
   char *path;
 
-  if (argv[0] && argv[1])
-    return (ft_perror("cd", ERR_TO_MANY_ARG), 1);
-  path = argv[0];
-  if (!path)
+  if (!argv || !*argv)
     path = getenv("HOME");
+  else if (argv[0] && argv[1])
+    return (ft_perror("cd", ERR_TO_MANY_ARG), 1);
+  else
+    path = argv[0];
   if (chdir(path) != 0)
   {
     ft_ref_perror("cd", path, ERR_ENOENT);
     return (1);
   }
-  if (!getcwd(cwd, PATH_MAX))
+  if (!getcwd(mish.cwd, PATH_MAX))
   {
     perror("cd");
     return (1);
   }
   ft_setenv("OLDPWD", ft_getenv("PWD"), 1);
-  ft_setenv("PWD", cwd, 1);
-  ft_memcpy(mish.cur_dir, cwd, ft_strlen(cwd));
+  ft_setenv("PWD", mish.cwd, 1);
   return (0);
 }

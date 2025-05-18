@@ -4,24 +4,28 @@
 
 
 // TODO:
-//  - ENVIR:
+//  - ENVIR: [-] tested
 //      - [x] ft_getenv
 //      - [x] ft_setenv
 //      - [x] ft_getpaths
 //      - [x] ft_unsetenv
-//  - free
+//
+//  - free [ ] tested
 //      - [x] ft_free_all (data, mish)
-//  - buildins
-//      - [ ] finish cd echo env exit pwd unset
-//      - [ ] export buildin
-//  - executor
+//
+//  - buildins [ ] tested
+//      - [x] finish cd echo env exit pwd unset
+//      - [x] export buildin
+//
+//  - executor [ ] tested
 //      - [ ] update mish.exit_status 
 //      - [ ] link get_paths
 //      - [ ] link $?
 //      - [ ] link buildins 
 //      - [ ] memory leeks
 //      - [ ] norminette
-//  - Signals
+//
+//  - Signals [ ] tested
 //      - [ ] signal kill (killpids)
 //  - link
 //      - [ ] link with parser
@@ -68,5 +72,6 @@ t_data *ft_setup(int ac, char **av, char **envp)
     return (free(data), NULL);
   mish.exit_status = 0;
   mish.envp = lenv;
+  getcwd(mish.cwd, PATH_MAX);
 	return data;
 }

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 17:16:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 17:58:32 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:35:42 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int ft_setenv(const char *name, const char *value, int overwrite)
   int i;
   int len;
 
-  if (!name || !value)
+  if (!name)
     return (-1);
   envp = mish.envp;
   if (!envp)

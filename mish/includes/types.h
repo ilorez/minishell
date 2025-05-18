@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 18:54:52 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 19:38:43 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct s_mish
 {
 	t_arr			*envp;
   int exit_status;
-  char cur_dir[PATH_MAX];
+  char cwd[PATH_MAX];
 } t_mish;
 
 #endif

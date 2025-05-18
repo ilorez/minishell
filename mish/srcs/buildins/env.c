@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:51:10 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 18:19:46 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 20:56:04 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int ft_env(char **argv)
 {
-  if (*argv && **argv)
+  if (argv && *argv)
   {
     ft_ref_perror("env", NULL, ERR_TO_MANY_ARG);
     return (1);

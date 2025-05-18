@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:44:36 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 19:05:40 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:10:36 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ typedef enum s_errno
 	ERR_SUCCESS = 0,
 	ERR_INVALID_ARG,
 	ERR_EMPTY_ARG,
-	ERR_EARGS,
+  ERR_EARGS,
+  ERR_NONUM,
+	ERR_IDENT,
 	ERR_TO_MANY_ARG,
 	ERR_ENOENT,
 	ERR_MALLOC_FAIL,

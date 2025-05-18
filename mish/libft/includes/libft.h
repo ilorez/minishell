@@ -3,9 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
+/*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */ /*                                                +#+#+#+#+#+   +#+           */ /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
 /*   Updated: 2025/05/17 18:37:52 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -80,6 +78,8 @@ int			ft_isascii(int c);
 int			ft_isprint(int c);
 int			ft_isspace(int c);
 int			ft_is_str_chars_same(char *str, char c);
+int			ft_is_valid_num(char *str);
+int			ft_isvalid_id(char *id);
 
 // atoi & itoa functions
 int			ft_atoi(const char *nptr);
