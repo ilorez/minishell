@@ -19,7 +19,7 @@ CC = cc
 RM = rm -f
 
 # debug
-F_DEBUG = ast_examples.c print_arr_str.c print_lexer.c print_ast.c
+F_DEBUG = ast_runner.c print_arr_str.c print_lexer.c print_ast.c lists.c components.c
 
 # folders
 F_UTILS = command_end.c free_methods.c get_word.c handel_exit.c heredoc.c wait_macros.c
