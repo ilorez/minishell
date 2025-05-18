@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 16:02:32 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:04:29 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	ft_exec(t_data *data, t_ast *ast)
 			return (ft_handel_exit(data, 1));
 		ft_change_fd(data->fd[0], STDIN_FILENO, data);
 		ft_change_fd(data->fd[1], STDOUT_FILENO, data);
-		execve(path, argv, data->envp);
+		execve(path, argv, mish.envp);
 		perror("execve");
 		ft_handel_exit(data, 126);
 	}
