@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 20:29:18 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:29:08 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,17 @@ void	ft_exec(t_data *data, t_ast *ast)
 	char	**argv;
 	char	*path;
 
+  argv = ft_extract(ast->argv);
+	if (!argv)
+		return (ft_perror(NULL, ERR_MALLOC_FAIL), ft_handel_exit(data, 1));
+  //ft_check_buildins(argv);
 	pid = ft_calloc(sizeof(int), 1);
 	*pid = fork();
 	if (*pid == -1)
 		return (perror("fork"), ft_free_data(data));
 	else if (*pid == 0)
 	{
-		argv = ft_extract(ast->argv);
-		if (!argv)
-			return (ft_perror(NULL, ERR_MALLOC_FAIL), ft_handel_exit(data, 1));
+		
 		path = ft_get_right_path(argv[0], data->paths);
 		if (!path)
 			return (ft_handel_exit(data, 1));
