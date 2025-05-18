@@ -19,7 +19,10 @@ static void		add_node(t_token **tmp, t_token **new_tk);
 
 t_token	*ft_get_tokens(char *cmd)
 {
-	t_token(*tmp), (*new_tk), (*head);
+	t_token	*tmp;
+	t_token	*new_tk;
+	t_token	*head;
+
 	head = NULL;
 	tmp = NULL;
 	while (*cmd)
