@@ -6,13 +6,16 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:43:22 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:37:52 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+#ifndef FT_EXEC_NAME
+#define FT_EXEC_NAME "mish"
+#endif
 // includes
 # include <limits.h>
 # include <stddef.h>
@@ -93,6 +96,7 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
+void		ft_print_str_arr(char **arr);
 
 // arrays functions
 char		*ft_strjoin(char const *s1, char const *s2, char const *c);

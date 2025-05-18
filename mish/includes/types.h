@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/13 21:26:15 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:50:13 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,16 @@ typedef struct s_ast
 // Note: this is what will be passsed to execute function
 typedef struct s_data
 {
-	char			*curr_dir;
 	char **paths; // double pointer array of paths
-	char			**envp;
 	t_ast			*ast;
 	int fd[2];    // used by executor: in deault: fd = [STDIN, STDOUT]
 	t_arr *wpids; // used by executor: arr_new();
 }					t_data;
+
+typedef struct s_mish
+{
+	char			**envp;
+  int exit_status;
+} t_mish;
 
 #endif
