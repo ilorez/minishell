@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:13:59 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 14:03:26 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 18:09:35 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,10 @@ void	ft_free_tokens(t_token **tks)
 		free((*tks));
 		(*tks) = tmp;
 	}
+}
+
+void ft_free_all(t_data *data)
+{
+  ft_free_data(data);
+  arr_free(mish.envp);
 }

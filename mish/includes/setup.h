@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   setup.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 18:40:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 14:35:03 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/18 17:06:07 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/18 17:07:35 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildins.h"
 
-// exit 
-//  - free all data and exit
-//  - it's ignore opetion but not argument
-int ft_exit(char **argv)
-{
-  // free all data
-  return (mish.exit_status);
-}
+#ifndef SETUP_H
+#define SETUP_H
+#include "./container.h"
+
+
+t_data *ft_setup(int ac, char **av, char **envp);
+extern t_mish mish;
+
+#endif

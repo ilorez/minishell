@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 18:50:13 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:38:33 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_data
 
 typedef struct s_mish
 {
-	char			**envp;
+	t_arr			*envp;
   int exit_status;
 } t_mish;
 

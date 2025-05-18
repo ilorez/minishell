@@ -7,6 +7,7 @@ void	print_token_type(t_token *token);
 void	print_tokens(t_token *tk);
 void	print_ast(t_ast *node, int level);
 void arr_print_str_list(char **list);
+void arr_print_str(t_arr *arr);
 
 // compoenents
 t_ast *ex_exec(char *cmd);

@@ -1,23 +1,62 @@
 #include "../../includes/container.h"
 
 
-t_data *ft_setup(char **envp)
+// TODO:
+//  - ENVIR:
+//      - [x] ft_getenv
+//      - [x] ft_setenv
+//      - [x] ft_getpaths
+//      - [x] ft_unsetenv
+//  - free
+//      - [x] ft_free_all (data, mish)
+//  - buildins
+//      - [ ] finish cd echo env exit pwd unset
+//      - [ ] export buildin
+//  - executor
+//      - [ ] update mish.exit_status 
+//      - [ ] link get_paths
+//      - [ ] link $?
+//      - [ ] link buildins 
+//      - [ ] memory leeks
+//      - [ ] norminette
+//  - Signals
+//      - [ ] signal kill (killpids)
+//  - link
+//      - [ ] link with parser
+//      - [ ] test
+//      - [ ] push
+
+t_mish mish;
+
+t_arr *_create_lenv(char **envp)
+{
+  int i;
+  t_arr *lst_env;
+
+  if (!envp || !*envp)
+    return (NULL);
+  lst_env = arr_new();
+  if (!lst_env)
+    return (NULL);
+  i = -1;
+  while (envp[++i])
+    arr_append(lst_env, ft_strdup(envp[i]));
+  return (lst_env);
+}
+
+t_data *ft_setup(int ac, char **av, char **envp)
 {
 	t_data *data;
-	char	*path;
+  t_arr *lenv;
 
+  (void) ac, (void)av;
 	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
-		exit(1);
-	path = getenv("PATH"); // this function is allowed  
-	data->paths = ft_split(path, ':');
-
-	// char **new_envp; => as default new_envp = envp, but it's changed in next cases:
-	//    - add new var ==>this one I guess we have the export function !!
-	//    - delete var ==> where we would need this one !?
-	//    - update var ==> the exprot function should handle this one !
-
-	//NOTE: if we want all the env variable the main fun passes it dirarclty  
-
+		  return (NULL);
+  lenv = _create_lenv(envp);
+  if (!lenv)
+    return (free(data), NULL);
+  mish.exit_status = 0;
+  mish.envp = lenv;
 	return data;
 }

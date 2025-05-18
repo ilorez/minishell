@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 18:40:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 14:35:03 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/18 16:40:38 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/18 17:42:55 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildins.h"
+#include "../../includes/container.h"
 
-// exit 
-//  - free all data and exit
-//  - it's ignore opetion but not argument
-int ft_exit(char **argv)
+char *ft_getenv(const char *name)
 {
-  // free all data
-  return (mish.exit_status);
+  char	*r;
+  char **envp;
+  int len;
+
+  envp = (char **)(mish.envp)->content;
+  if (!envp || !*envp)
+		return (NULL);
+	r = NULL;
+  len = ft_strlen(name);
+	while (*envp)
+	{
+		if (ft_strncmp(*envp, name, len) == 0 && *(*envp + len) == '=')
+		{
+			r = (*envp + len + 1);
+			break ;
+		}
+		envp++;
+	}
+	return (r);
 }

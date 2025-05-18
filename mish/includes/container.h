@@ -34,6 +34,6 @@
 # include "./utils.h"
 # include "./executor.h"
 # include "./lexer.h"
+# include "./setup.h"
 
-extern t_mish mish;
 #endif

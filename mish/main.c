@@ -3,7 +3,6 @@
 #include "debug/debug.h"
 #include "utils.h"
 
-t_mish mish;
 
 void	handle_sigint(int sig)
 {
@@ -18,7 +17,7 @@ void	handle_sigint(int sig)
 void	init_history(void)
 {
 	rl_clear_history();
-	add_history("first command");
+	//add_history("first command");
 }
 
 int	main(int ac, char **av, char **env)
@@ -26,12 +25,6 @@ int	main(int ac, char **av, char **env)
 	t_token	*token;
 	char	*input;
 
-  mish.envp = env;
-  mish.exit_status = 0;
-	// setup data and envirnoment varibale
-	// using ft_setup() form ./setup/setup.c
-	// the setup it's free memory and exit auto on error
-	(void)ac, (void)av, (void)env;
 	if (signal(SIGINT, handle_sigint) == SIG_ERR)
 	{
 		printf("failed to register interrupts with kernel\n");
