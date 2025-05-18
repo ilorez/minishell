@@ -24,12 +24,12 @@ t_redir		*fill_redir(t_token **lst)
 	char	*str;
 
 	tt = (*lst)->type;
-	next_token(lst);
+	next_token(lst, 'p');
 	str = ft_calloc((*lst)->word->len + 1, sizeof(char));
 	if (!str)
 		exit_err("malloc failed", 2);
 	ft_strlcpy(str, (*lst)->word->ptr, (*lst)->word->len + 1);
-	next_token(lst);
+	next_token(lst, 'p');
 	if (tt != T_LLESS)
 	{
 		redir = ft_calloc(1, sizeof(t_redir));
@@ -44,10 +44,12 @@ t_redir		*fill_redir(t_token **lst)
 	return (ft_heredoc(str));
 }
 
-void	next_token(t_token **lst)
+void	next_token(t_token **lst, char c)
 {
-	if (*lst)
+	if (c == 'n' && *lst)
 		*lst = (*lst)->next;
+	if (c == 'p' && *lst)
+		*lst = (*lst)->prev;
 }
 
 int	match(t_token **lst, t_type tt)

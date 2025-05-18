@@ -22,7 +22,7 @@ void	init_history(void)
 int	main(int ac, char **av, char **env)
 {
 	t_token	*token;
-	t_ast	*ast;
+	//t_ast	*ast;
 	char	*input;
 
 	// setup data and envirnoment varibale
@@ -48,10 +48,10 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 			// printf("cmd: %s\n", input);
 			token = ft_get_tokens(input);
-			print_tokens(token);
-			//ft_grammar(token);
-			ast = ft_parse_ast(&token);
-			print_ast(ast, 0);
+			//print_tokens(token);
+			ft_grammar(&token);
+			//ast = ft_parse_ast(&token);
+			//print_ast(ast, 0);
 			ft_free_tokens(&token);
 			// send input to lexer
 			// get tokenzation array

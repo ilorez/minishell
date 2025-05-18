@@ -16,8 +16,8 @@ t_ast	*parse_list(t_token **lst)
 {
 	t_ast	*left;
 	
-	next_token(lst);
+	next_token(lst, 'p');
 	left = parse_or(lst);
-	next_token(lst);
+	next_token(lst, 'p');
 	return (new_node(T_SUBSH, NULL, NULL, left));
 }

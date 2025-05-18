@@ -31,23 +31,22 @@
 // types
 // ==================================
 
-// tokens
 typedef enum s_type
 {
-	T_ROOT, // token
-	T_LPAR, // token
-	T_RPAR, // token
+	T_ROOT, 
+	T_LPAR, 
+	T_RPAR, 
 	T_AND,
 	T_OR,
 	T_PIPE,
-	T_LESS,   // token
-	T_LLESS,  // token
-	T_GREAT,  // token
-	T_GGREAT, // token
-	T_WORD,   // token
-	T_REDIR,  // ast
-	T_EXEC,   // ast
-	T_SUBSH,  // ast
+	T_LESS,   
+	T_LLESS,  
+	T_GREAT,  
+	T_GGREAT, 
+	T_WORD,   
+	T_REDIR,  
+	T_EXEC,   
+	T_SUBSH,  
 	T_EOL,
 	T_UNKNOW
 }					t_type;
