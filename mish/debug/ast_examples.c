@@ -196,7 +196,7 @@ void arr_print_str_list(char **list)
     printf("[%d]->%s\n", i, list[i]);
 }
 
-/*int main(int ac, char **av, char **envp) {
+int main(int ac, char **av, char **envp) {
   (void )ac, (void)av;
 	t_data *data = init_example_data(envp);
 	if (!data) return 1;
@@ -207,4 +207,4 @@ void arr_print_str_list(char **list)
   ft_waitpids(data->wpids);
 
 	return 0;
-}*/
+}
