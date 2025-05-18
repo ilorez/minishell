@@ -1,4 +1,6 @@
 #include "../../includes/container.h"
+#include <linux/limits.h>
+#include <unistd.h>
 
 
 // TODO:
@@ -32,6 +34,8 @@ t_arr *_create_lenv(char **envp)
 {
   int i;
   t_arr *lst_env;
+  char cwd[PATH_MAX];
+
 
   if (!envp || !*envp)
     return (NULL);
@@ -41,6 +45,12 @@ t_arr *_create_lenv(char **envp)
   i = -1;
   while (envp[++i])
     arr_append(lst_env, ft_strdup(envp[i]));
+  if (!getcwd(cwd, PATH_MAX))
+  {
+    perror("setup");
+    return (arr_free(lst_env), NULL);
+  }
+  ft_setenv("PWD", cwd, 1);
   return (lst_env);
 }
 

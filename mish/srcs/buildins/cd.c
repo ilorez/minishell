@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:28:22 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 18:58:01 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/18 18:59:13 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int ft_cd(char **argv)
     perror("cd");
     return (1);
   }
-  // TODO;
-  // set $OLDPWD = $PWD
-  // set $PWD = cwd; 
+  ft_setenv("OLDPWD", ft_getenv("PWD"), 1);
+  ft_setenv("PWD", cwd, 1);
+  ft_memcpy(mish.cur_dir, cwd, ft_strlen(cwd));
   return (0);
 }
