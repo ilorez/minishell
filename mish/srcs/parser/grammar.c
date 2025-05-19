@@ -12,8 +12,8 @@
 
 #include "container.h"
 
-static int	match_op(t_token **lst);
-//TODO: its is possible to start with rediraction then a command after 
+static int	match_op(t_token **lst, int is_redir);
+
 int	ft_grammar(t_token **lst)
 {
 	if (match(lst, T_LPAR))
@@ -21,36 +21,37 @@ int	ft_grammar(t_token **lst)
 		next_token(lst, 'n');
 		if (ft_grammar(lst))
 			return (1);
-		if (match(lst, T_RPAR))
-			return (next_token(lst, 'n'), 0);
-		else 
+		if (!match(lst, T_RPAR))
 			return (ft_perror("expected ) ", ERR_SYNTAX), 1);
+		else 
+			next_token(lst, 'n');
 	}
-	if (!match(lst, T_WORD))
+	if(match
+	if ((*lst)->prev && (*lst)->prev->type == T_RPAR && !match(lst, T_WORD))
 		return (ft_perror("expected word ", ERR_SYNTAX), 1);
-	while (match(lst, T_WORD))
-		next_token(lst, 'n');
-	if (match_op(lst))
+	//if (!match(lst, T_WORD) & !match_op(lst, 1))
+	//	return (ft_perror("expected word ", ERR_SYNTAX), 1);
+	if (match_op(lst, 0) || match_op(lst, 1))
 	{
 		next_token(lst, 'n');
 		if (ft_grammar(lst))
 			return (1);
 	}
-	else if (!*lst || match(lst, T_RPAR))
-		return (0);
-	else
-		return (ft_perror("unexpected token ", ERR_SYNTAX), 1);
+	while (match(lst, T_WORD))
+		next_token(lst, 'n');
 	return (0);
 }
 
-static int	match_op(t_token **lst)
+static int	match_op(t_token **lst, int is_redir)
 {
 	t_type	tt;
 
 	if (!lst || !*lst)
 		return (0);
 	tt = (*lst)->type;
-	return (tt >= T_AND && tt <= T_GGREAT);
+	if (is_redir)
+		return (tt >= T_LESS && tt <= T_GGREAT);
+	return (tt >= T_AND && tt <= T_PIPE);
 }
 
 t_ast	*ft_parse_ast(t_token **lst)
