@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 16:17:33 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:10:04 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ int	ft_exec(t_data *data, t_ast *ast)
 	char	*path;
   t_buildin buildin;
 
-  ft_change_fd(data->fd[0], STDIN_FILENO, data);
-	ft_change_fd(data->fd[1], STDOUT_FILENO, data);
   argv = ft_extract(ast->argv);
 	if (!argv)
 		  return (ft_perror(NULL, ERR_MALLOC_FAIL), ft_handel_exit(data, 1), 1);
@@ -102,6 +100,8 @@ int	ft_exec(t_data *data, t_ast *ast)
 		return (perror("fork"), ft_free_data(data), 1);
 	else if (*pid == 0)
 	{
+    ft_change_fd(data->fd[0], STDIN_FILENO, data);
+	  ft_change_fd(data->fd[1], STDOUT_FILENO, data);
 		path = ft_get_right_path(argv[0], data->paths);
 		if (!path)
 			ft_handel_exit(data, 1);

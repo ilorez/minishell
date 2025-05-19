@@ -8,6 +8,15 @@ static void _print_list_cmd(char *cmd)
   printf("================================================\n");
 }
 // [x] - 
+t_ast *example_list_0()
+{
+	t_ast *ast;
+  _print_list_cmd("echo hello world");
+	ast = ex_exec("echo hello world");
+	return ast;
+}
+
+// [x] - 
 t_ast *example_list_1() 
 {
 	t_ast *ast = calloc(1, sizeof(t_ast));

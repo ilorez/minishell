@@ -16,6 +16,7 @@ t_ast *ex_redir(char *file_name, int fd, int flags, t_ast *next_ast);
 t_ast *ex_bi(t_type type, t_ast *left, t_ast *right);
 
 // lists
+t_ast *example_list_0();
 t_ast *example_list_1();
 t_ast *example_list_2();
 t_ast *example_list_3();
