@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 12:09:13 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:17:33 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ static int	_or_and(t_data *data, t_ast *ast, int cond);
 int	ft_executor(t_data *data, t_ast *ast)
 {
 	int		status;
-	t_arr	*tmp;
 
 	status = 0;
 	if (!ast || ast->type == T_EOL)
-		return (0);
+		return (mish.exit_status);
 	if (ast->type == T_OR)
 		status = _or_and(data, ast, 0);
 	else if (ast->type == T_AND)
@@ -87,17 +86,16 @@ int	ft_exec(t_data *data, t_ast *ast)
 	int		*pid;
 	char	**argv;
 	char	*path;
-  t_buildin b;
-
+  t_buildin buildin;
 
   ft_change_fd(data->fd[0], STDIN_FILENO, data);
 	ft_change_fd(data->fd[1], STDOUT_FILENO, data);
   argv = ft_extract(ast->argv);
 	if (!argv)
 		  return (ft_perror(NULL, ERR_MALLOC_FAIL), ft_handel_exit(data, 1), 1);
-  b = is_buildin(argv[0]);
-  if (b)
-    return (ft_run_buildin(b, &argv[1], data));
+  buildin = ft_is_buildin(argv[0]);
+  if (buildin)
+    return (ft_run_buildin(buildin, &argv[1], data));
 	pid = ft_calloc(sizeof(int), 1);
 	*pid = fork();
 	if (*pid == -1)

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 18:44:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 15:35:42 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:03:09 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	_get_env(t_field *r, char *word, int tag)
     if (*word == '?')
     {
 	    field_drop_list(r, r->str->i, r->str->i + 2);
-	    field_insert(r, r->str->i++, ft_itoa(100), tag); // todo replace 100 with exit status
+	    field_insert(r, r->str->i++, ft_itoa(mish.exit_status), tag);
     }
     else
 		  r->str->i++;

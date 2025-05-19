@@ -1,6 +1,7 @@
 
 #include "container.h"
 #include "debug/debug.h"
+#include "setup.h"
 #include "utils.h"
 
 
@@ -24,12 +25,15 @@ int	main(int ac, char **av, char **env)
 {
 	t_token	*token;
 	char	*input;
+  t_data *data;
+  t_ast *ast;
 
 	if (signal(SIGINT, handle_sigint) == SIG_ERR)
 	{
 		printf("failed to register interrupts with kernel\n");
 	}
 	init_history();
+  ft_setup_mish(ac, av, env);
 	while (1)
 	{
 		input = readline("minishell$");
@@ -46,15 +50,12 @@ int	main(int ac, char **av, char **env)
 			token = ft_get_tokens(input);
 			print_tokens(token);
 			ft_free_tokens(&token);
-			// send input to lexer
-			// get tokenzation array
-			// check if lexer has everthing done well
-			// send tokenzation array to parser
-			// check if parser do it's work with no error
-			// get AST and check everthing has done well for parser with no error
-			// send AST to exector
-			// executor return a status put it in $? variable
-			// done
+			//ft_grammar(token);
+      //ast = parser(token);
+      data = ft_setup_data(ast);
+			ast = ft_parse_ast(&token);
+			ft_free_tokens(&token);
+      mish.exit_status = ft_executor(data, ast);
 		}
 		free(input);
 	}

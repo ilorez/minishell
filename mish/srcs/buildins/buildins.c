@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:15:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 11:52:11 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:34:47 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ int ft_run_buildin(t_buildin b, char **argv, t_data *data)
   return (status);
 }
 
-t_buildin is_buildin(char *path)
+t_buildin ft_is_buildin(char *path)
 {
   if (!path)
     return (B_UNKNOWN);
-  if (ft_strncmp(path, "cd", 3))
+  if (ft_strncmp(path, "cd", 3) == 0)
     return (B_CD);
-  else if (ft_strncmp(path, "echo", 5))
+  else if (ft_strncmp(path, "echo", 5) == 0)
     return (B_ECHO);
-  else if (ft_strncmp(path, "env", 4))
+  else if (ft_strncmp(path, "env", 4) == 0)
     return (B_ENV);
-  else if (ft_strncmp(path, "exit", 5))
+  else if (ft_strncmp(path, "exit", 5) == 0)
     return (B_EXIT);
-  else if (ft_strncmp(path, "export", 7))
+  else if (ft_strncmp(path, "export", 7) == 0)
     return (B_EXPORT);
-  else if (ft_strncmp(path, "pwd", 4))
+  else if (ft_strncmp(path, "pwd", 4) == 0)
     return (B_UNSET);
-  else if (ft_strncmp(path, "unset", 6))
+  else if (ft_strncmp(path, "unset", 6) == 0)
     return (B_UNSET);
   return (B_UNKNOWN);
 }

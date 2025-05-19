@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:29:25 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 11:44:44 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:17:19 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 // buildins utils
 int ft_run_buildin(t_buildin b, char **argv, t_data *data);
-t_buildin is_buildin(char *path);
+t_buildin ft_is_buildin(char *path);
 
 // buildins
 int ft_echo(char **argv);

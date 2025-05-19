@@ -1,7 +1,16 @@
-#include "../../includes/container.h"
-#include <linux/limits.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setup.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/19 15:27:35 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/19 16:40:09 by znajdaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../includes/container.h"
 
 // TODO:
 //  - ENVIR: [-] tested
@@ -18,10 +27,10 @@
 //      - [x] export buildin
 //
 //  - executor [ ] tested
-//      - [ ] update mish.exit_status 
-//      - [ ] link get_paths
-//      - [ ] link $?
-//      - [ ] link buildins 
+//      - [x] update mish.exit_status 
+//      - [x] link get_paths
+//      - [x] link $?
+//      - [x] link buildins 
 //      - [ ] memory leeks
 //      - [ ] norminette
 //
@@ -34,11 +43,10 @@
 
 t_mish mish;
 
-t_arr *_create_lenv(char **envp)
+static t_arr *_create_lenv(char **envp)
 {
   int i;
   t_arr *lst_env;
-  char cwd[PATH_MAX];
 
 
   if (!envp || !*envp)
@@ -49,31 +57,40 @@ t_arr *_create_lenv(char **envp)
   i = -1;
   while (envp[++i])
     arr_append(lst_env, ft_strdup(envp[i]));
-  if (!getcwd(cwd, PATH_MAX))
-  {
-    perror("setup");
-    return (arr_free(lst_env), NULL);
-  }
-  ft_setenv("PWD", cwd, 1);
+  ft_setenv("PWD", mish.cwd, 1);
   return (lst_env);
 }
 
-t_data *ft_setup(int ac, char **av, char **envp)
+t_data *ft_setup_data(t_ast *ast)
 {
 	t_data *data;
-  t_arr *lenv;
 
-  (void) ac, (void)av;
+  if (!ast)
+    return (NULL);
 	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 		  return (NULL);
-  lenv = _create_lenv(envp);
-  if (!lenv)
+  data->wpids = arr_new();
+  if (!data->wpids)
     return (free(data), NULL);
+  data->paths = ft_getpaths();
+  if (!data->paths)
+    return (arr_free(data->wpids), free(data), NULL);
   data->fd[0] = STDIN_FILENO;
   data->fd[1] = STDOUT_FILENO;
-  mish.exit_status = 0;
-  mish.envp = lenv;
-  getcwd(mish.cwd, PATH_MAX);
+  data->ast = ast;
 	return data;
+}
+
+int ft_setup_mish(int ac, char **av, char **envp)
+{
+  (void) ac, (void)av;
+  mish.exit_status = 0;
+
+  if (!getcwd(mish.cwd, PATH_MAX))
+    return (0);
+  mish.envp = _create_lenv(envp);
+  if (!mish.envp)
+    return (0);
+  return (1);
 }
