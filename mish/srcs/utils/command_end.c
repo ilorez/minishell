@@ -6,17 +6,17 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:18:05 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:46:12 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 10:29:44 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
 
-int	restore_std(int std, int flags, int status)
+int	ft_restore_std(int std, int flags, int status)
 {
 	int	fd;
 
-	if (isatty(std))
+	if (!isatty(std))
 	{
 		close(std);
 		fd = open("/dev/tty", flags);
@@ -42,10 +42,10 @@ int	handel_cmd_end(t_data *data)
 		status = ft_killpids(data->wpids);
 	if (data->ast)
 		; //TODO: ft_free_ast(data->ast);
-	status = restore_std(STDIN_FILENO, O_RDONLY, status);
+	status = ft_restore_std(STDIN_FILENO, O_RDONLY, status);
 	if (data->fd[0] != STDIN_FILENO)
 		close(data->fd[0]);
-	status = restore_std(STDOUT_FILENO, O_WRONLY, status);
+	status = ft_restore_std(STDOUT_FILENO, O_WRONLY, status);
 	if (data->fd[1] != STDOUT_FILENO)
 		close(data->fd[1]);
 	return (status);

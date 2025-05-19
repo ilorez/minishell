@@ -35,5 +35,6 @@
 # include "./executor.h"
 # include "./lexer.h"
 # include "./setup.h"
+# include "./buildins.h"
 
 #endif

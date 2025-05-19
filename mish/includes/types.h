@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 19:38:43 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:43:41 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,18 @@ typedef struct s_mish
   int exit_status;
   char cwd[PATH_MAX];
 } t_mish;
+
+// this struct for buildin check and run used only on executor
+typedef enum s_buildin 
+{
+  B_UNKNOWN,
+  B_CD,
+  B_ECHO,
+  B_ENV,
+  B_EXIT,
+  B_EXPORT,
+  B_PWD,
+  B_UNSET
+} t_buildin;
 
 #endif

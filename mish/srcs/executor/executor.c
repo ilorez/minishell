@@ -6,17 +6,13 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 22:29:08 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:09:13 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
 
-// TODO: test expand path name
-//        - for current dir this ./main.c sould work as main.c so just skip ./
-//        - more tests
-//        - norm
-void		ft_exec(t_data *data, t_ast *ast);
+int			ft_exec(t_data *data, t_ast *ast);
 int			ft_pipe(t_data *data, t_ast *ast);
 int			ft_redir(t_data *data, t_ast *ast, t_redir *r);
 static int	_or_and(t_data *data, t_ast *ast, int cond);
@@ -44,7 +40,7 @@ int	ft_executor(t_data *data, t_ast *ast)
 	else if (ast->type == T_REDIR)
 		status = ft_redir(data, ast, ast->redir);
 	else if (ast->type == T_EXEC)
-		ft_exec(data, ast);
+		status = ft_exec(data, ast);
 	return (status);
 }
 
@@ -86,39 +82,45 @@ int	ft_pipe(t_data *data, t_ast *ast)
 }
 
 // TODO: replace ./ with data->curr_path
-void	ft_exec(t_data *data, t_ast *ast)
+int	ft_exec(t_data *data, t_ast *ast)
 {
 	int		*pid;
 	char	**argv;
 	char	*path;
+  t_buildin b;
 
+
+  ft_change_fd(data->fd[0], STDIN_FILENO, data);
+	ft_change_fd(data->fd[1], STDOUT_FILENO, data);
   argv = ft_extract(ast->argv);
 	if (!argv)
-		return (ft_perror(NULL, ERR_MALLOC_FAIL), ft_handel_exit(data, 1));
-  //ft_check_buildins(argv);
+		  return (ft_perror(NULL, ERR_MALLOC_FAIL), ft_handel_exit(data, 1), 1);
+  b = is_buildin(argv[0]);
+  if (b)
+    return (ft_run_buildin(b, &argv[1], data));
 	pid = ft_calloc(sizeof(int), 1);
 	*pid = fork();
 	if (*pid == -1)
-		return (perror("fork"), ft_free_data(data));
+		return (perror("fork"), ft_free_data(data), 1);
 	else if (*pid == 0)
 	{
-		
 		path = ft_get_right_path(argv[0], data->paths);
 		if (!path)
-			return (ft_handel_exit(data, 1));
-		ft_change_fd(data->fd[0], STDIN_FILENO, data);
-		ft_change_fd(data->fd[1], STDOUT_FILENO, data);
+			ft_handel_exit(data, 1);
 		execve(path, argv, (char **)(mish.envp->content));
 		perror("execve");
 		ft_handel_exit(data, 126);
 	}
 	arr_append(data->wpids, pid);
+  return (0);
 }
 
 int	ft_redir(t_data *data, t_ast *ast, t_redir *r)
 {
 	int		fd;
 	t_arr	*lst;
+  int org;
+  int status;
 
 	lst = ft_extract_arg(r->fpath);
 	if (!lst)
@@ -134,6 +136,9 @@ int	ft_redir(t_data *data, t_ast *ast, t_redir *r)
 		perror("open");
 		return (1);
 	}
-	ft_change_fd(fd, r->fd, data);
-	return (ft_executor(data, ast->left));
+  org = data->fd[r->fd];
+  data->fd[r->fd] = fd;
+  status = ft_executor(data, ast->left);
+  data->fd[r->fd] = org;
+	return (status);
 }

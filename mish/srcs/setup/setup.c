@@ -70,6 +70,8 @@ t_data *ft_setup(int ac, char **av, char **envp)
   lenv = _create_lenv(envp);
   if (!lenv)
     return (free(data), NULL);
+  data->fd[0] = STDIN_FILENO;
+  data->fd[1] = STDOUT_FILENO;
   mish.exit_status = 0;
   mish.envp = lenv;
   getcwd(mish.cwd, PATH_MAX);

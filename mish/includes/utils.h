@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:19:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 20:31:51 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 10:21:04 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_free_tokens(t_token **tks);
 void ft_free_all(t_data *data);
 
 // command end
-int		restore_std(int std, int flags, int status);
+int		ft_restore_std(int std, int flags, int status);
 int		handel_cmd_end(t_data *data);
 
 // helpers 

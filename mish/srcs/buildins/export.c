@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:39:33 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 23:41:45 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 10:05:44 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // If a variable name is followed by =value, the value of the variable is set to value.
 // The return status is zero unless an invalid option is supplied, 
 // one of the names is not a valid shell variable name 
-//https://www.gnu.org/software/bash/manual/bash.html?utm_source=chatgpt.com#Shell-Parameters
+// https://www.gnu.org/software/bash/manual/bash.html?utm_source=chatgpt.com#Shell-Parameters
 
 int ft_export(char **argv)
 {
