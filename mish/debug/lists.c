@@ -70,7 +70,9 @@ t_ast *example_list_5()
 t_ast *example_list_6()
 {
 	t_ast *ast;
-  _print_list_cmd("cd Desktop | pwd");
-	ast = ex_bi(T_PIPE, ex_exec("cd Desktop"), ex_exec("pwd"));
+  _print_list_cmd("cd libft | pwd");
+	ast = ex_bi(T_PIPE, ex_exec("cd libft"), ex_exec("pwd"));
 	return ast;
 }
+
+

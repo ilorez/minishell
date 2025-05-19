@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:15:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 20:16:20 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:06:07 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_buildin ft_is_buildin(char *path)
   else if (ft_strncmp(path, "export", 7) == 0)
     return (B_EXPORT);
   else if (ft_strncmp(path, "pwd", 4) == 0)
-    return (B_UNSET);
+    return (B_PWD);
   else if (ft_strncmp(path, "unset", 6) == 0)
     return (B_UNSET);
   return (B_UNKNOWN);
