@@ -6,7 +6,7 @@ int main(int ac, char **av, char **envp)
   t_data *data;
 
   ft_setup_mish(ac, av, envp);
-	ast = example_list_5();
+	ast = ex_bi(T_AND, ex_exec("export a=hello"), ex_exec("echo $a"));
   data = ft_setup_data(ast);
 	ft_executor(data, data->ast);
   ft_waitpids(data->wpids);

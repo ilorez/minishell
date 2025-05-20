@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:02:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:38:18 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:44:06 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,23 @@ char	*ft_get_right_path(char *cmd, char **paths)
 	return (NULL);
 }
 
-int	ft_change_fd(int fd, int to, t_data *data)
+int	ft_dup2(int fd, int to, t_data *data)
 {
-	if (fd == to)
+  if (fd == to)
 		return (true);
 	if (dup2(fd, to) == -1)
 	{
 		perror("dup2");
 		ft_handel_exit(data, 2);
 	}
+	return (true);
+}
+
+int	ft_change_fd(int fd, int to, t_data *data)
+{
+  if (fd == to)
+		  return (true);
+  ft_dup2(fd, to, data);
 	close(fd);
 	return (true);
 }

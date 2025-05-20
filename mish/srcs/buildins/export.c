@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:39:33 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 10:05:44 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:27:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int ft_export(char **argv)
       status = 1;
       continue;
     }
-    ft_setenv(argv[i], value, 1);
+    ft_setenv(argv[i], (value + 1), 1);
   }
   return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 20:10:04 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:36:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ int	ft_redir(t_data *data, t_ast *ast, t_redir *r)
   org = data->fd[r->fd];
   data->fd[r->fd] = fd;
   status = ft_executor(data, ast->left);
+  close(fd);
   data->fd[r->fd] = org;
 	return (status);
 }

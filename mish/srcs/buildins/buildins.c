@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:15:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 21:06:07 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:58:18 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ int ft_run_buildin(t_buildin b, char **argv, t_data *data)
   status = 0;
   if (b == B_UNKNOWN)
     return (0);
-  // dup STDIN and STDOUT to other fd
   org[0] = dup(STDIN_FILENO);
   org[1] = dup(STDOUT_FILENO);
-  // dup data->fd to STD
-  dup2(data->fd[0], STDIN_FILENO);
-	dup2(data->fd[1], STDOUT_FILENO);
+  ft_dup2(data->fd[0], STDIN_FILENO, data);
+	ft_dup2(data->fd[1], STDOUT_FILENO, data);
   if (b == B_CD)
     status = ft_cd(argv);
   else if (b == B_ECHO)
@@ -42,7 +40,6 @@ int ft_run_buildin(t_buildin b, char **argv, t_data *data)
     status = ft_pwd(argv);
   else if (b == B_UNSET)
     status = ft_unset(argv);
-  // restore std 
   ft_change_fd(org[0], STDIN_FILENO, data);
   ft_change_fd(org[1], STDOUT_FILENO, data);
   return (status);

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:09:51 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 16:30:52 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:36:53 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*ft_get_right_path(char *cmd, char **paths);
 int		ft_change_fd(int fd, int to, t_data *data);
 int		ft_waitpids(t_arr *pid);
 int		ft_killpids(t_arr *pid);
+int	ft_dup2(int fd, int to, t_data *data);
 
 // extract
 char	**ft_extract(char **argv);
