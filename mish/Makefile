@@ -69,7 +69,7 @@ fclean: clean
 re: fclean all
 
 vg:
-	 valgrind --suppressions=../ignore_readline_leaks.supp --leak-check=full --show-leak-kinds=all ./minishell
+	 valgrind --suppressions=../ignore_readline_leaks.supp --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishell
 d:
 	gdbtui ./$(NAME)
 

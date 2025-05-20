@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:18:05 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 10:29:44 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:19:46 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,28 @@ int	ft_restore_std(int std, int flags, int status)
 	return (status);
 }
 
+void ft_free_ast(t_ast *ast)
+{
+  if (!ast)
+    return ;
+  else if (ast->type == T_AND || ast->type == T_OR || ast->type == T_PIPE)
+  {
+    ft_free_ast(ast->left);
+    ft_free_ast(ast->right);
+  }
+  else if (ast->type == T_SUBSH)
+    ft_free_ast(ast->left);
+  else if (ast->type == T_EXEC)
+    ft_free_str_lst(ast->argv);
+  else if (ast->type == T_REDIR)
+  {
+    free(ast->redir->fpath);
+    free(ast->redir);
+    ft_free_ast(ast->left);
+  }
+  free(ast);
+}
+
 int	handel_cmd_end(t_data *data)
 {
 	int	status;
@@ -39,9 +61,9 @@ int	handel_cmd_end(t_data *data)
 	if (!data)
 		return (0);
 	if (data->wpids->index)
-		status = ft_killpids(data->wpids);
+		  status = ft_killpids(data->wpids);
 	if (data->ast)
-		; //TODO: ft_free_ast(data->ast);
+		ft_free_ast(data->ast);
 	status = ft_restore_std(STDIN_FILENO, O_RDONLY, status);
 	if (data->fd[0] != STDIN_FILENO)
 		close(data->fd[0]);

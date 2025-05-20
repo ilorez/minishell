@@ -6,20 +6,20 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:27:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 20:55:41 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:44:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
 
 // TODO:
-//  - ENVIR: [-] tested
+//  - ENVIR: [x] tested
 //      - [x] ft_getenv
 //      - [x] ft_setenv
 //      - [x] ft_getpaths
 //      - [x] ft_unsetenv
 //
-//  - free [ ] tested
+//  - free [x] tested
 //      - [x] ft_free_all (data, mish)
 //
 //  - buildins [x] tested 
@@ -31,7 +31,7 @@
 //      - [x] link get_paths
 //      - [x] link $?
 //      - [x] link buildins 
-//      - [ ] memory leeks
+//      - [x] memory leeks
 //      - [ ] norminette
 //
 //  - Signals [ ] tested

@@ -6,11 +6,12 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:40:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 20:32:35 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:43:13 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/buildins.h"
+#include <unistd.h>
 
 // exit 
 //  - free all data and exit
@@ -26,7 +27,9 @@ void ft_exit(char **argv, t_data *data)
   else if (*(argv+1))
     return (ft_ref_perror("exit", NULL, ERR_TO_MANY_ARG));
   ft_waitpids(data->wpids);
-  status = atoi(*argv);
+  if (argv && *argv)
+    status = atoi(*argv);
   ft_free_all(data);
+  write(STDOUT_FILENO, "exit\n", 5);
   exit(status);
 }

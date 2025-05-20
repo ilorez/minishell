@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 20:57:51 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 22:59:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,15 @@ int	ft_pipe(t_data *data, t_ast *ast)
 int	ft_exec(t_data *data, t_ast *ast)
 {
 	int		*pid;
-	char	**argv;
 	char	*path;
   t_buildin buildin;
 
-  argv = ft_extract(ast->argv);
-	if (!argv)
+  ast->argv = ft_extract(ast->argv);
+	if (!ast->argv)
 		  return (ft_perror(NULL, ERR_MALLOC_FAIL), ft_handel_exit(data, 1), 1);
-  buildin = ft_is_buildin(argv[0]);
+  buildin = ft_is_buildin(ast->argv[0]);
   if (buildin)
-    return (ft_run_buildin(buildin, &argv[1], data));
+    return (ft_run_buildin(buildin, &ast->argv[1], data));
 	pid = ft_calloc(sizeof(int), 1);
 	*pid = fork();
 	if (*pid == -1)
@@ -102,10 +101,10 @@ int	ft_exec(t_data *data, t_ast *ast)
 	{
     ft_change_fd(data->fd[0], STDIN_FILENO, data);
 	  ft_change_fd(data->fd[1], STDOUT_FILENO, data);
-		path = ft_get_right_path(argv[0]);
+		path = ft_get_right_path(ast->argv[0]);
 		if (!path)
 			ft_handel_exit(data, 127);
-		execve(path, argv, (char **)(mish.envp->content));
+		execve(path, ast->argv, (char **)((mish.envp)->content));
 		perror(path);
 		ft_handel_exit(data, 126);
 	}
