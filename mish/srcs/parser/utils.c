@@ -49,9 +49,9 @@ void	next_token(t_token **lst, char c)
 {
 	if (!lst || !*lst)
 		return ;
-	if (c == 'n' && (*lst)->next)
+	if (c == 'n' && *lst)
 		*lst = (*lst)->next;
-	if (c == 'p' && (*lst)->prev)
+	if (c == 'p' && *lst)
 		*lst = (*lst)->prev;
 }
 

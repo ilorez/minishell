@@ -14,6 +14,9 @@
 # define PARSER_H
 
 int		ft_grammar(t_token **lst);
+int ft_operators(t_token **lst);
+int ft_parenthese(t_token **lst);
+int ft_command(t_token **lst);
 t_ast	*ft_parse_ast(t_token **lst);
 t_ast	*parse_or_and(t_token **lst);
 t_ast	*parse_pipe(t_token **lst);

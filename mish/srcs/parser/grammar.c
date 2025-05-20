@@ -13,29 +13,70 @@
 #include "container.h"
 
 static int	match_op(t_token **lst, int is_redir);
-
-int	ft_grammar(t_token **lst)
+//TODO: the idea is to create a function contains a static varibale to hold
+// the error if there is any and after all the parsing done we reset the varilabe
+int ft_grammar(t_token **lst)
 {
-	if (match(lst, T_LPAR))
-	{
-		next_token(lst, 'n');
-		if (ft_grammar(lst))
-			return (1);
-		if (!match(lst, T_RPAR))
-			return (ft_perror("expected ) ", ERR_SYNTAX), 1);
-		next_token(lst, 'n');
-		if (match(lst, T_WORD))
-			return (ft_perror("unexpected token after ) ", ERR_SYNTAX), 1);
-	}
-	while (match(lst, T_WORD) || match_op(lst, 1))
-		next_token(lst, 'n');
-	if (match_op(lst, 0))
-	{
-		next_token(lst, 'n');
-		if (match_op(lst, 0) || ft_grammar(lst))
-			return (ft_perror("unexpected token after op ", ERR_SYNTAX), 1);
-	}
-	return (0);
+    if (!lst || !*lst)
+        return (ft_perror("empty input", ERR_SYNTAX), 1);
+    if (match_op(lst, 0))
+        return (ft_perror("unexpected operator at start", ERR_SYNTAX), 1);
+    if (ft_operators(lst))
+        return 1;
+    if (*lst != NULL)
+        return (ft_perror("unexpected token at end", ERR_SYNTAX), 1);
+    return 0;
+}
+
+int ft_operators(t_token **lst)
+{
+    if (ft_parenthese(lst) && ft_command(lst))
+	return (ft_perror("expected command or (", ERR_SYNTAX), 1);
+
+    while (match_op(lst, 0)) {
+        next_token(lst, 'n');
+        if (ft_parenthese(lst) && ft_command(lst))
+            return (ft_perror("expected command after operator", ERR_SYNTAX), 1);
+    }
+    return 0;
+}
+
+int ft_parenthese(t_token **lst)
+{
+    if (!match(lst, T_LPAR))
+        return 1;
+
+    next_token(lst, 'n');
+
+    if (ft_operators(lst))
+        return 1;
+
+    if (!match(lst, T_RPAR))
+        return (ft_perror("expected )", ERR_SYNTAX), 1);
+    next_token(lst, 'n');
+
+    if (match(lst, T_WORD))
+        return (ft_perror("unexpected token after )", ERR_SYNTAX), 1);
+    return 0;
+}
+
+int ft_command(t_token **lst)
+{
+    int success;
+
+    success = 1;
+    while (match(lst, T_WORD) || match_op(lst, 1)) {
+        if (match(lst, T_WORD)) {
+            next_token(lst, 'n');
+        } else if (match_op(lst, 1)) {
+            next_token(lst, 'n');
+            if (!match(lst, T_WORD))
+                return (ft_perror("expected word after redirection", ERR_SYNTAX), 1);
+            next_token(lst, 'n');
+        }
+        success = 0;
+    }
+    return (success);
 }
 
 static int	match_op(t_token **lst, int is_redir)
@@ -48,11 +89,4 @@ static int	match_op(t_token **lst, int is_redir)
 	if (is_redir)
 		return (tt >= T_LESS && tt <= T_GGREAT);
 	return (tt >= T_AND && tt <= T_PIPE);
-}
-
-t_ast	*ft_parse_ast(t_token **lst)
-{
-	if (match(lst, T_ROOT))
-		next_token(lst, 'p');
-	return (parse_or(lst));
 }
