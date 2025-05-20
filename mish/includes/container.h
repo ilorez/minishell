@@ -6,7 +6,8 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 16:18:25 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 11:09:40 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:52:00 by znajdaou         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTAINER_H
@@ -25,7 +26,6 @@
 # include <signal.h>
 # include <dirent.h>
 
-
 # include "../libft/includes/libft.h"
 // THIS SHOULD BE ABOVE ALL THE HEADER CUZ IT CONTAINS ALL THE DATA TYPES
 # include "./types.h"
@@ -34,6 +34,7 @@
 # include "./utils.h"
 # include "./executor.h"
 # include "./lexer.h"
+# include "./setup.h"
+# include "./buildins.h"
 
-extern t_mish mish;
 #endif

@@ -12,16 +12,16 @@
 
 #include "./includes/libft.h"
 
-void ft_print_str_arr(char **arr)
+void	ft_print_str_arr(char **arr)
 {
-  int i;
+	int	i;
 
-  if (!arr || !*arr)
-    return;
-  i = -1;
-  while (arr[++i])
-  {
-    ft_putstr_fd(arr[i], STDOUT_FILENO);
-    write(STDOUT_FILENO, "\n", 1);
-  }
+	if (!arr || !*arr)
+		return ;
+	i = -1;
+	while (arr[++i])
+	{
+		ft_putstr_fd(arr[i], STDOUT_FILENO);
+		write(STDOUT_FILENO, "\n", 1);
+	}
 }

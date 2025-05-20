@@ -1,45 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_methods.c                                     :+:      :+:    :+:   */
+/*   get_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 15:13:59 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 23:57:04 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/18 16:43:26 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/20 23:58:07 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
 
-void	ft_free_data(t_data *data)
+// get paths & split it from envp
+char	**ft_getpaths(void)
 {
-	if (!data)
-		return ;
-	handel_cmd_end(data);
-	if (data->wpids)
-		arr_clean(&(data->wpids));
-	free(data);
-}
+	char	**paths;
+	char	**envp;
 
-void	ft_free_tokens(t_token **tks)
-{
-	t_token	*tmp;
-
-	if (!(*tks))
-		return ;
-	while ((*tks))
+	if (!g_mish.envp)
+		return (NULL);
+	envp = (char **)(g_mish.envp)->content;
+	if (!envp || !*envp)
+		return (ft_split("", ' '));
+	paths = NULL;
+	while (*envp)
 	{
-		tmp = (*tks)->next;
-		if ((*tks)->type == T_WORD && (*tks)->word)
-			free((*tks)->word);
-		free((*tks));
-		(*tks) = tmp;
+		if (ft_strncmp(*envp, "PATH=", 5) == 0)
+		{
+			paths = ft_split((*envp + 5), ':');
+			break ;
+		}
+		envp++;
 	}
-}
-
-void	ft_free_all(t_data *data)
-{
-	ft_free_data(data);
-	arr_free(g_mish.envp);
+	if (!paths)
+		paths = ft_split("", ' ');
+	return (paths);
 }

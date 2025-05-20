@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 18:44:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 15:35:42 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 00:18:56 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,16 @@ static void	_double_quotes(t_field *field, t_str *str)
 	field_drop_item(field, str->i);
 }
 
+static void	_exit_status(t_field *r, int tag)
+{
+	char	*tmp;
+
+	field_drop_list(r, r->str->i, r->str->i + 2);
+	tmp = ft_itoa(g_mish.exit_status);
+	field_insert(r, r->str->i++, tmp, tag);
+	free(tmp);
+}
+
 // Note "+1" at this function is for $
 static void	_get_env(t_field *r, char *word, int tag)
 {
@@ -60,13 +70,10 @@ static void	_get_env(t_field *r, char *word, int tag)
 
 	if (!ft_isalpha(*++word) && *word != '_')
 	{
-    if (*word == '?')
-    {
-	    field_drop_list(r, r->str->i, r->str->i + 2);
-	    field_insert(r, r->str->i++, ft_itoa(100), tag); // todo replace 100 with exit status
-    }
-    else
-		  r->str->i++;
+		if (*word == '?')
+			_exit_status(r, tag);
+		else
+			r->str->i++;
 		return ;
 	}
 	var = ft_get_word(word);
@@ -76,7 +83,7 @@ static void	_get_env(t_field *r, char *word, int tag)
 		return (ft_perror(NULL, ERR_MALLOC_FAIL));
 	}
 	field_drop_list(r, r->str->i, r->str->i + 1 + ft_strlen(var));
-	env = getenv(var);
+	env = ft_getenv(var);
 	free(var);
 	field_insert(r, r->str->i, env, tag);
 	r->str->i += ft_strlen(env);
