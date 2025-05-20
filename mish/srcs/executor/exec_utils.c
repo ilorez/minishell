@@ -6,31 +6,41 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:02:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 13:44:06 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:57:28 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
 
-// get path can be founded
-char	*ft_get_right_path(char *cmd, char **paths)
+char	*ft_get_right_path(char *cmd)
 {
 	char	*path;
+  char *paths;
+  char *start;
 
-	if (ft_strchr(cmd, '/'))
+  paths = ft_getenv("PATH");
+	if (ft_strchr(cmd, '/') || !paths)
 		return (ft_strdup(cmd));
 	path = NULL;
-	while (*paths)
+  start = paths;
+	while (*start)
 	{
-		path = ft_strjoin(paths[0], cmd, "/");
+    if (*paths && *paths !=  ':' && ++paths)
+      continue;
+    if (!*paths)
+		  path = ft_strjoin(start, cmd, "/");
+    else
+    {
+      *paths = '\0';
+		  path = ft_strjoin(start, cmd, "/");
+      *paths++ = ':';
+    }
 		if (access(path, F_OK | X_OK) == 0)
 			return (path);
 		free(path);
-		paths++;
+    start = paths;
 	}
-	ft_putstr_fd("Command '", STDERR_FILENO);
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putstr_fd("' not found\n", STDERR_FILENO);
+  ft_perror(cmd, ERR_CMDNF);
 	return (NULL);
 }
 

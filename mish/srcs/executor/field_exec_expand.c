@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 18:44:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 16:03:09 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:28:10 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	_get_env(t_field *r, char *word, int tag)
 		return (ft_perror(NULL, ERR_MALLOC_FAIL));
 	}
 	field_drop_list(r, r->str->i, r->str->i + 1 + ft_strlen(var));
-	env = getenv(var);
+	env = ft_getenv(var);
 	free(var);
 	field_insert(r, r->str->i, env, tag);
 	r->str->i += ft_strlen(env);

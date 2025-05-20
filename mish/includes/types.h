@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 11:43:41 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:55:31 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ typedef struct s_ast
 // Note: this is what will be passsed to execute function
 typedef struct s_data
 {
-	char **paths; // double pointer array of paths
 	t_ast			*ast;
 	int fd[2];    // used by executor: in deault: fd = [STDIN, STDOUT]
 	t_arr *wpids; // used by executor: arr_new();
@@ -118,5 +117,11 @@ typedef enum s_buildin
   B_PWD,
   B_UNSET
 } t_buildin;
+
+typedef struct s_iofd
+{
+  int in;
+  int out;
+} t_iofd;
 
 #endif

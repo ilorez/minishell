@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:15:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 12:58:18 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:15:00 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,27 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+static void _save_org(t_data *data, int *org, int std ,int index)
+{
+  if (std != data->fd[index])
+  {
+    *org = dup(std);
+    ft_dup2(data->fd[index], std, data);
+  }
+  else 
+    *org = std;
+}
+
 int ft_run_buildin(t_buildin b, char **argv, t_data *data)
 {
   int status;
-  int org[2];
+  t_iofd org;
 
   status = 0;
   if (b == B_UNKNOWN)
     return (0);
-  org[0] = dup(STDIN_FILENO);
-  org[1] = dup(STDOUT_FILENO);
-  ft_dup2(data->fd[0], STDIN_FILENO, data);
-	ft_dup2(data->fd[1], STDOUT_FILENO, data);
+  _save_org(data, &(org.in), STDIN_FILENO, 0);
+  _save_org(data, &(org.out), STDOUT_FILENO, 1);
   if (b == B_CD)
     status = ft_cd(argv);
   else if (b == B_ECHO)
@@ -40,8 +49,8 @@ int ft_run_buildin(t_buildin b, char **argv, t_data *data)
     status = ft_pwd(argv);
   else if (b == B_UNSET)
     status = ft_unset(argv);
-  ft_change_fd(org[0], STDIN_FILENO, data);
-  ft_change_fd(org[1], STDOUT_FILENO, data);
+  ft_change_fd(org.in, STDIN_FILENO, data);
+  ft_change_fd(org.out, STDOUT_FILENO, data);
   return (status);
 }
 

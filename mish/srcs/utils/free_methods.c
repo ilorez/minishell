@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:13:59 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 20:32:22 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:56:08 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	ft_free_data(t_data *data)
 	if (!data)
 		return ;
 	handel_cmd_end(data);
-	if (data->paths)
-		ft_free_str_lst(data->paths);
 	if (data->wpids)
 		arr_clean(&(data->wpids));
 }

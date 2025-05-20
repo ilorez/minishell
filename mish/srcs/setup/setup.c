@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:27:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 16:40:09 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:55:41 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 //  - free [ ] tested
 //      - [x] ft_free_all (data, mish)
 //
-//  - buildins [ ] tested
+//  - buildins [x] tested 
 //      - [x] finish cd echo env exit pwd unset
 //      - [x] export buildin
 //
@@ -48,14 +48,11 @@ static t_arr *_create_lenv(char **envp)
   int i;
   t_arr *lst_env;
 
-
-  if (!envp || !*envp)
-    return (NULL);
   lst_env = arr_new();
   if (!lst_env)
     return (NULL);
   i = -1;
-  while (envp[++i])
+  while (envp && envp[++i])
     arr_append(lst_env, ft_strdup(envp[i]));
   ft_setenv("PWD", mish.cwd, 1);
   return (lst_env);
@@ -73,9 +70,6 @@ t_data *ft_setup_data(t_ast *ast)
   data->wpids = arr_new();
   if (!data->wpids)
     return (free(data), NULL);
-  data->paths = ft_getpaths();
-  if (!data->paths)
-    return (arr_free(data->wpids), free(data), NULL);
   data->fd[0] = STDIN_FILENO;
   data->fd[1] = STDOUT_FILENO;
   data->ast = ast;

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:43:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 16:52:42 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:36:48 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	**ft_getpaths()
 	char	**paths;
   char **envp;
 
+  if (!mish.envp)
+    return (NULL);
   envp = (char **)(mish.envp)->content;
   if (!envp || !*envp)
 		return (ft_split("", ' '));

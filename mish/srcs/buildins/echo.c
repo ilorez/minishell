@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:51:10 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 14:21:09 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:15:04 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,12 @@ int ft_echo(char **argv)
   while (argv[++i] && argv[i][0] == '-' && argv[i][1] == 'n')
   {
     j = 0;
-    is_newline = 1;
     while (argv[i][++j] == 'n')
       ;
-    if (argv[i][j] != '\0')
-    {
+    if (argv[i][j] == '\0')
       is_newline = 0;
+    else 
       break;
-    }
   }
   while (argv[i])
   {

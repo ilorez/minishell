@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 15:48:41 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/19 16:19:07 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:37:11 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int ft_pwd(char **argv)
 {
   (void)argv;
   ft_putstr_fd(mish.cwd, STDOUT_FILENO);
+  write(STDOUT_FILENO, "\n", 1);
   return (0);
 }

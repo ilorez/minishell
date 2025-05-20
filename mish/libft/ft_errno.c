@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:51:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 21:11:31 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:36:19 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	_ft_create_err_list(char *lst[ERR_COUNT])
 	err_msgs[ERR_INVALID_ARG] = "invalid argument";
 	err_msgs[ERR_EMPTY_ARG] = "Empty argumnet";
 	err_msgs[ERR_EARGS] = "not enough arguments";
-	err_msgs[ERR_NONUM] = "numeric argument required";
+  err_msgs[ERR_CMDNF] = "command not found";
+  err_msgs[ERR_NONUM] = "numeric argument required";
 	err_msgs[ERR_IDENT] = "not a valid identifier";
 	err_msgs[ERR_TO_MANY_ARG] = "too many arguments";
 	err_msgs[ERR_ENOENT] = "No such file or directory";

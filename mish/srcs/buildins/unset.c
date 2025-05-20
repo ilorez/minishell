@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:01:34 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/18 21:57:50 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 18:52:15 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ int ft_unset(char **argv)
     return (0);
   i = -1;
   while (argv[++i])
-  {
-    if (!ft_isvalid_id(argv[i]))
-    {
-      ft_ref_perror("unset", argv[i], ERR_IDENT);
-      break;
-    }
     ft_unsetenv(argv[i]);
-  }
   return (0);
 }

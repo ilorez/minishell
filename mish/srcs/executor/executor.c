@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 13:36:57 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:57:51 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,11 @@ int	ft_exec(t_data *data, t_ast *ast)
 	{
     ft_change_fd(data->fd[0], STDIN_FILENO, data);
 	  ft_change_fd(data->fd[1], STDOUT_FILENO, data);
-		path = ft_get_right_path(argv[0], data->paths);
+		path = ft_get_right_path(argv[0]);
 		if (!path)
-			ft_handel_exit(data, 1);
+			ft_handel_exit(data, 127);
 		execve(path, argv, (char **)(mish.envp->content));
-		perror("execve");
+		perror(path);
 		ft_handel_exit(data, 126);
 	}
 	arr_append(data->wpids, pid);
