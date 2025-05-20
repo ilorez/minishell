@@ -14,10 +14,11 @@
 
 int	match_redir(t_token **lst)
 {
-	return (match(lst, T_LESS) || match(lst, T_LLESS) ||match(lst, T_GREAT)||match(lst, T_GGREAT));
+	return (match(lst, T_LESS) || match(lst, T_LLESS) || match(lst, T_GREAT)
+		|| match(lst, T_GGREAT));
 }
 
-t_redir		*fill_redir(t_token **lst)
+t_redir	*fill_redir(t_token **lst)
 {
 	t_redir	*redir;
 	t_type	tt;

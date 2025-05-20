@@ -23,22 +23,18 @@ int	ft_grammar(t_token **lst)
 			return (1);
 		if (!match(lst, T_RPAR))
 			return (ft_perror("expected ) ", ERR_SYNTAX), 1);
-		else 
-			next_token(lst, 'n');
+		next_token(lst, 'n');
+		if (match(lst, T_WORD))
+			return (ft_perror("unexpected token after ) ", ERR_SYNTAX), 1);
 	}
-	if(match
-	if ((*lst)->prev && (*lst)->prev->type == T_RPAR && !match(lst, T_WORD))
-		return (ft_perror("expected word ", ERR_SYNTAX), 1);
-	//if (!match(lst, T_WORD) & !match_op(lst, 1))
-	//	return (ft_perror("expected word ", ERR_SYNTAX), 1);
-	if (match_op(lst, 0) || match_op(lst, 1))
+	while (match(lst, T_WORD) || match_op(lst, 1))
+		next_token(lst, 'n');
+	if (match_op(lst, 0))
 	{
 		next_token(lst, 'n');
-		if (ft_grammar(lst))
-			return (1);
+		if (match_op(lst, 0) || ft_grammar(lst))
+			return (ft_perror("unexpected token after op ", ERR_SYNTAX), 1);
 	}
-	while (match(lst, T_WORD))
-		next_token(lst, 'n');
 	return (0);
 }
 
