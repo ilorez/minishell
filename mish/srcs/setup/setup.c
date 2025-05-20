@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:27:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 00:02:14 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 00:43:01 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@
 //      - [x] finish cd echo env exit pwd unset
 //      - [x] export buildin
 //
-//  - executor [ ] tested
+//  - executor [x] tested
 //      - [x] update mish.exit_status
 //      - [x] link get_paths
 //      - [x] link $?
 //      - [x] link buildins
 //      - [x] memory leeks
-//      - [ ] norminette
+//      - [x] norminette
 //
 //  - Signals [ ] tested
 //      - [ ] signal kill (killpids)
