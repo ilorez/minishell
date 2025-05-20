@@ -47,9 +47,11 @@ t_redir	*fill_redir(t_token **lst)
 
 void	next_token(t_token **lst, char c)
 {
-	if (c == 'n' && *lst)
+	if (!lst || !*lst)
+		return ;
+	if (c == 'n' && (*lst)->next)
 		*lst = (*lst)->next;
-	if (c == 'p' && *lst)
+	if (c == 'p' && (*lst)->prev)
 		*lst = (*lst)->prev;
 }
 

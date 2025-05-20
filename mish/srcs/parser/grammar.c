@@ -16,21 +16,6 @@ static int	match_op(t_token **lst, int is_redir);
 
 int	ft_grammar(t_token **lst)
 {
-	t_token *end;
-
-	end = NULL;
-	if (*lst && (*lst)->next == NULL)
-		end = *lst;
-	if (match(lst, T_WORD))
-		while (match(lst, T_WORD))
-			next_token(lst, 'n');
-	if (match_op(lst, 1))
-		while (match_op(lst, 1))
-		{
-			next_token(lst, 'n');
-			if (!match(lst, T_WORD))
-				return (ft_perror("unexpected token redir ", ERR_SYNTAX), 1);
-		}
 	if (match(lst, T_LPAR))
 	{
 		next_token(lst, 'n');
@@ -42,14 +27,14 @@ int	ft_grammar(t_token **lst)
 		if (match(lst, T_WORD))
 			return (ft_perror("unexpected token after ) ", ERR_SYNTAX), 1);
 	}
+	while (match(lst, T_WORD) || match_op(lst, 1))
+		next_token(lst, 'n');
 	if (match_op(lst, 0))
 	{
 		next_token(lst, 'n');
 		if (match_op(lst, 0) || ft_grammar(lst))
 			return (ft_perror("unexpected token after op ", ERR_SYNTAX), 1);
 	}
-	if (end && *lst == NULL)
-		*lst = end;
 	return (0);
 }
 
@@ -63,4 +48,11 @@ static int	match_op(t_token **lst, int is_redir)
 	if (is_redir)
 		return (tt >= T_LESS && tt <= T_GGREAT);
 	return (tt >= T_AND && tt <= T_PIPE);
+}
+
+t_ast	*ft_parse_ast(t_token **lst)
+{
+	if (match(lst, T_ROOT))
+		next_token(lst, 'p');
+	return (parse_or(lst));
 }
