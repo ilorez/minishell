@@ -55,7 +55,7 @@ int	main(int ac, char **av, char **env)
       data = ft_setup_data(ast);
 			ast = ft_parse_ast(&token);
 			ft_free_tokens(&token);
-      mish.exit_status = ft_executor(data, ast);
+      g_mish.exit_status = ft_executor(data, ast);
 		}
 		free(input);
 	}

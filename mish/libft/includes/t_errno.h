@@ -19,9 +19,9 @@ typedef enum s_errno
 	ERR_SUCCESS = 0,
 	ERR_INVALID_ARG,
 	ERR_EMPTY_ARG,
-  ERR_EARGS,
-  ERR_CMDNF,
-  ERR_NONUM,
+	ERR_EARGS,
+	ERR_CMDNF,
+	ERR_NONUM,
 	ERR_IDENT,
 	ERR_TO_MANY_ARG,
 	ERR_ENOENT,
@@ -38,7 +38,7 @@ void	ft_strerr(t_errno errno_num);
 void	ft_pserror(char *prefix, t_errno error_code, char suffix);
 void	ft_serror(t_errno error_code, char *msg);
 
-// refirence errno 
+// refirence errno
 void	ft_ref_perror(char *subref, char *msg, t_errno error_code);
 
 #endif

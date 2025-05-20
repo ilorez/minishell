@@ -6,11 +6,11 @@ int main(int ac, char **av, char **envp)
   t_data *data;
 
   ft_setup_mish(ac, av, envp);
-	ast = example_builtin_list_0();
+	ast = example_list_1();
   data = ft_setup_data(ast);
 	ft_executor(data, data->ast);
   ft_waitpids(data->wpids);
   ft_free_all(data);
-	return (mish.exit_status);
+	return (g_mish.exit_status);
 }
 

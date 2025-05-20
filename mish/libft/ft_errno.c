@@ -22,8 +22,8 @@ static void	_ft_create_err_list(char *lst[ERR_COUNT])
 	err_msgs[ERR_INVALID_ARG] = "invalid argument";
 	err_msgs[ERR_EMPTY_ARG] = "Empty argumnet";
 	err_msgs[ERR_EARGS] = "not enough arguments";
-  err_msgs[ERR_CMDNF] = "command not found";
-  err_msgs[ERR_NONUM] = "numeric argument required";
+	err_msgs[ERR_CMDNF] = "command not found";
+	err_msgs[ERR_NONUM] = "numeric argument required";
 	err_msgs[ERR_IDENT] = "not a valid identifier";
 	err_msgs[ERR_TO_MANY_ARG] = "too many arguments";
 	err_msgs[ERR_ENOENT] = "No such file or directory";
@@ -53,10 +53,10 @@ void	ft_perror(char *msg, t_errno error_code)
 	if (error_code < 0 || error_code >= ERR_COUNT)
 		error_code = ERR_UNKNOWN;
 	if (msg)
-  {
+	{
 		ft_putstr_fd(msg, STDERR_FILENO);
-	  ft_putstr_fd(": ", STDERR_FILENO);
-  }
+		ft_putstr_fd(": ", STDERR_FILENO);
+	}
 	ft_putstr_fd(err_msgs[error_code], STDERR_FILENO);
 	write(STDERR_FILENO, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:02:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 20:57:28 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 00:24:37 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,35 @@
 
 char	*ft_get_right_path(char *cmd)
 {
-	char	*path;
-  char *paths;
-  char *start;
-
-  paths = ft_getenv("PATH");
+	char *(path), *(paths), *(start);
+	paths = ft_getenv("PATH");
 	if (ft_strchr(cmd, '/') || !paths)
 		return (ft_strdup(cmd));
-	path = NULL;
-  start = paths;
+	start = paths;
 	while (*start)
 	{
-    if (*paths && *paths !=  ':' && ++paths)
-      continue;
-    if (!*paths)
-		  path = ft_strjoin(start, cmd, "/");
-    else
-    {
-      *paths = '\0';
-		  path = ft_strjoin(start, cmd, "/");
-      *paths++ = ':';
-    }
+		if (*paths && *paths != ':' && ++paths)
+			continue ;
+		if (!*paths)
+			path = ft_strjoin(start, cmd, "/");
+		else
+		{
+			*paths = '\0';
+			path = ft_strjoin(start, cmd, "/");
+			*paths++ = ':';
+		}
 		if (access(path, F_OK | X_OK) == 0)
 			return (path);
 		free(path);
-    start = paths;
+		start = paths;
 	}
-  ft_perror(cmd, ERR_CMDNF);
+	ft_perror(cmd, ERR_CMDNF);
 	return (NULL);
 }
 
 int	ft_dup2(int fd, int to, t_data *data)
 {
-  if (fd == to)
+	if (fd == to)
 		return (true);
 	if (dup2(fd, to) == -1)
 	{
@@ -58,9 +54,9 @@ int	ft_dup2(int fd, int to, t_data *data)
 
 int	ft_change_fd(int fd, int to, t_data *data)
 {
-  if (fd == to)
-		  return (true);
-  ft_dup2(fd, to, data);
+	if (fd == to)
+		return (true);
+	ft_dup2(fd, to, data);
 	close(fd);
 	return (true);
 }

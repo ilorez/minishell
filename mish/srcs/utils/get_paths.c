@@ -6,22 +6,22 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:43:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 17:36:48 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:58:07 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
 
 // get paths & split it from envp
-char	**ft_getpaths()
+char	**ft_getpaths(void)
 {
 	char	**paths;
-  char **envp;
+	char	**envp;
 
-  if (!mish.envp)
-    return (NULL);
-  envp = (char **)(mish.envp)->content;
-  if (!envp || !*envp)
+	if (!g_mish.envp)
+		return (NULL);
+	envp = (char **)(g_mish.envp)->content;
+	if (!envp || !*envp)
 		return (ft_split("", ' '));
 	paths = NULL;
 	while (*envp)

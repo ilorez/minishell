@@ -13,12 +13,12 @@
 #include "./includes/libft.h"
 
 // valid id is id contain just alphanum or _ and doesn't start with digit
-int ft_isvalid_id(char *id)
+int	ft_isvalid_id(char *id)
 {
-  if (!id || ft_isdigit(*id))
-    return (0);
+	if (!id || ft_isdigit(*id))
+		return (0);
 	while (*++id)
-    if (!ft_isalnum(*id) && *id != '_')
-      return (0);
-  return (1);
+		if (!ft_isalnum(*id) && *id != '_')
+			return (0);
+	return (1);
 }

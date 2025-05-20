@@ -20,7 +20,5 @@ void	ft_ref_perror(char *subref, char *msg, t_errno error_code)
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putstr_fd(subref, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
-  ft_perror(msg, error_code);
+	ft_perror(msg, error_code);
 }
-
-

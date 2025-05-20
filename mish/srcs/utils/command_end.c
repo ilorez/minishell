@@ -31,26 +31,26 @@ int	ft_restore_std(int std, int flags, int status)
 	return (status);
 }
 
-void ft_free_ast(t_ast *ast)
+void	ft_free_ast(t_ast *ast)
 {
-  if (!ast)
-    return ;
-  else if (ast->type == T_AND || ast->type == T_OR || ast->type == T_PIPE)
-  {
-    ft_free_ast(ast->left);
-    ft_free_ast(ast->right);
-  }
-  else if (ast->type == T_SUBSH)
-    ft_free_ast(ast->left);
-  else if (ast->type == T_EXEC)
-    ft_free_str_lst(ast->argv);
-  else if (ast->type == T_REDIR)
-  {
-    free(ast->redir->fpath);
-    free(ast->redir);
-    ft_free_ast(ast->left);
-  }
-  free(ast);
+	if (!ast)
+		return ;
+	else if (ast->type == T_AND || ast->type == T_OR || ast->type == T_PIPE)
+	{
+		ft_free_ast(ast->left);
+		ft_free_ast(ast->right);
+	}
+	else if (ast->type == T_SUBSH)
+		ft_free_ast(ast->left);
+	else if (ast->type == T_EXEC)
+		ft_free_str_lst(ast->argv);
+	else if (ast->type == T_REDIR)
+	{
+		free(ast->redir->fpath);
+		free(ast->redir);
+		ft_free_ast(ast->left);
+	}
+	free(ast);
 }
 
 int	handel_cmd_end(t_data *data)
@@ -61,7 +61,7 @@ int	handel_cmd_end(t_data *data)
 	if (!data)
 		return (0);
 	if (data->wpids->index)
-		  status = ft_killpids(data->wpids);
+		status = ft_killpids(data->wpids);
 	if (data->ast)
 		ft_free_ast(data->ast);
 	status = ft_restore_std(STDIN_FILENO, O_RDONLY, status);

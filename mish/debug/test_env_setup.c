@@ -29,8 +29,8 @@ int	main(int ac, char **av, char **envp)
   ft_setenv("HMZA", "LHBIL 2", 1);
 
   ft_unsetenv("PATH");
-  arr_print_str(mish.envp);
+  arr_print_str(g_mish.envp);
 	// Free resources
-	arr_free(mish.envp);  // if you have arr_free to clean up t_arr
+	arr_free(g_mish.envp);  // if you have arr_free to clean up t_arr
 	return (0);
 }

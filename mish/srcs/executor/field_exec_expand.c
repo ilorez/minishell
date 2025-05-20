@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 18:44:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 23:26:10 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 00:18:56 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,28 @@ static void	_double_quotes(t_field *field, t_str *str)
 	field_drop_item(field, str->i);
 }
 
+static void	_exit_status(t_field *r, int tag)
+{
+	char	*tmp;
+
+	field_drop_list(r, r->str->i, r->str->i + 2);
+	tmp = ft_itoa(g_mish.exit_status);
+	field_insert(r, r->str->i++, tmp, tag);
+	free(tmp);
+}
+
 // Note "+1" at this function is for $
 static void	_get_env(t_field *r, char *word, int tag)
 {
 	char	*var;
 	char	*env;
-  char  *tmp;
 
 	if (!ft_isalpha(*++word) && *word != '_')
 	{
-    if (*word == '?')
-    {
-	    field_drop_list(r, r->str->i, r->str->i + 2);
-      tmp = ft_itoa(mish.exit_status);
-	    field_insert(r, r->str->i++, tmp, tag);
-      free(tmp);
-    }
-    else
-		  r->str->i++;
+		if (*word == '?')
+			_exit_status(r, tag);
+		else
+			r->str->i++;
 		return ;
 	}
 	var = ft_get_word(word);

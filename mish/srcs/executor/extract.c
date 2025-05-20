@@ -26,8 +26,8 @@ char	**ft_extract(char **argv)
 	t_arr	*tmp;
 
 	args = arr_new();
-  if (!args)
-    return (ft_free_str_lst(argv), NULL);
+	if (!args)
+		return (ft_free_str_lst(argv), NULL);
 	i = -1;
 	while (argv[++i])
 	{

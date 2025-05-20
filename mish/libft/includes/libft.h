@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */ /*                                                +#+#+#+#+#+   +#+           */ /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 18:37:52 by znajdaou         ###   ########.fr       */
+/*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/20 23:47:45 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#ifndef FT_EXEC_NAME
-#define FT_EXEC_NAME "mish"
-#endif
+# ifndef FT_EXEC_NAME
+#  define FT_EXEC_NAME "mish"
+# endif
 // includes
 # include <limits.h>
 # include <stddef.h>
