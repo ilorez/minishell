@@ -12,12 +12,37 @@
 
 #include "container.h"
 
+t_ast	*parse_word(t_token **lst)
+{
+	t_arr	*exec;
+	char	*arg;
+	int		done;
+
+	if (match(lst, T_LPAR))
+		return (parse_list(lst));
+	exec = arr_new();
+	done = 0;
+	while (match(lst, T_WORD))
+	{
+		arg = (char *)malloc(((*lst)->word->len + 1) * sizeof(char));
+		if (!arg)
+			exit_err("malloc failed", 2);
+		ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
+		arr_append(exec, arg);
+		next_token(lst, 'p');
+		done++;
+	}
+	if (done)
+		return (new_node(T_EXEC, exec->content, NULL, NULL));
+	return (NULL);
+}
+
 t_ast	*parse_list(t_token **lst)
 {
 	t_ast	*left;
 
 	next_token(lst, 'p');
-	left = parse_or(lst);
+	left = parse_or_and(lst);
 	next_token(lst, 'p');
 	return (new_node(T_SUBSH, NULL, NULL, left));
 }

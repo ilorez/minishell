@@ -37,28 +37,17 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		input = readline("minishell$ ");
-
-    //ft_heredoc(input);
-    //return (0);
-		// Ctrl+D for exit
 		if (!input)
 			break ;
 		if (*input)
 		{
 			add_history(input);
-			// printf("cmd: %s\n", input);
 			token = ft_get_tokens(input);
-			//print_tokens(token);
+			print_tokens(token);
 			ft_grammar(&token);
 			//ast = ft_parse_ast(&token);
 			//print_ast(ast, 0);
 			ft_free_tokens(&token);
-			// send input to lexer
-			// get tokenzation array
-			// check if lexer has everthing done well
-			// send tokenzation array to parser
-			// check if parser do it's work with no error
-			// get AST and check everthing has done well for parser with no error
 			// send AST to exector
 			// executor return a status put it in $? variable
 			// done

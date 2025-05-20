@@ -71,6 +71,6 @@ re: fclean all
 vg:
 	 valgrind --suppressions=../ignore_readline_leaks.supp --leak-check=full --show-leak-kinds=all ./minishell
 d:
-	gdbtui ./$(NAME)
+	gdbgui ./$(NAME)
 
 .PHONY: all clean fclean re
