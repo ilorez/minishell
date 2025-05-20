@@ -16,6 +16,9 @@ static int	match_op(t_token **lst, int is_redir);
 
 int	ft_grammar(t_token **lst)
 {
+	t_token(*end);
+	if ((*lst)->next == NULL)
+		end = *lst;
 	if (match(lst, T_LPAR))
 	{
 		next_token(lst, 'n');
@@ -35,6 +38,8 @@ int	ft_grammar(t_token **lst)
 		if (match_op(lst, 0) || ft_grammar(lst))
 			return (ft_perror("unexpected token after op ", ERR_SYNTAX), 1);
 	}
+	if (*lst == NULL)
+		*lst = end;
 	return (0);
 }
 
