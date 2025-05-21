@@ -20,7 +20,7 @@ CC = cc
 RM = rm -f
 
 # debug
-F_DEBUG = ast_runner.c print_arr_str.c print_lexer.c print_ast.c lists.c components.c buildins_lists.c
+F_DEBUG = print_arr_str.c print_lexer.c print_ast.c lists.c components.c buildins_lists.c
 
 # folders
 F_UTILS = command_end.c free_methods.c get_word.c handel_exit.c heredoc.c wait_macros.c get_env.c get_paths.c set_env.c unset_env.c
@@ -32,7 +32,7 @@ F_EXECUTOR = executor.c exec_utils.c extract.c field_exec_expand.c field_exec_sp
 F_BUILDINS = cd.c echo.c env.c exit.c export.c pwd.c unset.c buildins.c
 
 # used files
-SRCS =  $(F_DEBUG) $(F_SETUP) $(F_UTILS) $(F_T_FIELD) $(F_BUILDINS) $(F_EXECUTOR) 
+SRCS =  main.c $(F_DEBUG) $(F_LEXER) $(F_SETUP) $(F_UTILS) $(F_T_FIELD) $(F_BUILDINS) $(F_EXECUTOR) 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
 
 # colors

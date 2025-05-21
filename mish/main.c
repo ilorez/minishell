@@ -1,5 +1,4 @@
 
-#include "container.h"
 #include "debug/debug.h"
 #include "setup.h"
 #include "utils.h"
@@ -28,9 +27,11 @@ int	main(int ac, char **av, char **env)
   t_data *data;
   t_ast *ast;
 
+  data = NULL;
+  signal(SIGQUIT, SIG_IGN);
 	if (signal(SIGINT, handle_sigint) == SIG_ERR)
 	{
-		printf("failed to register interrupts with kernel\n");
+		perror("signal\n");
 	}
 	init_history();
   ft_setup_mish(ac, av, env);
@@ -38,26 +39,24 @@ int	main(int ac, char **av, char **env)
 	{
 		input = readline("minishell$");
 
-    //ft_heredoc(input);
-    //return (0);
-		// Ctrl+D for exit
 		if (!input)
 			break ;
 		if (*input)
 		{
 			add_history(input);
-			// printf("cmd: %s\n", input);
 			token = ft_get_tokens(input);
 			print_tokens(token);
+      // grammer
+      // parser
 			ft_free_tokens(&token);
-			//ft_grammar(token);
-      //ast = parser(token);
-      data = ft_setup_data(ast);
-			ast = ft_parse_ast(&token);
-			ft_free_tokens(&token);
+			ast = example_list_1();
+      data = ft_setup_data(data, ast);
       g_mish.exit_status = ft_executor(data, ast);
+      ft_waitpids(data->wpids);
+      handel_cmd_end(data);
 		}
 		free(input);
 	}
-	return (0);
+  ft_free_all(&data);
+	return (g_mish.exit_status);
 }

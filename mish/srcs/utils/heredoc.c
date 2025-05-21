@@ -6,12 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:56:32 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:28:04 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:43:02 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
-#include <fcntl.h>
+#include "../../includes/utils.h"
 
 static void	_here_doc(int fd, char *eof);
 static char	*_randtmp_file(char *dir, char *prefix);

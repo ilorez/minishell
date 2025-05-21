@@ -6,11 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:18:05 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 23:19:46 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:42:10 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/utils.h"
 
 int	ft_restore_std(int std, int flags, int status)
 {
@@ -60,10 +60,13 @@ int	handel_cmd_end(t_data *data)
 	status = 0;
 	if (!data)
 		return (0);
-	if (data->wpids->index)
+	if (data->wpids && data->wpids->index)
 		status = ft_killpids(data->wpids);
 	if (data->ast)
+  {
 		ft_free_ast(data->ast);
+    data->ast = NULL;
+  }
 	status = ft_restore_std(STDIN_FILENO, O_RDONLY, status);
 	if (data->fd[0] != STDIN_FILENO)
 		close(data->fd[0]);

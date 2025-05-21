@@ -6,11 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:48:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/15 09:59:19 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:41:29 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/lexer.h"
 
 static t_type	_set_token(char **ptr, t_word **word);
 static t_type	_redir_type(char **cmd);

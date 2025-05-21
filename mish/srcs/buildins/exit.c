@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:40:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 00:00:04 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:38:23 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_exit(char **argv, t_data *data)
 	ft_waitpids(data->wpids);
 	if (argv && *argv)
 		status = atoi(*argv);
-	ft_free_all(data);
+	ft_free_all(&data);
 	write(STDOUT_FILENO, "exit\n", 5);
 	exit(status);
 }

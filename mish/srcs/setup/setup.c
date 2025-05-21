@@ -6,11 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:27:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 00:43:01 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:41:45 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/setup.h"
 
 // TODO:
 //  - ENVIR: [x] tested
@@ -58,16 +58,16 @@ static t_arr	*_create_lenv(char **envp)
 	return (lst_env);
 }
 
-t_data	*ft_setup_data(t_ast *ast)
+t_data	*ft_setup_data(t_data *data, t_ast *ast)
 {
-	t_data	*data;
-
 	if (!ast)
-		return (NULL);
-	data = ft_calloc(1, sizeof(t_data));
+		  return (NULL);
+  if (!data)
+	  data = ft_calloc(1, sizeof(t_data));
 	if (!data)
-		return (NULL);
-	data->wpids = arr_new();
+		  return (NULL);
+  if (!data->wpids)
+	  data->wpids = arr_new();
 	if (!data->wpids)
 		return (free(data), NULL);
 	data->fd[0] = STDIN_FILENO;
