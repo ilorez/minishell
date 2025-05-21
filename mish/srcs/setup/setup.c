@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:27:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 08:41:45 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:01:06 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@
 //      - [x] norminette
 //
 //  - Signals [ ] tested
+//      - [x] intractive mode for CTRL+c\D
+//      - [x] CTRL+d
+//      - [ ] CTRL+c
+//      - [ ] CTRL+\
 //      - [ ] signal kill (killpids)
 //  - link
 //      - [ ] link with parser

@@ -2,6 +2,7 @@
 #include "debug/debug.h"
 #include "setup.h"
 #include "utils.h"
+#include <signal.h>
 
 
 void	handle_sigint(int sig)
@@ -20,6 +21,17 @@ void	init_history(void)
 	//add_history("first command");
 }
 
+
+void	handle_sigint2(int sig)
+{
+	(void)sig;
+	printf("\n");           // Move to a new line
+	//printf("hello\n");           // Move to a new line
+	//rl_on_new_line();       // Regenerate the prompt on a newline
+	//rl_replace_line("", 0); // Clear the previous text
+	//rl_redisplay();
+	// TODO: stop running process
+}
 int	main(int ac, char **av, char **env)
 {
 	t_token	*token;
@@ -29,16 +41,13 @@ int	main(int ac, char **av, char **env)
 
   data = NULL;
   signal(SIGQUIT, SIG_IGN);
-	if (signal(SIGINT, handle_sigint) == SIG_ERR)
-	{
-		perror("signal\n");
-	}
 	init_history();
   ft_setup_mish(ac, av, env);
 	while (1)
 	{
+	  if (signal(SIGINT, handle_sigint) == SIG_ERR)
+		  perror("signal\n");
 		input = readline("minishell$");
-
 		if (!input)
 			break ;
 		if (*input)
@@ -49,8 +58,10 @@ int	main(int ac, char **av, char **env)
       // grammer
       // parser
 			ft_free_tokens(&token);
-			ast = example_list_1();
+      // echo hi && ehco hi2 || echo hi3
+			ast = ex_bi(T_OR, ex_bi(T_AND, ex_exec("echo hi"), ex_exec("echo hi2")), ex_exec("echo hi3"));
       data = ft_setup_data(data, ast);
+      signal(SIGINT, handle_sigint2);
       g_mish.exit_status = ft_executor(data, ast);
       ft_waitpids(data->wpids);
       handel_cmd_end(data);

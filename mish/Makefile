@@ -32,7 +32,7 @@ F_EXECUTOR = executor.c exec_utils.c extract.c field_exec_expand.c field_exec_sp
 F_BUILDINS = cd.c echo.c env.c exit.c export.c pwd.c unset.c buildins.c
 
 # used files
-SRCS =  main.c $(F_DEBUG) $(F_LEXER) $(F_SETUP) $(F_UTILS) $(F_T_FIELD) $(F_BUILDINS) $(F_EXECUTOR) 
+SRCS = ast_runner.c $(F_DEBUG) $(F_LEXER) $(F_SETUP) $(F_UTILS) $(F_T_FIELD) $(F_BUILDINS) $(F_EXECUTOR) 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
 
 # colors
