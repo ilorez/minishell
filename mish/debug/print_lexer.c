@@ -35,21 +35,20 @@ const char	*get_token_type_name(t_type type)
 
 void	print_token_type(t_token *token)
 {
-	printf("Token Type: %s", get_token_type_name(token->type));
-	if (token->type == T_WORD && token->word != NULL)
-	{
-		printf(" (str: %.*s)", (int)token->word->len, token->word->ptr);
-	}
-	printf("\n");
+	printf("[%s]", get_token_type_name(token->type));
+	//if (token->type == T_WORD && token->word != NULL)
+	//{
+	//	printf(" |%.*s|]", (int)token->word->len, token->word->ptr);
+	//}
+	printf("->");
 }
 
 void	print_tokens(t_token *tk)
 {
-	while (tk->next)
-		tk = tk->next;
 	while (tk)
 	{
 		print_token_type(tk);
-		tk = tk->prev;
+		tk = tk->next;
 	}
+	printf("[NULL]\n");
 }

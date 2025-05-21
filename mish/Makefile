@@ -17,7 +17,7 @@ INCLUDES_DRS = -I./includes -I./libft/includes
 HEADERS = ./debug/debug.h ./includes/utils.h ./includes/t_field.h  ./includes/lexer.h ./includes/parser.h ./includes/container.h ./includes/types.h ./includes/executor.h ./includes/buildins.h
 FLAGS =  -Wall -Wextra -Werror -g
 CC = cc
-RM = rm -f
+RM = rm -rf
 
 # debug
 F_DEBUG = ast_runner.c print_arr_str.c print_lexer.c print_ast.c lists.c components.c buildins_lists.c
@@ -32,7 +32,8 @@ F_EXECUTOR = executor.c exec_utils.c extract.c field_exec_expand.c field_exec_sp
 F_BUILDINS = cd.c echo.c env.c exit.c export.c pwd.c unset.c buildins.c
 
 # used files
-SRCS =  $(F_DEBUG) $(F_SETUP) $(F_UTILS) $(F_T_FIELD) $(F_BUILDINS) $(F_EXECUTOR) 
+#SRCS =  $(F_DEBUG) $(F_UTILS) $(F_T_FIELD) $(F_EXECUTOR)
+SRCS =  main_ast.c $(F_PARSER) $(F_LEXER) $(F_DEBUG) $(F_UTILS) $(F_T_FIELD) $(F_EXECUTOR)
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
 
 # colors
@@ -60,17 +61,18 @@ $(BUILD_DR):
 	mkdir -p $@
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(BUILD_DR)
 	make -C $(LIBFT_DR) fclean
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) $(BUILD_DR)
 
 re: fclean all
 
 vg:
 	 valgrind --suppressions=../ignore_readline_leaks.supp --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishell
 d:
-	gdbtui ./$(NAME)
+	gdbgui ./$(NAME)
 
 .PHONY: all clean fclean re

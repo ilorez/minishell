@@ -12,44 +12,81 @@
 
 #include "container.h"
 
-static t_type	command(t_token **lst);
-
-int	ft_grammar(t_token *lst)
+static int	match_op(t_token **lst, int is_redir);
+//TODO: the idea is to create a function contains a static varibale to hold
+// the error if there is any and after all the parsing done we reset the varilabe
+int ft_grammar(t_token **lst)
 {
-	lst = lst->next;
-	if (!command(&lst))
-		exit_err("ft_grammer", ERR_SYNTAX);
-	return (0);
+    if (!lst || !*lst)
+        return (ft_perror("empty input", ERR_SYNTAX), 1);
+    if (match_op(lst, 0))
+        return (ft_perror("unexpected operator at start", ERR_SYNTAX), 1);
+    if (ft_operators(lst))
+        return 1;
+    if (*lst != NULL)
+        return (ft_perror("unexpected token at end", ERR_SYNTAX), 1);
+    return 0;
 }
 
-t_ast	*ft_parse_ast(t_token **lst)
+int ft_operators(t_token **lst)
 {
-	if (match(lst, T_ROOT))
-		next_token(lst);
-	return (parse_or(lst));
+    if (ft_parenthese(lst) && ft_command(lst))
+	return (ft_perror("expected command or (", ERR_SYNTAX), 1);
+
+    while (match_op(lst, 0)) {
+        next_token(lst, 'n');
+        if (ft_parenthese(lst) && ft_command(lst))
+            return (ft_perror("expected command after operator", ERR_SYNTAX), 1);
+    }
+    return 0;
 }
 
-static t_type	command(t_token **lst)
+int ft_parenthese(t_token **lst)
 {
-	if (!*lst)
+    if (!match(lst, T_LPAR))
+        return 1;
+
+    next_token(lst, 'n');
+
+    if (ft_operators(lst))
+        return 1;
+
+    if (!match(lst, T_RPAR))
+        return (ft_perror("expected )", ERR_SYNTAX), 1);
+    next_token(lst, 'n');
+
+    if (match(lst, T_WORD))
+        return (ft_perror("unexpected token after )", ERR_SYNTAX), 1);
+    return 0;
+}
+
+int ft_command(t_token **lst)
+{
+    int success;
+
+    success = 1;
+    while (match(lst, T_WORD) || match_op(lst, 1)) {
+        if (match(lst, T_WORD)) {
+            next_token(lst, 'n');
+        } else if (match_op(lst, 1)) {
+            next_token(lst, 'n');
+            if (!match(lst, T_WORD))
+                return (ft_perror("expected word after redirection", ERR_SYNTAX), 1);
+            next_token(lst, 'n');
+        }
+        success = 0;
+    }
+    return (success);
+}
+
+static int	match_op(t_token **lst, int is_redir)
+{
+	t_type	tt;
+
+	if (!lst || !*lst)
 		return (0);
-	if (match(lst, T_LPAR))
-	{
-		if (!command(lst))
-			exit_err("nothing after '('\n", ERR_SYNTAX);
-		if (!match(lst, T_RPAR))
-			exit_err("unclosed '('\n", ERR_SYNTAX);
-	}
-	else if (match(lst, T_WORD))
-	{
-		while (match(lst, T_WORD))
-			next_token(lst);
-		if (match(lst, T_LPAR) || match(lst, T_AND) || match(lst, T_OR) || match(lst, T_PIPE)
-			|| match(lst, T_REDIR))
-			if (!command(lst))
-				exit_err("expected a command after an operator\n", ERR_SYNTAX);
-	}
-	else
-		return (0);
-	return (1);
+	tt = (*lst)->type;
+	if (is_redir)
+		return (tt >= T_LESS && tt <= T_GGREAT);
+	return (tt >= T_AND && tt <= T_PIPE);
 }

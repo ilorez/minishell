@@ -12,34 +12,32 @@
 
 #include "container.h"
 
-t_ast	*parse_or(t_token **lst)
+t_ast	*ft_parse_ast(t_token **lst)
 {
-	t_ast	*left;
-	t_ast	*right;
-
-	left = parse_and(lst);
-	while (match(lst, T_OR))
-	{
-		next_token(lst);
-		right = parse_and(lst);
-		left = new_node(T_OR, NULL, right, left);
-	}
-	return (left);
+	t_ast	*ast;
+	
+	ast = parse_or_and(lst);
+	return (ast);
 }
 
-t_ast	*parse_and(t_token **lst)
+t_ast	*parse_or_and(t_token **lst)
 {
 	t_ast	*left;
 	t_ast	*right;
+	t_type	type;
 
-	left = parse_pipe(lst);
-	while (match(lst, T_AND))
+	right = parse_pipe(lst);
+	while (match(lst, T_OR) || match(lst, T_AND))
 	{
-		next_token(lst);
-		right = parse_pipe(lst);
-		left = new_node(T_AND, NULL, right, left);
+		if (match(lst, T_OR))
+			type = T_OR;
+		else
+			type = T_AND;
+		next_token(lst, 'p');
+		left = parse_pipe(lst);
+		right = new_node(type, NULL, right, left);
 	}
-	return (left);
+	return (right);
 }
 
 t_ast	*parse_pipe(t_token **lst)
@@ -47,14 +45,14 @@ t_ast	*parse_pipe(t_token **lst)
 	t_ast	*left;
 	t_ast	*right;
 
-	left = parse_redir(lst);
+	right = parse_redir(lst);
 	while (match(lst, T_PIPE))
 	{
-		next_token(lst);
-		right = parse_redir(lst);
-		left = new_node(T_PIPE, NULL, right, left);
+		next_token(lst, 'p');
+		left = parse_redir(lst);
+		right = new_node(T_PIPE, NULL, right, left);
 	}
-	return (left);
+	return (right);
 }
 
 t_ast	*parse_redir(t_token **lst)
@@ -70,29 +68,4 @@ t_ast	*parse_redir(t_token **lst)
 		left = new_node(T_REDIR, redir, NULL, left);
 	}
 	return (left);
-}
-
-t_ast	*parse_word(t_token **lst)
-{
-	t_arr	*exec;
-	char	*arg;
-	int		done;
-
-	if (match(lst, T_LPAR))
-		return (parse_list(lst));
-	exec = arr_new();
-	done = 0;
-	while (match(lst, T_WORD))
-	{
-		arg = (char *)malloc(((*lst)->word->len + 1) * sizeof(char));
-		if (!arg)
-			exit_err("malloc failed", 2);
-		ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
-		arr_append(exec, arg);
-		next_token(lst);
-		done++;
-	}
-	if (done)
-		return (new_node(T_EXEC, exec->content, NULL, NULL));
-	return (NULL);
 }
