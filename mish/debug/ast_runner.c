@@ -7,7 +7,7 @@ int main(int ac, char **av, char **envp)
 
   data = NULL;
   ft_setup_mish(ac, av, envp);
-	ast = ex_bi(T_OR, ex_bi(T_AND, ex_exec("echo hi"), ex_exec("echo hi2")), ex_exec("echo hi3"));
+	ast = example_list_17();
   data = ft_setup_data(data, ast);
 	ft_executor(data, data->ast);
   ft_waitpids(data->wpids);
