@@ -6,35 +6,41 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:02:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:38:18 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 00:24:37 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/container.h"
 
-// get path can be founded
-char	*ft_get_right_path(char *cmd, char **paths)
+char	*ft_get_right_path(char *cmd)
 {
-	char	*path;
-
-	if (ft_strchr(cmd, '/'))
+	char *(path), *(paths), *(start);
+	paths = ft_getenv("PATH");
+	if (ft_strchr(cmd, '/') || !paths)
 		return (ft_strdup(cmd));
-	path = NULL;
-	while (*paths)
+	start = paths;
+	while (*start)
 	{
-		path = ft_strjoin(paths[0], cmd, "/");
+		if (*paths && *paths != ':' && ++paths)
+			continue ;
+		if (!*paths)
+			path = ft_strjoin(start, cmd, "/");
+		else
+		{
+			*paths = '\0';
+			path = ft_strjoin(start, cmd, "/");
+			*paths++ = ':';
+		}
 		if (access(path, F_OK | X_OK) == 0)
 			return (path);
 		free(path);
-		paths++;
+		start = paths;
 	}
-	ft_putstr_fd("Command '", STDERR_FILENO);
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putstr_fd("' not found\n", STDERR_FILENO);
+	ft_perror(cmd, ERR_CMDNF);
 	return (NULL);
 }
 
-int	ft_change_fd(int fd, int to, t_data *data)
+int	ft_dup2(int fd, int to, t_data *data)
 {
 	if (fd == to)
 		return (true);
@@ -43,6 +49,14 @@ int	ft_change_fd(int fd, int to, t_data *data)
 		perror("dup2");
 		ft_handel_exit(data, 2);
 	}
+	return (true);
+}
+
+int	ft_change_fd(int fd, int to, t_data *data)
+{
+	if (fd == to)
+		return (true);
+	ft_dup2(fd, to, data);
 	close(fd);
 	return (true);
 }

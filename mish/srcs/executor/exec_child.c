@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   executor_child.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 19:01:34 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 18:52:15 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/21 00:31:43 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/21 00:34:01 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildins.h"
+#include "../../includes/container.h"
 
-int	ft_unset(char **argv)
+void	ft_exec_child(t_data *data, t_ast *ast)
 {
-	int	i;
+	char	*path;
 
-	if (!argv || !*argv)
-		return (0);
-	i = -1;
-	while (argv[++i])
-		ft_unsetenv(argv[i]);
-	return (0);
+	ft_change_fd(data->fd[0], STDIN_FILENO, data);
+	ft_change_fd(data->fd[1], STDOUT_FILENO, data);
+	path = ft_get_right_path(ast->argv[0]);
+	if (!path)
+		ft_handel_exit(data, 127);
+	execve(path, ast->argv, (char **)((g_mish.envp)->content));
+	perror(path);
+	ft_handel_exit(data, 126);
 }
