@@ -14,10 +14,7 @@
 
 t_ast	*ft_parse_ast(t_token **lst)
 {
-	t_ast	*ast;
-	
-	ast = parse_or_and(lst);
-	return (ast);
+	return (parse_or_and(lst));
 }
 
 t_ast	*parse_or_and(t_token **lst)
@@ -29,11 +26,10 @@ t_ast	*parse_or_and(t_token **lst)
 	right = parse_pipe(lst);
 	while (match(lst, T_OR) || match(lst, T_AND))
 	{
+		type = T_AND;
 		if (match(lst, T_OR))
 			type = T_OR;
-		else
-			type = T_AND;
-		next_token(lst, 'p');
+		next_token(lst);
 		left = parse_pipe(lst);
 		right = new_node(type, NULL, right, left);
 	}
@@ -48,7 +44,7 @@ t_ast	*parse_pipe(t_token **lst)
 	right = parse_redir(lst);
 	while (match(lst, T_PIPE))
 	{
-		next_token(lst, 'p');
+		next_token(lst);
 		left = parse_redir(lst);
 		right = new_node(T_PIPE, NULL, right, left);
 	}
@@ -58,14 +54,17 @@ t_ast	*parse_pipe(t_token **lst)
 t_ast	*parse_redir(t_token **lst)
 {
 	t_ast	*left;
+	t_ast	*right;
 	t_redir	*redir;
 
-	left = parse_word(lst);
+	right = parse_word(lst);
 	if (match_redir(lst))
 	{
-		left = parse_redir(lst);
 		redir = fill_redir(lst);
-		left = new_node(T_REDIR, redir, NULL, left);
+		left = parse_redir(lst);
+		left = new_node(T_REDIR, redir, right, left);
 	}
+	else
+		return (right);
 	return (left);
 }

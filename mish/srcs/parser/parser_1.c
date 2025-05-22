@@ -29,7 +29,7 @@ t_ast	*parse_word(t_token **lst)
 			exit_err("malloc failed", 2);
 		ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
 		arr_append(exec, arg);
-		next_token(lst, 'p');
+		next_token(lst);
 		done++;
 	}
 	if (done)
@@ -41,8 +41,8 @@ t_ast	*parse_list(t_token **lst)
 {
 	t_ast	*left;
 
-	next_token(lst, 'p');
+	next_token(lst);
 	left = parse_or_and(lst);
-	next_token(lst, 'p');
+	next_token(lst);
 	return (new_node(T_SUBSH, NULL, NULL, left));
 }
