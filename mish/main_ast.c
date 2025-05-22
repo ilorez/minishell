@@ -1,6 +1,7 @@
 
 #include "container.h"
 #include "debug/debug.h"
+#include "setup.h"
 #include "utils.h"
 
 void	handle_sigint(int sig)
@@ -24,10 +25,12 @@ int	main(int ac, char **av, char **env)
 	t_token	*token;
 	t_ast	*ast;
 	char	*input;
+	t_data *data;
 
 	// setup data and envirnoment varibale
 	// using ft_setup() form ./setup/setup.c
 	// the setup it's free memory and exit auto on error
+	ft_setup_mish(ac, av, env);
 	(void)ac, (void)av, (void)env;
 	if (signal(SIGINT, handle_sigint) == SIG_ERR)
 	{
@@ -43,11 +46,14 @@ int	main(int ac, char **av, char **env)
 		{
 			add_history(input);
 			token = ft_get_tokens(input);
-	//		print_tokens(token);
+			//		print_tokens(token);
 			if (!ft_grammar(token))
 			{
 				ast = ft_parse_ast(&token);
-				print_ast(ast, 0);
+				//print_ast(ast, 0);
+				data = ft_setup_data(ast);
+				ft_executor(data, ast);
+				ft_waitpids(data->wpids);
 			}
 			ft_free_tokens(&token);
 			// send AST to exector
@@ -56,5 +62,6 @@ int	main(int ac, char **av, char **env)
 		}
 		free(input);
 	}
+	ft_free_all(data);
 	return (0);
 }
