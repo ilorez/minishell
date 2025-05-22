@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:12:46 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/17 09:41:21 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/22 22:03:12 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ t_ast	*parse_or_and(t_token **lst)
 	t_ast	*right;
 	t_type	type;
 
-	right = parse_pipe(lst);
+	left = parse_pipe(lst);
 	while (match(lst, T_OR) || match(lst, T_AND))
 	{
 		type = T_AND;
 		if (match(lst, T_OR))
 			type = T_OR;
 		next_token(lst);
-		left = parse_pipe(lst);
-		right = new_node(type, NULL, right, left);
+		right = parse_pipe(lst);
+		left = new_node(type, NULL, right, left);
 	}
-	return (right);
+	return (left);
 }
 
 t_ast	*parse_pipe(t_token **lst)
