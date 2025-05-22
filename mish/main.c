@@ -51,7 +51,7 @@ int	main(int ac, char **av, char **env)
 	  if (signal(SIGINT, handle_sigint2) == SIG_ERR)
 		  perror("signal\n");
 		if (!input)
-			break ;
+      ft_exit(NULL, data);
 		if (*input)
 		{
 			add_history(input);
@@ -62,7 +62,7 @@ int	main(int ac, char **av, char **env)
 			ft_free_tokens(&token);
       // echo hi && ehco hi2 || echo hi3
 			//ast = ex_bi(T_OR, ex_bi(T_AND, ex_exec("echo hi"), ex_exec("echo hi2")), ex_exec("echo hi3"));
-			ast = ex_exec("sleep 3");
+			ast = ex_exec(av[1]);
       data = ft_setup_data(data, ast);
       g_mish.exit_status = ft_executor(data, ast);
       ft_waitpids(data->wpids);
