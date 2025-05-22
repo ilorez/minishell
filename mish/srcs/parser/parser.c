@@ -41,14 +41,14 @@ t_ast	*parse_pipe(t_token **lst)
 	t_ast	*left;
 	t_ast	*right;
 
-	right = parse_redir(lst);
+	left = parse_redir(lst);
 	while (match(lst, T_PIPE))
 	{
 		next_token(lst);
-		left = parse_redir(lst);
-		right = new_node(T_PIPE, NULL, right, left);
+		right = parse_redir(lst);
+		left = new_node(T_PIPE, NULL, right, left);
 	}
-	return (right);
+	return (left);
 }
 
 t_ast	*parse_redir(t_token **lst)
