@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:02:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/22 19:28:45 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:48:01 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,18 @@ int	ft_waitpids(t_arr *pid)
 {
 	int	i;
 	int	status;
+  int r;
 
 	i = -1;
 	status = 0;
+  r = 1;
 	while (++i < pid->index)
 	{
 		waitpid(*(int *)(pid->content[i]), &status, 0);
-		if (ft_wifexited(status))
-			status = ft_wexitstatus(status);
-		else
-			status = 0;
+    r = ft_check_status(status);
 	}
 	arr_empty(pid);
-	return (status);
+	return (r);
 }
 
 int	ft_killpids(t_arr *pid)
