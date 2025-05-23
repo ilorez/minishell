@@ -6,38 +6,32 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:12:46 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/17 09:41:21 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/22 22:03:12 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "container.h"
 
-t_ast	*parse_or(t_token **lst)
+t_ast	*ft_parse_ast(t_token **lst)
 {
-	t_ast	*left;
-	t_ast	*right;
-
-	left = parse_and(lst);
-	while (match(lst, T_OR))
-	{
-		next_token(lst);
-		right = parse_and(lst);
-		left = new_node(T_OR, NULL, right, left);
-	}
-	return (left);
+	return (parse_or_and(lst));
 }
 
-t_ast	*parse_and(t_token **lst)
+t_ast	*parse_or_and(t_token **lst)
 {
 	t_ast	*left;
 	t_ast	*right;
+	t_type	type;
 
 	left = parse_pipe(lst);
-	while (match(lst, T_AND))
+	while (match(lst, T_OR) || match(lst, T_AND))
 	{
+		type = T_AND;
+		if (match(lst, T_OR))
+			type = T_OR;
 		next_token(lst);
 		right = parse_pipe(lst);
-		left = new_node(T_AND, NULL, right, left);
+		left = new_node(type, NULL, right, left);
 	}
 	return (left);
 }
@@ -60,39 +54,17 @@ t_ast	*parse_pipe(t_token **lst)
 t_ast	*parse_redir(t_token **lst)
 {
 	t_ast	*left;
+	t_ast	*right;
 	t_redir	*redir;
 
-	left = parse_word(lst);
+	right = parse_word(lst);
 	if (match_redir(lst))
 	{
-		left = parse_redir(lst);
 		redir = fill_redir(lst);
-		left = new_node(T_REDIR, redir, NULL, left);
+		left = parse_redir(lst);
+		left = new_node(T_REDIR, redir, right, left);
 	}
+	else
+		return (right);
 	return (left);
-}
-
-t_ast	*parse_word(t_token **lst)
-{
-	t_arr	*exec;
-	char	*arg;
-	int		done;
-
-	if (match(lst, T_LPAR))
-		return (parse_list(lst));
-	exec = arr_new();
-	done = 0;
-	while (match(lst, T_WORD))
-	{
-		arg = (char *)malloc(((*lst)->word->len + 1) * sizeof(char));
-		if (!arg)
-			exit_err("malloc failed", 2);
-		ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
-		arr_append(exec, arg);
-		next_token(lst);
-		done++;
-	}
-	if (done)
-		return (new_node(T_EXEC, exec->content, NULL, NULL));
-	return (NULL);
 }

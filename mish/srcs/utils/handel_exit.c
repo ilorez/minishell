@@ -15,7 +15,6 @@
 void	exit_err(char *msg, t_errno code)
 {
 	ft_perror(msg, code);
-	exit(code);
 }
 
 void	ft_handel_exit(t_data *data, int status)

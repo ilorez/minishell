@@ -6,18 +6,20 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/17 09:47:46 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/22 22:05:58 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "container.h"
+#include <fcntl.h>
 
 int	match_redir(t_token **lst)
 {
-	return (match(lst, T_LESS) || match(lst, T_LLESS) ||match(lst, T_GREAT)||match(lst, T_GGREAT));
+	return (match(lst, T_LESS) || match(lst, T_LLESS) || match(lst, T_GREAT)
+		|| match(lst, T_GGREAT));
 }
 
-t_redir		*fill_redir(t_token **lst)
+t_redir	*fill_redir(t_token **lst)
 {
 	t_redir	*redir;
 	t_type	tt;
@@ -37,7 +39,7 @@ t_redir		*fill_redir(t_token **lst)
 			exit_err("malloc failed fill_redir", 2);
 		redir->fpath = str;
 		redir->fd = 1 * (tt == T_GREAT || tt == T_GGREAT);
-		redir->flags = O_RDONLY;
+		redir->flags = O_WRONLY | O_CREAT;
 		redir->mode = 0644;
 		return (redir);
 	}
@@ -46,6 +48,8 @@ t_redir		*fill_redir(t_token **lst)
 
 void	next_token(t_token **lst)
 {
+	if (!lst || !*lst)
+		return ;
 	if (*lst)
 		*lst = (*lst)->next;
 }

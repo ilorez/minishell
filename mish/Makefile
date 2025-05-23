@@ -17,7 +17,7 @@ INCLUDES_DRS = -I./includes -I./libft/includes
 HEADERS = ./debug/debug.h ./includes/utils.h ./includes/t_field.h  ./includes/lexer.h ./includes/parser.h ./includes/container.h ./includes/types.h ./includes/executor.h ./includes/buildins.h
 FLAGS =  -Wall -Wextra -Werror -g
 CC = cc
-RM = rm -f
+RM = rm -rf
 
 # debug
 F_DEBUG = print_arr_str.c print_lexer.c print_ast.c lists.c components.c buildins_lists.c
@@ -59,17 +59,18 @@ $(BUILD_DR):
 	mkdir -p $@
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(BUILD_DR)
 	make -C $(LIBFT_DR) fclean
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) $(BUILD_DR)
 
 re: fclean all
 
 vg:
 	 valgrind --suppressions=../ignore_readline_leaks.supp --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishell
 d:
-	gdbtui ./$(NAME)
+	gdbgui ./$(NAME)
 
 .PHONY: all clean fclean re

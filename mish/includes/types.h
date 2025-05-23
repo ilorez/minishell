@@ -32,7 +32,6 @@
 // types
 // ==================================
 
-// tokens
 typedef enum s_type
 {
 	T_ROOT,
