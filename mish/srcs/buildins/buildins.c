@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:15:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 22:05:31 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:09:52 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,41 @@ static void	_save_org(t_data *data, int *org, int std, int index)
 		*org = std;
 }
 
+static int	_run_buildin(t_buildin b, char **argv, t_data *data)
+{
+	if (b == B_CD)
+		return (ft_cd(argv));
+	if (b == B_ECHO)
+		return (ft_echo(argv));
+	if (b == B_ENV)
+		return (ft_env(argv));
+	if (b == B_EXIT)
+		ft_exit(argv, data);
+	if (b == B_EXPORT)
+		return (ft_export(argv));
+	if (b == B_PWD)
+		return (ft_pwd(argv));
+	if (b == B_UNSET)
+		return (ft_unset(argv));
+	return (0);
+}
+
 int	ft_run_buildin(t_buildin b, char **argv, t_data *data)
 {
-	int		status;
+	int		*status;
 	t_iofd	org;
 
-	status = 0;
+	status = ft_calloc(1, sizeof(int));
 	if (b == B_UNKNOWN)
 		return (0);
 	_save_org(data, &(org.in), STDIN_FILENO, 0);
 	_save_org(data, &(org.out), STDOUT_FILENO, 1);
-	if (b == B_CD)
-		status = ft_cd(argv);
-	else if (b == B_ECHO)
-		status = ft_echo(argv);
-	else if (b == B_ENV)
-		status = ft_env(argv);
-	else if (b == B_EXIT)
-		ft_exit(argv, data);
-	else if (b == B_EXPORT)
-		status = ft_export(argv);
-	else if (b == B_PWD)
-		status = ft_pwd(argv);
-	else if (b == B_UNSET)
-		status = ft_unset(argv);
+	_run_buildin(b, argv, data);
 	ft_change_fd(org.in, STDIN_FILENO, data);
 	ft_change_fd(org.out, STDOUT_FILENO, data);
-	return (status);
+	*status *= -1;
+	arr_append(data->wpids, status);
+	return (*status * -1);
 }
 
 t_buildin	ft_is_buildin(char *path)

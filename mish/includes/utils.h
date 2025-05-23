@@ -28,7 +28,7 @@ char	*ft_get_word(char *str);
 // wait macors
 int		ft_wexitstatus(int status);
 int		ft_wifexited(int status);
-int	ft_wcoredump(int status);
+int		ft_wcoredump(int status);
 
 // free methods
 void	ft_free_data(t_data **data);
@@ -46,6 +46,6 @@ int		ft_setenv(const char *name, const char *value, int overwrite);
 int		ft_unsetenv(const char *name);
 
 // signals
-int ft_check_status(int status);
+int		ft_check_status(int status);
 
 #endif

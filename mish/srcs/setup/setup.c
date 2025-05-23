@@ -65,13 +65,13 @@ static t_arr	*_create_lenv(char **envp)
 t_data	*ft_setup_data(t_data *data, t_ast *ast)
 {
 	if (!ast)
-		  return (NULL);
-  if (!data)
-	  data = ft_calloc(1, sizeof(t_data));
+		return (NULL);
 	if (!data)
-		  return (NULL);
-  if (!data->wpids)
-	  data->wpids = arr_new();
+		data = ft_calloc(1, sizeof(t_data));
+	if (!data)
+		return (NULL);
+	if (!data->wpids)
+		data->wpids = arr_new();
 	if (!data->wpids)
 		return (free(data), NULL);
 	data->fd[0] = STDIN_FILENO;

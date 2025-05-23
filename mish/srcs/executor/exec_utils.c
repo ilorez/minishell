@@ -6,11 +6,12 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:02:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/23 09:48:01 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:03:02 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executor.h"
+#include <sys/wait.h>
 
 char	*ft_get_right_path(char *cmd)
 {
@@ -65,18 +66,26 @@ int	ft_waitpids(t_arr *pid)
 {
 	int	i;
 	int	status;
-  int r;
+	int	is_normal_exit;
 
 	i = -1;
 	status = 0;
-  r = 1;
+	is_normal_exit = 1;
 	while (++i < pid->index)
 	{
+		if (*(int *)(pid->content[i]) <= 0)
+		{
+			g_mish.exit_status = *(int *)(pid->content[i]) * -1;
+			continue ;
+		}
 		waitpid(*(int *)(pid->content[i]), &status, 0);
-    r = ft_check_status(status);
+		is_normal_exit = ft_check_status(status);
 	}
 	arr_empty(pid);
-	return (r);
+	if (!is_normal_exit && WIFSIGNALED(status))
+		if (ft_wcoredump(status))
+			printf("Quit (core dumped)\n");
+	return (is_normal_exit);
 }
 
 int	ft_killpids(t_arr *pid)
@@ -87,7 +96,11 @@ int	ft_killpids(t_arr *pid)
 	i = -1;
 	status = 0;
 	while (++i < pid->index)
+	{
+		if (*(int *)(pid->content[i]) <= 0)
+			continue ;
 		kill(*(int *)(pid->content[i]), SIGTERM);
+	}
 	arr_empty(pid);
 	return (status);
 }
