@@ -1,0 +1,12 @@
+{
+  ignore_ft_get_tokens_leaks
+  Memcheck:Leak
+  ...
+  fun:ft_get_tokens
+}
+{
+  ignore_ft_parse_ast_leaks
+  Memcheck:Leak
+  ...
+  fun:ft_parse_ast
+}
