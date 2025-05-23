@@ -6,11 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 00:35:44 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:49:28 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/executor.h"
 
 int			ft_exec(t_data *data, t_ast *ast);
 int			ft_pipe(t_data *data, t_ast *ast);
@@ -45,12 +45,12 @@ int	ft_executor(t_data *data, t_ast *ast)
 
 static int	_or_and(t_data *data, t_ast *ast, int cond)
 {
-	int	status;
+  int status;
 
-	status = ft_executor(data, ast->left);
+  status = ft_executor(data, ast->left);
 	if (data->wpids->index)
 		status = ft_waitpids(data->wpids);
-	if ((status == 0) == cond)
+	if (status && (g_mish.exit_status == 0) == cond)
 		status = ft_executor(data, ast->right);
 	return (status);
 }
@@ -95,7 +95,7 @@ int	ft_exec(t_data *data, t_ast *ast)
 	pid = ft_calloc(sizeof(int), 1);
 	*pid = fork();
 	if (*pid == -1)
-		return (free(pid), perror("fork"), ft_free_data(data), 1);
+		return (free(pid), perror("fork"), ft_free_data(&data), 1);
 	else if (*pid == 0)
 		ft_exec_child(data, ast);
 	arr_append(data->wpids, pid);

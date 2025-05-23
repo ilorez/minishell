@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 17:06:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 23:53:18 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:15:15 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 // functions
 int				ft_setup_mish(int ac, char **av, char **envp);
-t_data			*ft_setup_data(t_ast *ast);
+t_data	*ft_setup_data(t_data *data, t_ast *ast);
 
 // global var
 extern t_mish	g_mish;

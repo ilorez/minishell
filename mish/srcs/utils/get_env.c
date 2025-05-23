@@ -6,11 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:40:38 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 23:57:53 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:43:51 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/utils.h"
 
 char	*ft_getenv(const char *name)
 {

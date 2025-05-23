@@ -233,3 +233,11 @@ t_ast *example_list_16()
 
     return ast;
 }
+
+t_ast *example_list_17()
+{
+	t_ast *ast;
+	_print_list_cmd(">out.txt");
+	ast = ex_redir("out.txt", 1, O_CREAT | O_WRONLY | O_TRUNC, NULL);
+	return ast;
+}
