@@ -15,6 +15,7 @@
  * If the lower 7 bits are zero, the process exited normally
  * */
 #include <sys/wait.h>
+
 int	ft_wifexited(int status)
 {
 	return ((status & 0x7F) == 0);
@@ -37,7 +38,7 @@ int	ft_wexitstatus(int status)
 }
 
 /* wcoredump, applique  WCOREDUMP macro behavior
- * the macro WCOREDUMP(status) return true 
+ * the macro WCOREDUMP(status) return true
  * if the child process produced a core dump file
  * the value stored in bit 7 in most signficant byte
  * Note: we use here the & 0x1 for cut only the first 1 bit
@@ -45,8 +46,7 @@ int	ft_wexitstatus(int status)
  * */
 int	ft_wcoredump(int status)
 {
-  if (WIFSIGNALED(status))
-	  return ((status >> 7) & 0x1);
-  return (0);
+	if (WIFSIGNALED(status))
+		return ((status >> 7) & 0x1);
+	return (0);
 }
-

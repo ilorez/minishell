@@ -20,7 +20,7 @@ void	ft_free_data(t_data **data)
 	if ((*data)->wpids)
 		arr_clean(&((*data)->wpids));
 	free(*data);
-  *data = NULL;
+	*data = NULL;
 }
 
 void	ft_free_tokens(t_token **tks)

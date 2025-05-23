@@ -18,7 +18,7 @@
 
 // functions
 int				ft_setup_mish(int ac, char **av, char **envp);
-t_data	*ft_setup_data(t_data *data, t_ast *ast);
+t_data			*ft_setup_data(t_data *data, t_ast *ast);
 
 // global var
 extern t_mish	g_mish;

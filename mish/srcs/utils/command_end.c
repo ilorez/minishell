@@ -63,10 +63,10 @@ int	handel_cmd_end(t_data *data)
 	if (data->wpids && data->wpids->index)
 		status = ft_killpids(data->wpids);
 	if (data->ast)
-  {
+	{
 		ft_free_ast(data->ast);
-    data->ast = NULL;
-  }
+		data->ast = NULL;
+	}
 	status = ft_restore_std(STDIN_FILENO, O_RDONLY, status);
 	if (data->fd[0] != STDIN_FILENO)
 		close(data->fd[0]);

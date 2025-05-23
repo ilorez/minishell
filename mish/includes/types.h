@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 00:06:12 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:31:15 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,17 @@ typedef struct s_data
 	t_arr			*wpids;
 }					t_data;
 
+typedef enum s_mode
+{
+	M_INTRACTIVE,
+	M_EXECUTION
+}					t_mode;
 typedef struct s_mish
 {
 	t_arr			*envp;
 	int				exit_status;
 	char			cwd[PATH_MAX];
+	t_mode			mode;
 }					t_mish;
 
 // this struct for buildin check and run used only on executor

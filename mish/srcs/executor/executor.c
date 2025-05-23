@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/23 09:49:28 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:10:57 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,18 @@ int	ft_executor(t_data *data, t_ast *ast)
 	return (status);
 }
 
+// r: is
 static int	_or_and(t_data *data, t_ast *ast, int cond)
 {
-  int status;
+	int	is_normal_exit;
 
-  status = ft_executor(data, ast->left);
+	is_normal_exit = 1;
+	g_mish.exit_status = ft_executor(data, ast->left);
 	if (data->wpids->index)
-		status = ft_waitpids(data->wpids);
-	if (status && (g_mish.exit_status == 0) == cond)
-		status = ft_executor(data, ast->right);
-	return (status);
+		is_normal_exit = ft_waitpids(data->wpids);
+	if (is_normal_exit && (g_mish.exit_status == 0) == cond)
+		g_mish.exit_status = ft_executor(data, ast->right);
+	return (g_mish.exit_status);
 }
 
 int	ft_pipe(t_data *data, t_ast *ast)
