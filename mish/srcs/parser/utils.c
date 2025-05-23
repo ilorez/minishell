@@ -12,10 +12,23 @@
 
 #include "container.h"
 
-int	match_redir(t_token **lst)
+int	is_redir(t_token *lst)
 {
-	return (match(lst, T_LESS) || match(lst, T_LLESS) || match(lst, T_GREAT)
-		|| match(lst, T_GGREAT));
+	int count;
+
+	count = 0;
+	while (lst->type >= T_LESS && lst->type <= T_WORD)
+	{
+		if (lst->type >= T_LESS && lst->type <= T_GGGREAT)
+			count++;
+		lst = lst->next;
+	}
+	return (count);
+}
+
+int	match_redir(t_token *lst)
+{
+	return (lst->type >= T_LESS && lst->type <= T_GGGREAT);
 }
 
 t_redir	*fill_redir(t_token **lst)

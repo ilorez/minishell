@@ -54,6 +54,19 @@ t_ast	*parse_pipe(t_token **lst)
 t_ast	*parse_redir(t_token **lst)
 {
 	t_ast	*left;
+	t_redir	*redir;
+
+	if (is_redir(*lst))
+	{
+		redir = fill_redir(lst);
+	}
+	left = parse_word(lst);
+	return (left);
+}
+/*
+t_ast	*parse_redir(t_token **lst)
+{
+	t_ast	*left;
 	t_ast	*right;
 	t_redir	*redir;
 
@@ -67,4 +80,4 @@ t_ast	*parse_redir(t_token **lst)
 	else
 		return (right);
 	return (left);
-}
+}*/
