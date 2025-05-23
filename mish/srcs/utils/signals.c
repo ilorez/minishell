@@ -42,7 +42,7 @@ int	ft_check_status(int status)
 		if (r == SIGINT)
 			g_mish.exit_status = 130;
 		else if (r == SIGQUIT)
-			g_mish.exit_status = 131;	
+			g_mish.exit_status = 131;
 	}
 	return (0);
 }

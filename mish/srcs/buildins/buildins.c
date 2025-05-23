@@ -25,10 +25,10 @@ static void	_save_org(t_data *data, int *org, int std, int index)
 		*org = std;
 }
 
-static int _run_buildin(t_buildin b, char **argv, t_data *data)
+static int	_run_buildin(t_buildin b, char **argv, t_data *data)
 {
-  if (b == B_CD)
-		return ft_cd(argv);
+	if (b == B_CD)
+		return (ft_cd(argv));
 	if (b == B_ECHO)
 		return (ft_echo(argv));
 	if (b == B_ENV)
@@ -40,8 +40,8 @@ static int _run_buildin(t_buildin b, char **argv, t_data *data)
 	if (b == B_PWD)
 		return (ft_pwd(argv));
 	if (b == B_UNSET)
-		  return (ft_unset(argv));
-  return (0);
+		return (ft_unset(argv));
+	return (0);
 }
 
 int	ft_run_buildin(t_buildin b, char **argv, t_data *data)
@@ -54,11 +54,11 @@ int	ft_run_buildin(t_buildin b, char **argv, t_data *data)
 		return (0);
 	_save_org(data, &(org.in), STDIN_FILENO, 0);
 	_save_org(data, &(org.out), STDOUT_FILENO, 1);
-  _run_buildin(b, argv, data);
+	_run_buildin(b, argv, data);
 	ft_change_fd(org.in, STDIN_FILENO, data);
 	ft_change_fd(org.out, STDOUT_FILENO, data);
-  *status *= -1;
-  arr_append(data->wpids, status);
+	*status *= -1;
+	arr_append(data->wpids, status);
 	return (*status * -1);
 }
 

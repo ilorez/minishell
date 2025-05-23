@@ -73,18 +73,18 @@ int	ft_waitpids(t_arr *pid)
 	is_normal_exit = 1;
 	while (++i < pid->index)
 	{
-    if (*(int *)(pid->content[i]) <= 0)
-    {
-      g_mish.exit_status =  *(int *)(pid->content[i]) * -1;
-      continue;
-    }
+		if (*(int *)(pid->content[i]) <= 0)
+		{
+			g_mish.exit_status = *(int *)(pid->content[i]) * -1;
+			continue ;
+		}
 		waitpid(*(int *)(pid->content[i]), &status, 0);
 		is_normal_exit = ft_check_status(status);
 	}
 	arr_empty(pid);
-  if (!is_normal_exit && WIFSIGNALED(status))
-      if (ft_wcoredump(status))
-			  printf("Quit (core dumped)\n");
+	if (!is_normal_exit && WIFSIGNALED(status))
+		if (ft_wcoredump(status))
+			printf("Quit (core dumped)\n");
 	return (is_normal_exit);
 }
 
@@ -96,11 +96,11 @@ int	ft_killpids(t_arr *pid)
 	i = -1;
 	status = 0;
 	while (++i < pid->index)
-  {
-    if (*(int *)(pid->content[i]) <= 0)
-      continue;
+	{
+		if (*(int *)(pid->content[i]) <= 0)
+			continue ;
 		kill(*(int *)(pid->content[i]), SIGTERM);
-  }
+	}
 	arr_empty(pid);
 	return (status);
 }
