@@ -54,13 +54,13 @@ t_ast	*parse_pipe(t_token **lst)
 t_ast	*parse_redir(t_token **lst)
 {
 	t_ast	*left;
-	t_redir	*redir;
+	t_ast	*word;
+	t_ast	*copy_lst;
 
-	if (is_redir(*lst))
-	{
-		redir = fill_redir(lst);
-	}
-	left = parse_word(lst);
+	copy_lst = *lst;
+	left = consume_redir(&copy_lst, is_redir(*lst));
+	word = parse_word(lst);
+	add_back_node(left, word);
 	return (left);
 }
 /*

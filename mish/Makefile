@@ -24,7 +24,7 @@ F_DEBUG = ast_runner.c print_arr_str.c print_lexer.c print_ast.c lists.c compone
 # folders
 F_UTILS = command_end.c free_methods.c get_word.c handel_exit.c heredoc.c wait_macros.c
 F_LEXER = lexer.c
-F_PARSER = grammar.c parser_1.c parser.c utils.c
+F_PARSER = grammar.c parser_1.c parser.c utils.c redir_utils.c
 F_T_FIELD = field_append.c field_clean.c field_drop.c field_extract.c field_insert.c field_new.c field_set.c field_split_at.c 
 F_EXECUTOR = executor.c exec_utils.c extract.c field_exec_expand.c field_exec_split.c wild_match.c
 F_BUILDINS = cd.c echo.c env.c exit.c export.c pwd.c unset.c
