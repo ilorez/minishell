@@ -6,30 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:18:05 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 08:42:10 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:37:44 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils.h"
-
-int	ft_restore_std(int std, int flags, int status)
-{
-	int	fd;
-
-	if (!isatty(std))
-	{
-		close(std);
-		fd = open("/dev/tty", flags);
-		if (fd == -1)
-		{
-			perror("open /dev/tty");
-			return (1);
-		}
-		else if (fd != std)
-			return (ft_change_fd(fd, std, NULL));
-	}
-	return (status);
-}
 
 void	ft_free_ast(t_ast *ast)
 {
@@ -67,11 +48,5 @@ int	handel_cmd_end(t_data *data)
 		ft_free_ast(data->ast);
 		data->ast = NULL;
 	}
-	status = ft_restore_std(STDIN_FILENO, O_RDONLY, status);
-	if (data->fd[0] != STDIN_FILENO)
-		close(data->fd[0]);
-	status = ft_restore_std(STDOUT_FILENO, O_WRONLY, status);
-	if (data->fd[1] != STDOUT_FILENO)
-		close(data->fd[1]);
 	return (status);
 }
