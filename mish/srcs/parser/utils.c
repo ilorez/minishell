@@ -45,17 +45,8 @@ t_ast	*new_node(t_type tt, void *value, t_ast *r, t_ast *l)
 
 void	consume_node(t_token **lst)
 {
-	t_token	*tmp;
-
 	if (!lst || !*lst)
 		return ;
-	tmp = *lst;
+	(*lst)->type = T_UNKNOWN;
 	next_token(lst);
-	if (tmp->prev)
-		tmp->prev->next = tmp->next;
-	if (tmp->next)
-		tmp->next->prev = tmp->prev;
-	if (tmp->type == T_WORD && tmp->word)
-		free(tmp->word);
-	free(tmp);
 }

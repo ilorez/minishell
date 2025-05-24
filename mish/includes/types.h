@@ -48,7 +48,7 @@ typedef enum s_type
 	T_EXEC,   
 	T_SUBSH,  
 	T_EOL,
-	T_UNKNOW
+	T_UNKNOWN
 }					t_type;
 
 typedef struct s_redir

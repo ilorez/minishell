@@ -41,7 +41,6 @@ reset = \033[0m
 all: $(NAME)
 	@clear;
 	@echo "$(green)SUCCESS!!!$(reset)"
-	@./$(NAME)
 
 debug: $(NAME)
 	clear

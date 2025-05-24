@@ -22,15 +22,20 @@ t_ast	*parse_word(t_token **lst)
 		return (parse_list(lst));
 	exec = arr_new();
 	done = 0;
-	while (match(lst, T_WORD))
+	while (match(lst, T_WORD) || match(lst, T_UNKNOWN))
 	{
-		arg = (char *)malloc(((*lst)->word->len + 1) * sizeof(char));
-		if (!arg)
-			exit_err("malloc failed", 2);
-		ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
-		arr_append(exec, arg);
+		if (match(lst, T_WORD))
+		{
+			arg = (char *)malloc(((*lst)->word->len + 1) * sizeof(char));
+			if (!arg)
+				exit_err("malloc failed", 2);
+			ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
+			arr_append(exec, arg);
+			next_token(lst);
+			done++;
+			done++;
+		}
 		next_token(lst);
-		done++;
 	}
 	if (done)
 		return (new_node(T_EXEC, exec->content, NULL, NULL));
