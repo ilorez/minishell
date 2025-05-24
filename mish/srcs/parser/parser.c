@@ -60,7 +60,7 @@ t_ast	*parse_redir(t_token **lst)
 	copy_lst = *lst;
 	left = consume_redir(&copy_lst, is_redir(*lst));
 	word = parse_word(lst);
-	add_back_node(left, word);
+	add_back_node(&left, word);
 	return (left);
 }
 /*

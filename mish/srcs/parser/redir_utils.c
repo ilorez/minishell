@@ -34,16 +34,16 @@ t_ast	*consume_redir(t_token **lst, int count)
 	return (node);
 }
 
-void	add_back_node(t_ast *lst, t_ast *end)
+void	add_back_node(t_ast **lst, t_ast *end)
 {
-	if (lst)
+	if (*lst)
 	{
-		while(lst->left)
-			lst = lst->left;
-		lst->left = end;
+		while((*lst)->left)
+			*lst = (*lst)->left;
+		(*lst)->left = end;
 	}
 	else
-		lst = end;
+		*lst = end;
 
 }
 
@@ -52,7 +52,7 @@ int	is_redir(t_token *lst)
 	int count;
 
 	count = 0;
-	while (lst->type >= T_LESS && lst->type <= T_WORD)
+	while (lst && lst->type >= T_LESS && lst->type <= T_WORD)
 	{
 		if (lst->type >= T_LESS && lst->type <= T_GGREAT)
 			count++;
