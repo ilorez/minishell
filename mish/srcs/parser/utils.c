@@ -43,10 +43,18 @@ t_ast	*new_node(t_type tt, void *value, t_ast *r, t_ast *l)
 	return (node);
 }
 
-void	consume_node(t_token **lst)
+t_ast	*add_back_node(t_ast *lst, t_ast *end)
 {
-	if (!lst || !*lst)
-		return ;
-	(*lst)->type = T_UNKNOWN;
-	next_token(lst);
+	t_ast	*head;
+
+	head = lst;
+	if (lst)
+	{
+		while(lst->left)
+			lst = lst->left;
+		lst->left = end;
+	}
+	else
+		head = end;
+	return (head);
 }

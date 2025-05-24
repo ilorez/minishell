@@ -58,26 +58,8 @@ t_ast	*parse_redir(t_token **lst)
 	t_token	*copy_lst;
 
 	copy_lst = *lst;
-	left = consume_redir(&copy_lst, is_redir(*lst));
+	left = consume_redir(copy_lst, is_redir(*lst));
 	word = parse_word(lst);
-	add_back_node(&left, word);
+	left = add_back_node(left, word);
 	return (left);
 }
-/*
-t_ast	*parse_redir(t_token **lst)
-{
-	t_ast	*left;
-	t_ast	*right;
-	t_redir	*redir;
-
-	right = parse_word(lst);
-	if (match_redir(lst))
-	{
-		redir = fill_redir(lst);
-		left = parse_redir(lst);
-		left = new_node(T_REDIR, redir, right, left);
-	}
-	else
-		return (right);
-	return (left);
-}*/

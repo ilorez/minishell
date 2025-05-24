@@ -33,9 +33,9 @@ t_ast	*parse_word(t_token **lst)
 			arr_append(exec, arg);
 			next_token(lst);
 			done++;
-			done++;
 		}
-		next_token(lst);
+		else
+			next_token(lst);
 	}
 	if (done)
 		return (new_node(T_EXEC, exec->content, NULL, NULL));
