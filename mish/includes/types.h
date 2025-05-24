@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/23 11:31:15 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:09:06 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_data
 {
 	t_ast			*ast;
 	int				fd[2];
+	int				pipein;
 	t_arr			*wpids;
 }					t_data;
 

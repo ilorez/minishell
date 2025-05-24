@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:27:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 11:01:06 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/24 15:11:05 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_data	*ft_setup_data(t_data *data, t_ast *ast)
 		return (free(data), NULL);
 	data->fd[0] = STDIN_FILENO;
 	data->fd[1] = STDOUT_FILENO;
+	data->pipein = -1;
 	data->ast = ast;
 	return (data);
 }
