@@ -55,7 +55,7 @@ t_ast	*parse_redir(t_token **lst)
 {
 	t_ast	*left;
 	t_ast	*word;
-	t_ast	*copy_lst;
+	t_token	*copy_lst;
 
 	copy_lst = *lst;
 	left = consume_redir(&copy_lst, is_redir(*lst));

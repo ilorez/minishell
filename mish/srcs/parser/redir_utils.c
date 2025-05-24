@@ -15,21 +15,32 @@
 t_ast	*consume_redir(t_token **lst, int count)
 {
 	t_ast	*node;
+	t_redir	*redir;
 
 	if (!lst || !*lst || count == 0)
 		return (NULL);
-
+	node = NULL;
 	if (match_redir(lst))
-
+	{
+		redir = fill_redir(lst);
+		node = consume_redir(lst, count - 1);
+		node = new_node(T_REDIR, redir, NULL, node);
+	}
+	else if (count)
+	{
+		next_token(lst);
+		node = consume_redir(lst, count - 1);
+	}
+	return (node);
 }
 
-void	add_back_node(t_token *lst, t_token *end)
+void	add_back_node(t_ast *lst, t_ast *end)
 {
 	if (lst)
 	{
-		while(lst->next)
-			lst = lst->next;
-		lst->next = end;
+		while(lst->left)
+			lst = lst->left;
+		lst->left = end;
 	}
 	else
 		lst = end;
@@ -43,7 +54,7 @@ int	is_redir(t_token *lst)
 	count = 0;
 	while (lst->type >= T_LESS && lst->type <= T_WORD)
 	{
-		if (lst->type >= T_LESS && lst->type <= T_GGGREAT)
+		if (lst->type >= T_LESS && lst->type <= T_GGREAT)
 			count++;
 		lst = lst->next;
 	}
@@ -54,7 +65,7 @@ int	match_redir(t_token **lst)
 {
 	if (!lst || !*lst)
 		return (0);
-	return ((*lst)->type >= T_LESS && (*lst)->type <= T_GGGREAT);
+	return ((*lst)->type >= T_LESS && (*lst)->type <= T_GGREAT);
 }
 
 t_redir	*fill_redir(t_token **lst)
@@ -64,12 +75,12 @@ t_redir	*fill_redir(t_token **lst)
 	char	*str;
 
 	tt = (*lst)->type;
-	next_token(lst);
+	consume_node(lst);
 	str = ft_calloc((*lst)->word->len + 1, sizeof(char));
 	if (!str)
 		exit_err("malloc failed", 2);
 	ft_strlcpy(str, (*lst)->word->ptr, (*lst)->word->len + 1);
-	next_token(lst);
+	consume_node(lst);
 	if (tt != T_LLESS)
 	{
 		redir = ft_calloc(1, sizeof(t_redir));

@@ -30,6 +30,7 @@ t_redir		*fill_redir(t_token **lst);
 int	is_redir(t_token *lst);
 int	match_redir(t_token **lst);
 t_ast	*consume_redir(t_token **lst, int count);
-void	add_back_node(t_token *lst, t_token *end);
+void	add_back_node(t_ast *lst, t_ast *end);
+void	consume_node(t_token **lst);
 
 #endif

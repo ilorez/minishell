@@ -16,8 +16,7 @@ void	next_token(t_token **lst)
 {
 	if (!lst || !*lst)
 		return ;
-	if (*lst)
-		*lst = (*lst)->next;
+	*lst = (*lst)->next;
 }
 
 int	match(t_token **lst, t_type tt)
@@ -42,4 +41,21 @@ t_ast	*new_node(t_type tt, void *value, t_ast *r, t_ast *l)
 	node->right = r;
 	node->left = l;
 	return (node);
+}
+
+void	consume_node(t_token **lst)
+{
+	t_token	*tmp;
+
+	if (!lst || !*lst)
+		return ;
+	tmp = *lst;
+	next_token(lst);
+	if (tmp->prev)
+		tmp->prev->next = tmp->next;
+	if (tmp->next)
+		tmp->next->prev = tmp->prev;
+	if (tmp->type == T_WORD && tmp->word)
+		free(tmp->word);
+	free(tmp);
 }
