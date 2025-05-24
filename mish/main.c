@@ -1,10 +1,5 @@
 
-#include "debug/debug.h"
-#include "setup.h"
-#include "types.h"
-#include "utils.h"
-#include <signal.h>
-#include <unistd.h>
+#include "./includes/setup.h"
 
 void	handle_sigint(int sig)
 {

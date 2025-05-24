@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:18:05 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/24 15:37:44 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:16:28 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_free_ast(t_ast *ast)
 		ft_free_str_lst(ast->argv);
 	else if (ast->type == T_REDIR)
 	{
+		if (ast->redir->is_hd)
+			unlink(ast->redir->fpath);
 		free(ast->redir->fpath);
 		free(ast->redir);
 		ft_free_ast(ast->left);
