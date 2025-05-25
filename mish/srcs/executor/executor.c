@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/24 15:10:32 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:59:58 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int	ft_redir(t_data *data, t_ast *ast, t_redir *r)
 	int		org;
 	int		status;
 
+  if (!r)
+    return (ft_executor(data, ast->left));
 	lst = ft_extract_arg(r->fpath);
 	if (!lst)
 		return (ft_perror(NULL, ERR_MALLOC_FAIL), 1);

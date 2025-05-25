@@ -1,25 +1,24 @@
 
 #include "./includes/setup.h"
+#include <unistd.h>
 
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	if (g_mish.mode == M_INTRACTIVE)
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		rl_on_new_line();       // Regenerate the prompt on a newline
-		rl_replace_line("", 0); // Clear the previous text
-		rl_redisplay();
-		g_mish.exit_status = 130;
-	}
-	else
-		write(STDOUT_FILENO, "\n", 1);
-}
 
-void	handle_sigint2(int sig)
-{
-	(void)sig;
-	printf("\n");
+	if (isatty(STDIN_FILENO))
+  {
+	  if (g_mish.mode == M_INTRACTIVE)
+	  {
+	  	write(STDOUT_FILENO, "\n", 1);
+	  	rl_on_new_line();       // Regenerate the prompt on a newline
+	  	rl_replace_line("", 0); // Clear the previous text
+	  	rl_redisplay();
+	  	g_mish.exit_status = 130;
+	  }
+	  else
+	  	  write(STDOUT_FILENO, "\n", 1);
+  }
 }
 
 int	main(int ac, char **av, char **env)
@@ -38,7 +37,10 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		g_mish.mode = M_INTRACTIVE;
-		input = readline("mish> ");
+    if (isatty(STDIN_FILENO))
+		  input = readline("mish> ");
+    else 
+		  input = readline("");
 		g_mish.mode = M_EXECUTION;
 		if (!input)
 			ft_exit(NULL, data);

@@ -40,7 +40,6 @@ green = \033[32m
 reset = \033[0m
 
 all: $(NAME)
-	@clear;
 	@echo "$(green)SUCCESS!!!$(reset)"
 
 debug: $(NAME)
