@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:56:32 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/24 16:37:10 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:08:10 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ t_redir	*ft_heredoc(char *eof)
 	int		status;
 
 	file = _randtmp_file("/tmp/", "mish_herdoc_");
+  if (!file)
+    return (NULL);
 	pid = fork();
 	if (pid == -1)
-		return (free(file), perror("fork"), NULL);
+		return (unlink(file), free(file), perror("fork"), NULL);
 	else if (pid == 0)
 		_here_doc(file, eof);
 	r = ft_calloc(1, sizeof(t_redir));
@@ -71,6 +73,7 @@ static void	_here_doc(char *file, char *eof)
 	int		fd;
 
 	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+  printf("pid: %d\n", getpid());
 	free(file);
 	signal(SIGINT, handel_herdocsig);
 	if (fd == -1)
