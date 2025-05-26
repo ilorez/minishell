@@ -1,0 +1,563 @@
+[
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "main_ast.c",
+   "-o",
+   "build/main_ast.o"
+  ],
+  "file": "main_ast.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/parser/grammar.c",
+   "-o",
+   "build/grammar.o"
+  ],
+  "file": "./srcs/parser/grammar.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/parser/parser_1.c",
+   "-o",
+   "build/parser_1.o"
+  ],
+  "file": "./srcs/parser/parser_1.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/parser/parser.c",
+   "-o",
+   "build/parser.o"
+  ],
+  "file": "./srcs/parser/parser.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/parser/utils.c",
+   "-o",
+   "build/utils.o"
+  ],
+  "file": "./srcs/parser/utils.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/parser/redir_utils.c",
+   "-o",
+   "build/redir_utils.o"
+  ],
+  "file": "./srcs/parser/redir_utils.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/lexer/lexer.c",
+   "-o",
+   "build/lexer.o"
+  ],
+  "file": "./srcs/lexer/lexer.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./debug/ast_runner.c",
+   "-o",
+   "build/ast_runner.o"
+  ],
+  "file": "./debug/ast_runner.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./debug/print_arr_str.c",
+   "-o",
+   "build/print_arr_str.o"
+  ],
+  "file": "./debug/print_arr_str.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./debug/print_lexer.c",
+   "-o",
+   "build/print_lexer.o"
+  ],
+  "file": "./debug/print_lexer.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./debug/print_ast.c",
+   "-o",
+   "build/print_ast.o"
+  ],
+  "file": "./debug/print_ast.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./debug/lists.c",
+   "-o",
+   "build/lists.o"
+  ],
+  "file": "./debug/lists.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./debug/components.c",
+   "-o",
+   "build/components.o"
+  ],
+  "file": "./debug/components.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/utils/command_end.c",
+   "-o",
+   "build/command_end.o"
+  ],
+  "file": "./srcs/utils/command_end.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/utils/free_methods.c",
+   "-o",
+   "build/free_methods.o"
+  ],
+  "file": "./srcs/utils/free_methods.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/utils/get_word.c",
+   "-o",
+   "build/get_word.o"
+  ],
+  "file": "./srcs/utils/get_word.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/utils/handel_exit.c",
+   "-o",
+   "build/handel_exit.o"
+  ],
+  "file": "./srcs/utils/handel_exit.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/utils/heredoc.c",
+   "-o",
+   "build/heredoc.o"
+  ],
+  "file": "./srcs/utils/heredoc.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/utils/wait_macros.c",
+   "-o",
+   "build/wait_macros.o"
+  ],
+  "file": "./srcs/utils/wait_macros.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/t_field/field_append.c",
+   "-o",
+   "build/field_append.o"
+  ],
+  "file": "./srcs/t_field/field_append.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/t_field/field_clean.c",
+   "-o",
+   "build/field_clean.o"
+  ],
+  "file": "./srcs/t_field/field_clean.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/t_field/field_drop.c",
+   "-o",
+   "build/field_drop.o"
+  ],
+  "file": "./srcs/t_field/field_drop.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/t_field/field_extract.c",
+   "-o",
+   "build/field_extract.o"
+  ],
+  "file": "./srcs/t_field/field_extract.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/t_field/field_insert.c",
+   "-o",
+   "build/field_insert.o"
+  ],
+  "file": "./srcs/t_field/field_insert.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/t_field/field_new.c",
+   "-o",
+   "build/field_new.o"
+  ],
+  "file": "./srcs/t_field/field_new.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/t_field/field_set.c",
+   "-o",
+   "build/field_set.o"
+  ],
+  "file": "./srcs/t_field/field_set.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/t_field/field_split_at.c",
+   "-o",
+   "build/field_split_at.o"
+  ],
+  "file": "./srcs/t_field/field_split_at.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/executor/executor.c",
+   "-o",
+   "build/executor.o"
+  ],
+  "file": "./srcs/executor/executor.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/executor/exec_utils.c",
+   "-o",
+   "build/exec_utils.o"
+  ],
+  "file": "./srcs/executor/exec_utils.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/executor/extract.c",
+   "-o",
+   "build/extract.o"
+  ],
+  "file": "./srcs/executor/extract.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/executor/field_exec_expand.c",
+   "-o",
+   "build/field_exec_expand.o"
+  ],
+  "file": "./srcs/executor/field_exec_expand.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/executor/field_exec_split.c",
+   "-o",
+   "build/field_exec_split.o"
+  ],
+  "file": "./srcs/executor/field_exec_split.c"
+ },
+ {
+  "directory": "/home/abdnasse/Files/minishell/mish",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I./includes",
+   "-I./libft/includes",
+   "-c",
+   "./srcs/executor/wild_match.c",
+   "-o",
+   "build/wild_match.o"
+  ],
+  "file": "./srcs/executor/wild_match.c"
+ }
+]
