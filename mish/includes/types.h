@@ -24,7 +24,7 @@
 // includes
 // ==================================
 
-# include "../libft/includes/libft.h"
+# include "libft.h"
 # include <stdlib.h>
 
 // ==================================
@@ -54,7 +54,7 @@ typedef enum s_type
 typedef struct s_redir
 {
 	char			*fpath;
-	int fd; // 0 for < and 1 for >
+	int fd;
 	int				flags;
 	int				mode;
 }					t_redir;
@@ -73,7 +73,6 @@ typedef struct s_token
 	struct s_token	*prev;
 }					t_token;
 
-// data container for the exucution part
 typedef struct s_ast
 {
 	t_type			type;
@@ -83,24 +82,21 @@ typedef struct s_ast
 		t_redir		*redir;
 	};
 	struct s_ast	*left;
-	// possible types: 1- exec (char *) 2- redir (t_redir *) 3-others (t_cmd *)
-	struct s_ast *right; // -t_ast *
+	struct s_ast *right;
 }					t_ast;
 
-// data container
-// Note: this is what will be passsed to execute function
 typedef struct s_data
 {
-	char **paths; // double pointer array of paths
+	char **paths;
 	t_ast			*ast;
-	int fd[2];    // used by executor: in deault: fd = [STDIN, STDOUT]
-	t_arr *wpids; // used by executor: arr_new();
+	int fd[2];
+	t_arr *wpids;
 }					t_data;
 
 typedef struct s_mish
 {
 	char			**envp;
-  int exit_status;
+  	int exit_status;
 } t_mish;
 
 #endif

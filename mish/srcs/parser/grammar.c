@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "container.h"
+# include "container.h"
 
 static int	match_op(t_token **lst, int is_redir);
 //TODO: the idea is to create a function contains a static varibale to hold

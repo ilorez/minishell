@@ -22,7 +22,7 @@ t_ast	*parse_word(t_token **lst)
 		return (parse_list(lst));
 	exec = arr_new();
 	done = 0;
-	while (match(lst, T_WORD) || match(lst, T_UNKNOWN))
+	while (match(lst, T_WORD) || match_redir(lst))
 	{
 		if (match(lst, T_WORD))
 		{
@@ -35,7 +35,7 @@ t_ast	*parse_word(t_token **lst)
 			done++;
 		}
 		else
-			next_token(lst);
+			*lst = (*lst)->next->next;
 	}
 	if (done)
 		return (new_node(T_EXEC, exec->content, NULL, NULL));
