@@ -55,11 +55,11 @@ t_ast	*parse_redir(t_token **lst)
 {
 	t_ast	*left;
 	t_ast	*word;
-	t_token	*copy_lst;
+	t_token	**copy_lst;
 
-	copy_lst = *lst;
-	left = consume_redir(copy_lst, is_redir(*lst));
+	copy_lst = lst;
 	word = parse_word(lst);
+	left = consume_redir(*copy_lst, is_redir(*lst));
 	left = add_back_node(left, word);
 	return (left);
 }
