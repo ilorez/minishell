@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 23:47:45 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:40:04 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include "t_bool.h"
 # include "t_errno.h"
 # include "t_str.h"
+#include "get_next_line.h"
 
 // memory functions
 void		*ft_memset(void *b, int c, size_t len);
