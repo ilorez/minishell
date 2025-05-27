@@ -21,18 +21,22 @@ t_ast	*parse_word(t_token **lst)
 	if (match(lst, T_LPAR))
 		return (parse_list(lst));
 	exec = arr_new();
-	done = 0;
-	while (match(lst, T_WORD))
+	while (match(lst, T_WORD) || match_redir(lst))
 	{
-		arg = (char *)malloc(((*lst)->word->len + 1) * sizeof(char));
-		if (!arg)
-			exit_err("malloc failed", 2);
-		ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
-		arr_append(exec, arg);
-		next_token(lst);
-		done++;
+		if (match(lst, T_WORD))
+		{
+			arg = (char *)malloc(((*lst)->word->len + 1) * sizeof(char));
+			if (!arg)
+				exit_err("malloc failed", 2);
+			ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
+			arr_append(exec, arg);
+			next_token(lst);
+			done = 1;
+		}
+		else
+			*lst = (*lst)->next->next;
 	}
-	if (done)
+	if (done == 1)
 		return (new_node(T_EXEC, exec->content, NULL, NULL));
 	return (NULL);
 }

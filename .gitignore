@@ -1,0 +1,4 @@
+**/a.out
+mish/build
+mish/.cache
+mish/compile_commands.json

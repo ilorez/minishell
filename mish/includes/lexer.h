@@ -12,7 +12,7 @@
 
 #ifndef LEXER_H
 # define LEXER_H
-# include "./container.h"
+# include "container.h"
 
 t_token	*ft_get_tokens(char *cmd);
 

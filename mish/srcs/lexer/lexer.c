@@ -33,7 +33,7 @@ t_token	*ft_get_tokens(char *cmd)
 			break ;
 		new_tk = ft_calloc(sizeof(t_token), 1);
 		new_tk->type = _set_token(&cmd, &(new_tk->word));
-		if (new_tk->type == T_UNKNOW)
+		if (new_tk->type == T_UNKNOWN)
 			return (ft_free_tokens(&head), NULL);
 		if (!head)
 		{
@@ -69,7 +69,7 @@ static t_type	_set_token(char **ptr, t_word **word)
 		return (_redir_type(ptr));
 	*word = _get_word(ptr);
 	if (!*word)
-		return (T_UNKNOW);
+		return (T_UNKNOWN);
 	return (T_WORD);
 }
 

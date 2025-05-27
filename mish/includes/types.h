@@ -25,7 +25,7 @@
 // includes
 // ==================================
 
-# include "../libft/includes/libft.h"
+# include "libft.h"
 # include <stdlib.h>
 
 // ==================================
@@ -49,7 +49,7 @@ typedef enum s_type
 	T_EXEC,
 	T_SUBSH,
 	T_EOL,
-	T_UNKNOW
+	T_UNKNOWN
 }					t_type;
 
 // fd: 0 for < and 1 for >
@@ -76,7 +76,6 @@ typedef struct s_token
 	struct s_token	*prev;
 }					t_token;
 
-// data container for the exucution part
 typedef struct s_ast
 {
 	t_type			type;
@@ -86,18 +85,15 @@ typedef struct s_ast
 		t_redir		*redir;
 	};
 	struct s_ast	*left;
-	struct s_ast	*right;
+	struct s_ast *right;
 }					t_ast;
 
-// data container
-// Note: this is what will be passsed to execute function
-// fd:used by executor: in deault: fd = [STDIN, STDOUT]
 typedef struct s_data
 {
+	char **paths;
 	t_ast			*ast;
-	int				fd[2];
-	int				pipein;
-	t_arr			*wpids;
+	int fd[2];
+	t_arr *wpids;
 }					t_data;
 
 typedef enum s_mode
