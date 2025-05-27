@@ -90,9 +90,9 @@ typedef struct s_ast
 
 typedef struct s_data
 {
-	char **paths;
 	t_ast			*ast;
 	int fd[2];
+	int	pipein;
 	t_arr *wpids;
 }					t_data;
 
