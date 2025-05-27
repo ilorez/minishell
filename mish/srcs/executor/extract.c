@@ -6,11 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:37:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 16:27:17 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/21 08:41:01 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/executor.h"
 
 // flags
 // 0: normal
@@ -25,16 +25,18 @@ char	**ft_extract(char **argv)
 	t_arr	*args;
 	t_arr	*tmp;
 
-	args = NULL;
+	args = arr_new();
+	if (!args)
+		return (ft_free_str_lst(argv), NULL);
 	i = -1;
 	while (argv[++i])
 	{
 		tmp = ft_extract_arg(argv[i]);
 		if (!tmp)
-			return (arr_free(args), NULL);
+			return (ft_free_str_lst(argv), arr_free(args), NULL);
 		args = arr_merge(args, tmp);
 	}
-	return ((char **)arr_extract(&args));
+	return (ft_free_str_lst(argv), (char **)arr_extract(&args));
 }
 
 t_arr	*ft_extract_arg(char *arg)

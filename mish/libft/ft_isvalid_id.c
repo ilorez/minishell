@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_isvalid_id.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 19:01:34 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 18:52:15 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/18 21:53:30 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/20 18:29:31 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildins.h"
+#include "./includes/libft.h"
 
-int	ft_unset(char **argv)
+// valid id is id contain just alphanum or _ and doesn't start with digit
+int	ft_isvalid_id(char *id)
 {
-	int	i;
-
-	if (!argv || !*argv)
+	if (!id || ft_isdigit(*id))
 		return (0);
-	i = -1;
-	while (argv[++i])
-		ft_unsetenv(argv[i]);
-	return (0);
+	while (*++id)
+		if (!ft_isalnum(*id) && *id != '_')
+			return (0);
+	return (1);
 }

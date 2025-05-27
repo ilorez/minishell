@@ -6,38 +6,42 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:56:32 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:28:04 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:08:10 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
-#include <fcntl.h>
+#include "../../includes/utils.h"
 
-static void	_here_doc(int fd, char *eof);
+static void	_here_doc(char *file, char *eof);
 static char	*_randtmp_file(char *dir, char *prefix);
 
 t_redir	*ft_heredoc(char *eof)
 {
 	t_redir	*r;
+	int		pid;
+	char	*file;
+	int		status;
 
+	file = _randtmp_file("/tmp/", "mish_herdoc_");
+  if (!file)
+    return (NULL);
+	pid = fork();
+	if (pid == -1)
+		return (unlink(file), free(file), perror("fork"), NULL);
+	else if (pid == 0)
+		_here_doc(file, eof);
 	r = ft_calloc(1, sizeof(t_redir));
 	if (!r)
-	{
-		ft_perror(NULL, ERR_MALLOC_FAIL);
-		return (NULL);
-	}
-	r->fpath = _randtmp_file("/tmp/", "mish_herdoc_");
-	r->fd = open(r->fpath, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	if (r->fd < 0)
-	{
-		perror("open failed");
-		return (NULL);
-	}
-	_here_doc(r->fd, eof);
+		return (ft_perror("heredoc", ERR_MALLOC_FAIL), NULL);
+	r->fpath = file;
 	r->fd = 0;
 	r->flags = O_RDONLY;
 	r->mode = 0644;
+	r->is_hd = 1;
 	free(eof);
+	status = 0;
+	waitpid(pid, &status, 0);
+	ft_check_status(status);
 	return (r);
 }
 
@@ -54,12 +58,26 @@ static char	*_randtmp_file(char *dir, char *prefix)
 	return (path);
 }
 
-static void	_here_doc(int fd, char *eof)
+// here there is a probleme some info eof is not freed before exit
+void	handel_herdocsig(int sig)
+{
+	(void)sig;
+	exit(130);
+}
+
+static void	_here_doc(char *file, char *eof)
 {
 	char	*line;
 	size_t	hd_s;
 	size_t	line_s;
+	int		fd;
 
+	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+  printf("pid: %d\n", getpid());
+	free(file);
+	signal(SIGINT, handel_herdocsig);
+	if (fd == -1)
+		return (perror("open filed"));
 	line = readline(">");
 	hd_s = ft_strlen(eof);
 	line_s = ft_strlen(line);
@@ -72,4 +90,6 @@ static void	_here_doc(int fd, char *eof)
 	}
 	free(line);
 	close(fd);
+	free(eof);
+	exit(0);
 }

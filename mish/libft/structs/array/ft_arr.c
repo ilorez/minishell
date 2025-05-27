@@ -6,7 +6,7 @@
 /*   By: abdenasse <abdenasse@student.1337.ma>        +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 21:34:56 by abdenasse          #+#    #+#            */
-/*   Updated: 2025/05/16 10:22:32 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:08:53 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/libft.h"
@@ -33,7 +33,7 @@ int	arr_append(t_arr *arr, void *ptr)
 
 	if (!arr || !ptr)
 		return (0);
-	if (arr->index >= arr->size)
+	if (arr->index >= (arr->size - 1))
 	{
 		arr->size += (arr->size / 2);
 		new = ft_calloc(arr->size, sizeof(void *));

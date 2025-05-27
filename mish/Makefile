@@ -5,6 +5,7 @@ vpath %.c	./srcs/parser
 vpath %.c	./srcs/executor
 vpath %.c	./srcs/setup
 vpath %.c	./srcs/t_field
+vpath %.c	./srcs/buildins
 vpath %.c	./debug
 
 BUILD_DR = ./build/
@@ -19,19 +20,19 @@ CC = cc
 RM = rm -rf
 
 # debug
-F_DEBUG = ast_runner.c print_arr_str.c print_lexer.c print_ast.c lists.c components.c
+F_DEBUG = print_arr_str.c print_lexer.c print_ast.c lists.c components.c buildins_lists.c
 
 # folders
-F_UTILS = command_end.c free_methods.c get_word.c handel_exit.c heredoc.c wait_macros.c
+F_UTILS = command_end.c free_methods.c get_word.c handel_exit.c heredoc.c wait_macros.c get_env.c get_paths.c set_env.c unset_env.c signals.c
+F_SETUP = setup.c
 F_LEXER = lexer.c
 F_PARSER = grammar.c parser_1.c parser.c utils.c redir_utils.c
 F_T_FIELD = field_append.c field_clean.c field_drop.c field_extract.c field_insert.c field_new.c field_set.c field_split_at.c 
-F_EXECUTOR = executor.c exec_utils.c extract.c field_exec_expand.c field_exec_split.c wild_match.c
-F_BUILDINS = cd.c echo.c env.c exit.c export.c pwd.c unset.c
+F_EXECUTOR = executor.c exec_utils.c extract.c field_exec_expand.c field_exec_split.c wild_match.c exec_child.c
+F_BUILDINS = cd.c echo.c env.c exit.c export.c pwd.c unset.c buildins.c
 
 # used files
-#SRCS =  $(F_DEBUG) $(F_UTILS) $(F_T_FIELD) $(F_EXECUTOR)
-SRCS =  main_ast.c $(F_PARSER) $(F_LEXER) $(F_DEBUG) $(F_UTILS) $(F_T_FIELD) $(F_EXECUTOR)
+SRCS = main.c $(F_PARSER) $(F_DEBUG) $(F_LEXER) $(F_SETUP) $(F_UTILS) $(F_T_FIELD) $(F_BUILDINS) $(F_EXECUTOR) 
 OBJS = $(addprefix $(BUILD_DR),$(SRCS:%.c=%.o))
 
 # colors
@@ -39,7 +40,6 @@ green = \033[32m
 reset = \033[0m
 
 all: $(NAME)
-	@clear;
 	@echo "$(green)SUCCESS!!!$(reset)"
 
 debug: $(NAME)
@@ -68,7 +68,7 @@ fclean: clean
 re: fclean all
 
 vg:
-	 valgrind --suppressions=../ignore_readline_leaks.supp --leak-check=full --show-leak-kinds=all ./minishell
+	 valgrind --suppressions=../ignore_readline_leaks.supp --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishell
 d:
 	gdbgui ./$(NAME)
 

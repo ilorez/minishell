@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:44:36 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 19:05:40 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:25:09 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ typedef enum s_errno
 	ERR_INVALID_ARG,
 	ERR_EMPTY_ARG,
 	ERR_EARGS,
+	ERR_CMDNF,
+	ERR_NONUM,
+	ERR_IDENT,
 	ERR_TO_MANY_ARG,
 	ERR_ENOENT,
 	ERR_MALLOC_FAIL,
@@ -35,7 +38,7 @@ void	ft_strerr(t_errno errno_num);
 void	ft_pserror(char *prefix, t_errno error_code, char suffix);
 void	ft_serror(t_errno error_code, char *msg);
 
-// refirence errno 
+// refirence errno
 void	ft_ref_perror(char *subref, char *msg, t_errno error_code);
 
 #endif

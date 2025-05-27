@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 19:01:34 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 18:52:15 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/18 16:40:38 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/21 08:43:51 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildins.h"
+#include "../../includes/utils.h"
 
-int	ft_unset(char **argv)
+char	*ft_getenv(const char *name)
 {
-	int	i;
+	char	*r;
+	char	**envp;
+	int		len;
 
-	if (!argv || !*argv)
-		return (0);
-	i = -1;
-	while (argv[++i])
-		ft_unsetenv(argv[i]);
-	return (0);
+	envp = (char **)(g_mish.envp)->content;
+	if (!envp || !*envp)
+		return (NULL);
+	r = NULL;
+	len = ft_strlen(name);
+	while (*envp)
+	{
+		if (ft_strncmp(*envp, name, len) == 0 && *(*envp + len) == '=')
+		{
+			r = (*envp + len + 1);
+			break ;
+		}
+		envp++;
+	}
+	return (r);
 }

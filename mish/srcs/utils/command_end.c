@@ -6,29 +6,34 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:18:05 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/16 15:46:12 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:16:28 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/container.h"
+#include "../../includes/utils.h"
 
-int	restore_std(int std, int flags, int status)
+void	ft_free_ast(t_ast *ast)
 {
-	int	fd;
-
-	if (isatty(std))
+	if (!ast)
+		return ;
+	else if (ast->type == T_AND || ast->type == T_OR || ast->type == T_PIPE)
 	{
-		close(std);
-		fd = open("/dev/tty", flags);
-		if (fd == -1)
-		{
-			perror("open /dev/tty");
-			return (1);
-		}
-		else if (fd != std)
-			return (ft_change_fd(fd, std, NULL));
+		ft_free_ast(ast->left);
+		ft_free_ast(ast->right);
 	}
-	return (status);
+	else if (ast->type == T_SUBSH)
+		ft_free_ast(ast->left);
+	else if (ast->type == T_EXEC)
+		ft_free_str_lst(ast->argv);
+	else if (ast->type == T_REDIR)
+	{
+		if (ast->redir->is_hd)
+			unlink(ast->redir->fpath);
+		free(ast->redir->fpath);
+		free(ast->redir);
+		ft_free_ast(ast->left);
+	}
+	free(ast);
 }
 
 int	handel_cmd_end(t_data *data)
@@ -38,15 +43,12 @@ int	handel_cmd_end(t_data *data)
 	status = 0;
 	if (!data)
 		return (0);
-	if (data->wpids->index)
+	if (data->wpids && data->wpids->index)
 		status = ft_killpids(data->wpids);
 	if (data->ast)
-		; //TODO: ft_free_ast(data->ast);
-	status = restore_std(STDIN_FILENO, O_RDONLY, status);
-	if (data->fd[0] != STDIN_FILENO)
-		close(data->fd[0]);
-	status = restore_std(STDOUT_FILENO, O_WRONLY, status);
-	if (data->fd[1] != STDOUT_FILENO)
-		close(data->fd[1]);
+	{
+		ft_free_ast(data->ast);
+		data->ast = NULL;
+	}
 	return (status);
 }

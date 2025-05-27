@@ -45,6 +45,21 @@ t_ast *ex_exec(char *cmd)
 
   ast = calloc(1, sizeof(t_ast));
 	ast->type = T_EXEC;
-	ast->argv = ft_split(ft_strdup(cmd), ' ');
+	ast->argv = ft_split(cmd, ' ');
   return (ast);
+}
+t_ast *ex_exec_2(char **argv)
+{
+  t_ast *ast;
+
+  ast = calloc(1, sizeof(t_ast));
+	ast->type = T_EXEC;
+	ast->argv = argv;
+  return (ast);
+}
+void _print_list_cmd(char *cmd)
+{
+  printf("================================================\n");
+  printf("%s\n", cmd);
+  printf("================================================\n");
 }

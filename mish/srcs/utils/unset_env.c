@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   unset_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 19:01:34 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 18:52:15 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/18 18:04:07 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/21 08:43:17 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildins.h"
+#include "../../includes/utils.h"
 
-int	ft_unset(char **argv)
+int	ft_unsetenv(const char *name)
 {
-	int	i;
+	t_arr	*envp;
+	int		i;
+	int		len;
 
-	if (!argv || !*argv)
-		return (0);
+	if (!name)
+		return (-1);
+	envp = g_mish.envp;
+	if (!envp)
+		return (-1);
 	i = -1;
-	while (argv[++i])
-		ft_unsetenv(argv[i]);
+	len = ft_strlen(name);
+	while (++i < envp->index)
+	{
+		if (ft_strncmp((char *)(envp->content[i]), name, len) == 0
+			&& (((char *)(envp->content[i]))[len]) == '=')
+		{
+			arr_del_item(envp, i);
+			break ;
+		}
+	}
 	return (0);
 }

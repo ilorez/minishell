@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_is_valid_num.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 19:01:34 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 18:52:15 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/05/18 19:57:38 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/18 19:58:48 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/buildins.h"
+#include "./includes/libft.h"
 
-int	ft_unset(char **argv)
+int	ft_is_valid_num(char *str)
 {
-	int	i;
-
-	if (!argv || !*argv)
+	if (*str == '+' || *str == '-')
+		str++;
+	if (!*str)
 		return (0);
-	i = -1;
-	while (argv[++i])
-		ft_unsetenv(argv[i]);
-	return (0);
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/17 18:50:13 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:15:10 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 // macors
 // ==================================
 
+# include <linux/limits.h>
 # define FT_NAME "minishell> "
 # define FT_DELIMS "<>()|&"
 
@@ -33,30 +34,32 @@
 
 typedef enum s_type
 {
-	T_ROOT, 
-	T_LPAR, 
-	T_RPAR, 
+	T_ROOT,
+	T_LPAR,
+	T_RPAR,
 	T_AND,
 	T_OR,
 	T_PIPE,
-	T_LESS,   
-	T_LLESS,  
-	T_GREAT,  
-	T_GGREAT, 
-	T_WORD,   
-	T_REDIR,  
-	T_EXEC,   
-	T_SUBSH,  
+	T_LESS,
+	T_LLESS,
+	T_GREAT,
+	T_GGREAT,
+	T_WORD,
+	T_REDIR,
+	T_EXEC,
+	T_SUBSH,
 	T_EOL,
 	T_UNKNOWN
 }					t_type;
 
+// fd: 0 for < and 1 for >
 typedef struct s_redir
 {
 	char			*fpath;
-	int fd;
+	int				fd;
 	int				flags;
 	int				mode;
+	int				is_hd;
 }					t_redir;
 
 typedef struct s_word
@@ -93,10 +96,36 @@ typedef struct s_data
 	t_arr *wpids;
 }					t_data;
 
+typedef enum s_mode
+{
+	M_INTRACTIVE,
+	M_EXECUTION
+}					t_mode;
 typedef struct s_mish
 {
-	char			**envp;
-  	int exit_status;
-} t_mish;
+	t_arr			*envp;
+	int				exit_status;
+	char			cwd[PATH_MAX];
+	t_mode			mode;
+}					t_mish;
+
+// this struct for buildin check and run used only on executor
+typedef enum s_buildin
+{
+	B_UNKNOWN,
+	B_CD,
+	B_ECHO,
+	B_ENV,
+	B_EXIT,
+	B_EXPORT,
+	B_PWD,
+	B_UNSET
+}					t_buildin;
+
+typedef struct s_iofd
+{
+	int				in;
+	int				out;
+}					t_iofd;
 
 #endif

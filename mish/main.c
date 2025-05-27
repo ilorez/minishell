@@ -1,69 +1,68 @@
 
-#include "container.h"
-#include "debug/debug.h"
-#include "utils.h"
-
-t_mish mish;
+#include "./includes/setup.h"
+#include <unistd.h>
 
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	printf("\n");           // Move to a new line
-	rl_on_new_line();       // Regenerate the prompt on a newline
-	rl_replace_line("", 0); // Clear the previous text
-	rl_redisplay();
-	// TODO: stop running process
-}
 
-void	init_history(void)
-{
-	rl_clear_history();
-	add_history("first command");
+	if (isatty(STDIN_FILENO))
+  {
+	  if (g_mish.mode == M_INTRACTIVE)
+	  {
+	  	write(STDOUT_FILENO, "\n", 1);
+	  	rl_on_new_line();       // Regenerate the prompt on a newline
+	  	rl_replace_line("", 0); // Clear the previous text
+	  	rl_redisplay();
+	  	g_mish.exit_status = 130;
+	  }
+	  else
+	  	  write(STDOUT_FILENO, "\n", 1);
+  }
 }
 
 int	main(int ac, char **av, char **env)
 {
 	t_token	*token;
 	char	*input;
+	t_data	*data;
+	t_ast	*ast;
 
-  mish.envp = env;
-  mish.exit_status = 0;
-	// setup data and envirnoment varibale
-	// using ft_setup() form ./setup/setup.c
-	// the setup it's free memory and exit auto on error
-	(void)ac, (void)av, (void)env;
+	data = NULL;
 	if (signal(SIGINT, handle_sigint) == SIG_ERR)
-	{
-		printf("failed to register interrupts with kernel\n");
-	}
-	init_history();
+		perror("signal");
+	signal(SIGQUIT, SIG_IGN);
+	rl_clear_history();
+	ft_setup_mish(ac, av, env);
 	while (1)
 	{
-		input = readline("minishell$");
-
-    //ft_heredoc(input);
-    //return (0);
-		// Ctrl+D for exit
+		g_mish.mode = M_INTRACTIVE;
+    if (isatty(STDIN_FILENO))
+		  input = readline("mish> ");
+    else 
+		  input = readline("");
+		g_mish.mode = M_EXECUTION;
 		if (!input)
-			break ;
+			ft_exit(NULL, data);
 		if (*input)
 		{
 			add_history(input);
-			// printf("cmd: %s\n", input);
 			token = ft_get_tokens(input);
-			print_tokens(token);
-			ft_free_tokens(&token);
-			// send input to lexer
-			// get tokenzation array
-			// check if lexer has everthing done well
-			// send tokenzation array to parser
-			// check if parser do it's work with no error
-			// get AST and check everthing has done well for parser with no error
-			// send AST to exector
-			// executor return a status put it in $? variable
-			// done
+			// print_tokens(token);
+			if (!ft_grammar(token))
+			{
+				ast = ft_parse_ast(&token);
+				ft_free_tokens(&token);
+				// print_ast(ast, 0);
+				data = ft_setup_data(data, ast);
+				ft_executor(data, ast);
+				ft_waitpids(data->wpids);
+				handel_cmd_end(data);
+			}
+			else
+				ft_free_tokens(&token);
 		}
 		free(input);
 	}
-	return (0);
+	ft_handel_exit(data, g_mish.exit_status);
 }

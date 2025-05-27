@@ -6,11 +6,12 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/17 09:47:46 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/05/22 22:05:58 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "container.h"
+#include <fcntl.h>
 
 void	next_token(t_token **lst)
 {
