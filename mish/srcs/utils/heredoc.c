@@ -6,11 +6,12 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:56:32 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/24 17:08:10 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/27 12:12:59 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils.h"
+#include <stdlib.h>
 
 static void	_here_doc(char *file, char *eof);
 static char	*_randtmp_file(char *dir, char *prefix);
@@ -42,6 +43,8 @@ t_redir	*ft_heredoc(char *eof)
 	status = 0;
 	waitpid(pid, &status, 0);
 	ft_check_status(status);
+  if (WIFSIGNALED(status))
+    return (free(file), free(r), NULL);
 	return (r);
 }
 
@@ -73,7 +76,6 @@ static void	_here_doc(char *file, char *eof)
 	int		fd;
 
 	fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0777);
-  printf("pid: %d\n", getpid());
 	free(file);
 	signal(SIGINT, handel_herdocsig);
 	if (fd == -1)
@@ -84,6 +86,7 @@ static void	_here_doc(char *file, char *eof)
 	while (line && !(ft_strncmp(eof, line, hd_s) == 0 && line_s == hd_s))
 	{
 		ft_putstr_fd(line, fd);
+		ft_putstr_fd("\n", fd);
 		free(line);
 		line = readline(">");
 		line_s = ft_strlen(line);

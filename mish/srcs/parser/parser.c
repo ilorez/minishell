@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:12:46 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/22 22:03:12 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/27 11:51:34 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_ast	*parse_redir(t_token **lst)
 
 	copy_lst = *lst;
 	word = parse_word(lst);
-	if (word->type == T_SUBSH)
+	if (word && word->type == T_SUBSH)
 		left = consume_redir(lst);
 	else
 		left = consume_redir(&copy_lst);
