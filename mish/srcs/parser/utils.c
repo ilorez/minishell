@@ -50,7 +50,7 @@ t_ast	*add_back_node(t_ast *lst, t_ast *end)
 	head = lst;
 	if (lst)
 	{
-		while(lst->left)
+		while (lst->left)
 			lst = lst->left;
 		lst->left = end;
 	}

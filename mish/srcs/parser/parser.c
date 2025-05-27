@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "container.h"
+#include "types.h"
 
 t_ast	*ft_parse_ast(t_token **lst)
 {
@@ -23,17 +24,17 @@ t_ast	*parse_or_and(t_token **lst)
 	t_ast	*right;
 	t_type	type;
 
-	right = parse_pipe(lst);
+	left = parse_pipe(lst);
 	while (match(lst, T_OR) || match(lst, T_AND))
 	{
 		type = T_AND;
 		if (match(lst, T_OR))
 			type = T_OR;
 		next_token(lst);
-		left = parse_pipe(lst);
-		right = new_node(type, NULL, right, left);
+		right = parse_pipe(lst);
+		left = new_node(type, NULL, right, left);
 	}
-	return (right);
+	return (left);
 }
 
 t_ast	*parse_pipe(t_token **lst)
@@ -55,11 +56,14 @@ t_ast	*parse_redir(t_token **lst)
 {
 	t_ast	*left;
 	t_ast	*word;
-	t_token	**copy_lst;
+	t_token	*copy_lst;
 
-	copy_lst = lst;
+	copy_lst = *lst;
 	word = parse_word(lst);
-	left = consume_redir(*copy_lst, is_redir(*lst));
+	if (word->type == T_SUBSH)
+		left = consume_redir(lst);
+	else
+		left = consume_redir(&copy_lst);
 	left = add_back_node(left, word);
 	return (left);
 }

@@ -21,7 +21,6 @@ t_ast	*parse_word(t_token **lst)
 	if (match(lst, T_LPAR))
 		return (parse_list(lst));
 	exec = arr_new();
-	done = 0;
 	while (match(lst, T_WORD) || match_redir(lst))
 	{
 		if (match(lst, T_WORD))
@@ -32,12 +31,12 @@ t_ast	*parse_word(t_token **lst)
 			ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
 			arr_append(exec, arg);
 			next_token(lst);
-			done++;
+			done = 1;
 		}
 		else
 			*lst = (*lst)->next->next;
 	}
-	if (done)
+	if (done == 1)
 		return (new_node(T_EXEC, exec->content, NULL, NULL));
 	return (NULL);
 }
