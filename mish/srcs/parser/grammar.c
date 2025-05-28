@@ -35,8 +35,7 @@ int	ft_operators(t_token **lst)
 	{
 		next_token(lst);
 		if (ft_parenthese(lst) && ft_command(lst))
-			return (ft_perror("expected command after operator", ERR_SYNTAX),
-				1);
+			return (ft_perror("expected command after operator", ERR_SYNTAX), 1);
 	}
 	return (0);
 }
@@ -78,8 +77,7 @@ int	ft_command(t_token **lst)
 		{
 			next_token(lst);
 			if (!match(lst, T_WORD))
-				return (ft_perror("expected word after redirection",
-						ERR_SYNTAX), 1);
+				return (ft_perror("expected word after redirection", ERR_SYNTAX), 1);
 			next_token(lst);
 		}
 		success = 0;
@@ -87,7 +85,13 @@ int	ft_command(t_token **lst)
 	return (success);
 }
 
-static int	_print_err(int err_n)
+/*static int	_print_err(int err_n)
 {
+return (ft_perror("expected word after redirection", ERR_SYNTAX), 1);
+return (ft_perror("unexpected token near redir", ERR_SYNTAX), 1);
+return (ft_perror("unexpected token after )", ERR_SYNTAX), 1);
+return (ft_perror("expected )", ERR_SYNTAX), 1);
+return (ft_perror("expected command after operator", ERR_SYNTAX), 1);
+return (ft_perror("expected command or (", ERR_SYNTAX), 1);
 	return (0);
-}
+}*/
