@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:13:59 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 08:43:51 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:21:22 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void	ft_free_all(t_data **data)
 {
 	ft_free_data(data);
 	arr_free(g_mish.envp);
+	rl_clear_history();
 }
