@@ -48,7 +48,6 @@ void	exec_routine(char *input, t_data *data)
 		if (!ft_grammar(token))
 		{
 			ast = ft_parse_ast(&token);
-			ft_free_tokens(&token);
 			data = ft_setup_data(data, ast);
 			ft_executor(data, ast);
 			ft_waitpids(data->wpids);

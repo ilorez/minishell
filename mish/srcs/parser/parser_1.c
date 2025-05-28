@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "container.h"
+#include "t_arr.h"
 
 t_ast	*parse_word(t_token **lst)
 {
@@ -21,7 +22,7 @@ t_ast	*parse_word(t_token **lst)
 	if (match(lst, T_LPAR))
 		return (parse_list(lst));
 	exec = arr_new();
-	while (match(lst, T_WORD) || match_redir(lst))
+	while (match(lst, T_WORD) || match_op(lst, 1))
 	{
 		if (match(lst, T_WORD))
 		{
@@ -37,7 +38,7 @@ t_ast	*parse_word(t_token **lst)
 			*lst = (*lst)->next->next;
 	}
 	if (done == 1)
-		return (new_node(T_EXEC, exec->content, NULL, NULL));
+		return (new_node(T_EXEC, arr_extract(&exec), NULL, NULL));
 	return (NULL);
 }
 
