@@ -12,11 +12,7 @@
 
 #include "container.h"
 
-static int	match_op(t_token **lst, int is_redir);
-// TODO: the idea is to create a function contains 
-// a static varibale to hold
-// the error if there is any and after all the parsing
-// done we reset the varilabe
+//static int	_print_err(int err_n);
 
 int	ft_grammar(t_token *lst)
 {
@@ -39,8 +35,7 @@ int	ft_operators(t_token **lst)
 	{
 		next_token(lst);
 		if (ft_parenthese(lst) && ft_command(lst))
-			return (ft_perror("expected command after operator", ERR_SYNTAX),
-				1);
+			return (ft_perror("expected command after operator", ERR_SYNTAX), 1);
 	}
 	return (0);
 }
@@ -82,8 +77,7 @@ int	ft_command(t_token **lst)
 		{
 			next_token(lst);
 			if (!match(lst, T_WORD))
-				return (ft_perror("expected word after redirection",
-						ERR_SYNTAX), 1);
+				return (ft_perror("expected word after redirection", ERR_SYNTAX), 1);
 			next_token(lst);
 		}
 		success = 0;
@@ -91,14 +85,13 @@ int	ft_command(t_token **lst)
 	return (success);
 }
 
-static int	match_op(t_token **lst, int is_redir)
+/*static int	_print_err(int err_n)
 {
-	t_type	tt;
-
-	if (!lst || !*lst)
-		return (0);
-	tt = (*lst)->type;
-	if (is_redir)
-		return (tt >= T_LESS && tt <= T_GGREAT);
-	return (tt >= T_AND && tt <= T_PIPE);
-}
+return (ft_perror("expected word after redirection", ERR_SYNTAX), 1);
+return (ft_perror("unexpected token near redir", ERR_SYNTAX), 1);
+return (ft_perror("unexpected token after )", ERR_SYNTAX), 1);
+return (ft_perror("expected )", ERR_SYNTAX), 1);
+return (ft_perror("expected command after operator", ERR_SYNTAX), 1);
+return (ft_perror("expected command or (", ERR_SYNTAX), 1);
+	return (0);
+}*/

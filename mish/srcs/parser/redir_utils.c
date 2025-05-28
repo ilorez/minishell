@@ -24,7 +24,7 @@ t_ast	*consume_redir(t_token **lst)
 	node = NULL;
 	while (match(lst, T_WORD))
 		next_token(lst);
-	if (match_redir(lst))
+	if (match_op(lst, 1))
 	{
 		redir = fill_redir(lst);
 		node = consume_redir(lst);
@@ -33,11 +33,16 @@ t_ast	*consume_redir(t_token **lst)
 	return (node);
 }
 
-int	match_redir(t_token **lst)
+int	match_op(t_token **lst, int is_redir)
 {
+	t_type	tt;
+
 	if (!lst || !*lst)
 		return (0);
-	return ((*lst)->type >= T_LESS && (*lst)->type <= T_GGREAT);
+	tt = (*lst)->type;
+	if (is_redir)
+		return (tt >= T_LESS && tt <= T_GGREAT);
+	return (tt >= T_AND && tt <= T_PIPE);
 }
 
 t_redir	*fill_redir(t_token **lst)

@@ -8,18 +8,18 @@ void	handle_sigint(int sig)
 	(void)sig;
 
 	if (isatty(STDIN_FILENO))
-  {
-	  if (g_mish.mode == M_INTRACTIVE)
-	  {
-	  	write(STDOUT_FILENO, "\n", 1);
-	  	rl_on_new_line();       // Regenerate the prompt on a newline
-	  	rl_replace_line("", 0); // Clear the previous text
-	  	rl_redisplay();
-	  	g_mish.exit_status = 130;
-	  }
-	  else
-	  	  write(STDOUT_FILENO, "\n", 1);
-  }
+	{
+		if (g_mish.mode == M_INTRACTIVE)
+		{
+			write(STDOUT_FILENO, "\n", 1);
+			rl_on_new_line();       // Regenerate the prompt on a newline
+			rl_replace_line("", 0); // Clear the previous text
+			rl_redisplay();
+			g_mish.exit_status = 130;
+		}
+		else
+			write(STDOUT_FILENO, "\n", 1);
+	}
 }
 
 int	main(int ac, char **av, char **env)
@@ -53,7 +53,6 @@ int	main(int ac, char **av, char **env)
 			if (!ft_grammar(token))
 			{
 				ast = ft_parse_ast(&token);
-				ft_free_tokens(&token);
 				// print_ast(ast, 0);
 				data = ft_setup_data(data, ast);
 				ft_executor(data, ast);
