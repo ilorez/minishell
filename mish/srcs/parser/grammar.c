@@ -13,10 +13,6 @@
 #include "container.h"
 
 static int	match_op(t_token **lst, int is_redir);
-// TODO: the idea is to create a function contains 
-// a static varibale to hold
-// the error if there is any and after all the parsing
-// done we reset the varilabe
 
 int	ft_grammar(t_token *lst)
 {
