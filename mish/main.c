@@ -1,5 +1,6 @@
 
 #include "./includes/setup.h"
+#include "get_next_line.h"
 #include <unistd.h>
 
 void	handle_sigint(int sig)
@@ -37,10 +38,10 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		g_mish.mode = M_INTRACTIVE;
-		if (isatty(STDIN_FILENO))
-			input = readline("mish> ");
-		else 
-			input = readline("");
+    if (isatty(STDIN_FILENO))
+		  input = readline("mish> ");
+    else 
+		  input = get_next_line(STDIN_FILENO);
 		g_mish.mode = M_EXECUTION;
 		if (!input)
 			ft_exit(NULL, data);
