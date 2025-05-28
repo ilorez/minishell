@@ -12,7 +12,7 @@
 
 #include "container.h"
 
-static int	match_op(t_token **lst, int is_redir);
+static int	_print_err(int err_n);
 
 int	ft_grammar(t_token *lst)
 {
@@ -87,14 +87,7 @@ int	ft_command(t_token **lst)
 	return (success);
 }
 
-static int	match_op(t_token **lst, int is_redir)
+static int	_print_err(int err_n)
 {
-	t_type	tt;
-
-	if (!lst || !*lst)
-		return (0);
-	tt = (*lst)->type;
-	if (is_redir)
-		return (tt >= T_LESS && tt <= T_GGREAT);
-	return (tt >= T_AND && tt <= T_PIPE);
+	return (0);
 }

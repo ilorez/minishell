@@ -59,8 +59,7 @@ int	main(int ac, char **av, char **env)
 				ft_waitpids(data->wpids);
 				handel_cmd_end(data);
 			}
-			else
-				ft_free_tokens(&token);
+			ft_free_tokens(&token);
 		}
 		free(input);
 	}

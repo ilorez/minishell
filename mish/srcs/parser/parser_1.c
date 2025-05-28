@@ -21,7 +21,7 @@ t_ast	*parse_word(t_token **lst)
 	if (match(lst, T_LPAR))
 		return (parse_list(lst));
 	exec = arr_new();
-	while (match(lst, T_WORD) || match_redir(lst))
+	while (match(lst, T_WORD) || match_op(lst, 1))
 	{
 		if (match(lst, T_WORD))
 		{
