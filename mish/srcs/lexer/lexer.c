@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/lexer.h"
+#include "utils.h"
 
 static t_type	_set_token(char **ptr, t_word **word);
 static t_type	_redir_type(char **cmd);

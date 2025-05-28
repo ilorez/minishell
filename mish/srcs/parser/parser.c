@@ -12,10 +12,17 @@
 
 #include "container.h"
 #include "types.h"
+#include "utils.h"
 
 t_ast	*ft_parse_ast(t_token **lst)
 {
-	return (parse_or_and(lst));
+	t_token	*lst_copy;
+	t_ast	*ast;
+
+	lst_copy = *lst;
+	ast = parse_or_and(lst);
+	ft_free_tokens(&lst_copy);
+	return (ast);
 }
 
 t_ast	*parse_or_and(t_token **lst)

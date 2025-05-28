@@ -12,7 +12,7 @@
 
 #include "container.h"
 
-static int	_print_err(int err_n);
+//static int	_print_err(int err_n);
 
 int	ft_grammar(t_token *lst)
 {

@@ -7,18 +7,18 @@ void	handle_sigint(int sig)
 	(void)sig;
 
 	if (isatty(STDIN_FILENO))
-  {
-	  if (g_mish.mode == M_INTRACTIVE)
-	  {
-	  	write(STDOUT_FILENO, "\n", 1);
-	  	rl_on_new_line();       // Regenerate the prompt on a newline
-	  	rl_replace_line("", 0); // Clear the previous text
-	  	rl_redisplay();
-	  	g_mish.exit_status = 130;
-	  }
-	  else
-	  	  write(STDOUT_FILENO, "\n", 1);
-  }
+	{
+		if (g_mish.mode == M_INTRACTIVE)
+		{
+			write(STDOUT_FILENO, "\n", 1);
+			rl_on_new_line();       // Regenerate the prompt on a newline
+			rl_replace_line("", 0); // Clear the previous text
+			rl_redisplay();
+			g_mish.exit_status = 130;
+		}
+		else
+			write(STDOUT_FILENO, "\n", 1);
+	}
 }
 
 int	main(int ac, char **av, char **env)
@@ -37,10 +37,10 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		g_mish.mode = M_INTRACTIVE;
-    if (isatty(STDIN_FILENO))
-		  input = readline("mish> ");
-    else 
-		  input = readline("");
+		if (isatty(STDIN_FILENO))
+			input = readline("mish> ");
+		else 
+			input = readline("");
 		g_mish.mode = M_EXECUTION;
 		if (!input)
 			ft_exit(NULL, data);
@@ -52,14 +52,14 @@ int	main(int ac, char **av, char **env)
 			if (!ft_grammar(token))
 			{
 				ast = ft_parse_ast(&token);
-				ft_free_tokens(&token);
 				// print_ast(ast, 0);
 				data = ft_setup_data(data, ast);
 				ft_executor(data, ast);
 				ft_waitpids(data->wpids);
 				handel_cmd_end(data);
 			}
-			ft_free_tokens(&token);
+			else
+				ft_free_tokens(&token);
 		}
 		free(input);
 	}
