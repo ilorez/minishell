@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:15:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/23 12:09:52 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:26:20 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	ft_run_buildin(t_buildin b, char **argv, t_data *data)
 		return (0);
 	_save_org(data, &(org.in), STDIN_FILENO, 0);
 	_save_org(data, &(org.out), STDOUT_FILENO, 1);
+	if (b == B_EXIT)
+		free(status);
 	_run_buildin(b, argv, data);
 	ft_change_fd(org.in, STDIN_FILENO, data);
 	ft_change_fd(org.out, STDOUT_FILENO, data);
