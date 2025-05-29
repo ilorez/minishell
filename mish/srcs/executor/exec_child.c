@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:31:43 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/24 15:11:48 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:37:38 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	ft_exec_child(t_data *data, t_ast *ast)
 		ft_handel_exit(data, 127);
 	execve(path, ast->argv, (char **)((g_mish.envp)->content));
 	perror(path);
+  free(path);
 	ft_handel_exit(data, 126);
 }

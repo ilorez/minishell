@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/27 20:16:41 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:35:46 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ int	ft_exec(t_data *data, t_ast *ast)
 	if (*pid == -1)
 		return (free(pid), perror("fork"), ft_free_data(&data), 1);
 	else if (*pid == 0)
+  {
+    free(pid);
 		ft_exec_child(data, ast);
+  }
 	arr_append(data->wpids, pid);
 	return (0);
 }
