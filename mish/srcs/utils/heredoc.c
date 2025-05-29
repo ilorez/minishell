@@ -44,9 +44,9 @@ t_redir	*ft_heredoc(char *eof)
 	waitpid(pid, &status, 0);
 	ft_check_status(status);
 	if (WIFSIGNALED(status))
-  {
+	{
 		return (free(file), free(r), NULL);
-  }
+	}
 	return (r);
 }
 

@@ -12,7 +12,7 @@
 
 #include "container.h"
 
-//static int	_print_err(int err_n);
+// static int	_print_err(int err_n);
 
 int	ft_grammar(t_token *lst)
 {
@@ -35,7 +35,8 @@ int	ft_operators(t_token **lst)
 	{
 		next_token(lst);
 		if (ft_parenthese(lst) && ft_command(lst))
-			return (ft_perror("expected command after operator", ERR_SYNTAX), 1);
+			return (ft_perror("expected command after operator", ERR_SYNTAX),
+				1);
 	}
 	return (0);
 }
@@ -77,7 +78,8 @@ int	ft_command(t_token **lst)
 		{
 			next_token(lst);
 			if (!match(lst, T_WORD))
-				return (ft_perror("expected word after redirection", ERR_SYNTAX), 1);
+				return (ft_perror("expected word after redirection",
+						ERR_SYNTAX), 1);
 			next_token(lst);
 		}
 		success = 0;
