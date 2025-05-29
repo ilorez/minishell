@@ -30,6 +30,7 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			 ft_malloc.c \
 			 ft_errno.c \
 			 ft_ref_errno.c \
+			 ft_get_next_line.c \
 			 ft_strlowcase.c ft_strupcase.c \
 			 ft_strtod.c \
 			 ./structs/string/ft_strappend.c \

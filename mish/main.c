@@ -1,18 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 20:13:35 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/05/29 09:55:06 by znajdaou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "./includes/setup.h"
+#include "get_next_line.h"
 #include <unistd.h>
 
+// rl_on_new_line : Regenerate the prompt on a newline
+// rl_replace_line : Clear the previous text
 void	handle_sigint(int sig)
 {
 	(void)sig;
-
 	if (isatty(STDIN_FILENO))
 	{
 		if (g_mish.mode == M_INTRACTIVE)
 		{
 			write(STDOUT_FILENO, "\n", 1);
-			rl_on_new_line();       // Regenerate the prompt on a newline
-			rl_replace_line("", 0); // Clear the previous text
+			rl_on_new_line();
+			rl_replace_line("", 0);
 			rl_redisplay();
 			g_mish.exit_status = 130;
 		}
@@ -21,46 +34,49 @@ void	handle_sigint(int sig)
 	}
 }
 
+void	exec_routine(char *input, t_data **data)
+{
+	t_ast	*ast;
+	t_token	*token;
+
+	if (!input)
+		ft_exit(NULL, *data);
+	if (*input)
+	{
+		add_history(input);
+		token = ft_get_tokens(input);
+		if (token  && !ft_grammar(token))
+		{
+			ast = ft_parse_ast(&token);
+			*data = ft_setup_data(*data, ast);
+			ft_executor(*data, ast);
+			ft_waitpids((*data)->wpids);
+			handel_cmd_end((*data));
+		}
+		else
+			ft_free_tokens(&token);
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
-	t_token	*token;
 	char	*input;
 	t_data	*data;
-	t_ast	*ast;
 
 	data = NULL;
 	if (signal(SIGINT, handle_sigint) == SIG_ERR)
 		perror("signal");
 	signal(SIGQUIT, SIG_IGN);
-	rl_clear_history();
 	ft_setup_mish(ac, av, env);
 	while (1)
 	{
 		g_mish.mode = M_INTRACTIVE;
 		if (isatty(STDIN_FILENO))
 			input = readline("mish> ");
-		else 
-			input = readline("");
+		else
+			input = get_next_line(STDIN_FILENO);
 		g_mish.mode = M_EXECUTION;
-		if (!input)
-			ft_exit(NULL, data);
-		if (*input)
-		{
-			add_history(input);
-			token = ft_get_tokens(input);
-			// print_tokens(token);
-			if (token && !ft_grammar(token))
-			{
-				ast = ft_parse_ast(&token);
-				// print_ast(ast, 0);
-				data = ft_setup_data(data, ast);
-				ft_executor(data, ast);
-				ft_waitpids(data->wpids);
-				handel_cmd_end(data);
-			}
-			else
-				ft_free_tokens(&token);
-		}
+		exec_routine(input, &data);
 		free(input);
 	}
 	ft_handel_exit(data, g_mish.exit_status);

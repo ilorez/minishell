@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/20 23:47:45 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/29 09:58:08 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 // local libs
 # include "ft_linked_lst.h"
 # include "ft_malloc.h"
+# include "get_next_line.h"
 # include "t_arr.h"
 # include "t_bool.h"
 # include "t_errno.h"
