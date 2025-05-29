@@ -22,11 +22,12 @@ t_ast	*consume_redir(t_token **lst)
 	if (!lst)
 		return (NULL);
 	node = NULL;
+	redir = NULL;
 	while (match(lst, T_WORD))
 		next_token(lst);
 	if (match_op(lst, 1))
 	{
-		redir = fill_redir(lst);
+		redir = fill_redir(lst, redir);
 		node = consume_redir(lst);
 		node = new_node(T_REDIR, redir, NULL, node);
 	}
@@ -45,9 +46,8 @@ int	match_op(t_token **lst, int is_redir)
 	return (tt >= T_AND && tt <= T_PIPE);
 }
 
-t_redir	*fill_redir(t_token **lst)
+t_redir	*fill_redir(t_token **lst, t_redir *redir)
 {
-	t_redir	*redir;
 	t_type	tt;
 	char	*str;
 

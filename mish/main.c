@@ -49,7 +49,7 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 			token = ft_get_tokens(input);
 			// print_tokens(token);
-			if (!ft_grammar(token))
+			if (token && !ft_grammar(token))
 			{
 				ast = ft_parse_ast(&token);
 				// print_ast(ast, 0);
