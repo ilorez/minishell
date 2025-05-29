@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "container.h"
+#include "t_errno.h"
+#include <unistd.h>
 
-// static int	_print_err(int err_n);
+static int	_print_err(int err_n);
 
 int	ft_grammar(t_token *lst)
 {
@@ -21,7 +23,7 @@ int	ft_grammar(t_token *lst)
 	if (match_op(&lst, 0))
 		return (ft_perror("unexpected operator at start", ERR_SYNTAX), 1);
 	if (ft_operators(&lst))
-		return (1);
+		return (_print_err(0));
 	if (lst != NULL)
 		return (ft_perror("unexpected token at end", ERR_SYNTAX), 1);
 	return (0);
@@ -30,13 +32,12 @@ int	ft_grammar(t_token *lst)
 int	ft_operators(t_token **lst)
 {
 	if (ft_parenthese(lst) && ft_command(lst))
-		return (ft_perror("expected command or (", ERR_SYNTAX), 1);
+		return (_print_err(6));
 	while (match_op(lst, 0))
 	{
 		next_token(lst);
 		if (ft_parenthese(lst) && ft_command(lst))
-			return (ft_perror("expected command after operator", ERR_SYNTAX),
-				1);
+			return (_print_err(5));
 	}
 	return (0);
 }
@@ -49,15 +50,15 @@ int	ft_parenthese(t_token **lst)
 	if (ft_operators(lst))
 		return (1);
 	if (!match(lst, T_RPAR))
-		return (ft_perror("expected )", ERR_SYNTAX), 1);
+		return (_print_err(4));
 	next_token(lst);
 	if (match(lst, T_WORD))
-		return (ft_perror("unexpected token after )", ERR_SYNTAX), 1);
+		return (_print_err(3));
 	while (match_op(lst, 1))
 	{
 		next_token(lst);
 		if (!match(lst, T_WORD))
-			return (ft_perror("unexpected token near redir", ERR_SYNTAX), 1);
+			return (_print_err(2));
 		next_token(lst);
 	}
 	return (0);
@@ -78,8 +79,7 @@ int	ft_command(t_token **lst)
 		{
 			next_token(lst);
 			if (!match(lst, T_WORD))
-				return (ft_perror("expected word after redirection",
-						ERR_SYNTAX), 1);
+				return (_print_err(1));
 			next_token(lst);
 		}
 		success = 0;
@@ -87,13 +87,28 @@ int	ft_command(t_token **lst)
 	return (success);
 }
 
-/*static int	_print_err(int err_n)
+static int	_print_err(int err_n)
 {
-return (ft_perror("expected word after redirection", ERR_SYNTAX), 1);
-return (ft_perror("unexpected token near redir", ERR_SYNTAX), 1);
-return (ft_perror("unexpected token after )", ERR_SYNTAX), 1);
-return (ft_perror("expected )", ERR_SYNTAX), 1);
-return (ft_perror("expected command after operator", ERR_SYNTAX), 1);
-return (ft_perror("expected command or (", ERR_SYNTAX), 1);
-	return (0);
-}*/
+	static int	err[7];
+	static char	*list[7];
+
+	list[0] = "print";
+	list[1] = "expected word after redirection";
+	list[2] = "unexpected token near redir";
+	list[3] = "unexpected token after )";
+	list[4] = "expected )";
+	list[5] = "expected command after operator";
+	list[6] = "expected command or (";
+	if (err_n != 0)
+	{
+		if (err[err_n] != 1)
+			err[err_n] = 1;
+	}
+	else
+	{
+		while (err_n < 7 && err[err_n] == 0)
+			err_n++;
+		ft_perror(list[err_n], ERR_SYNTAX);
+	}
+	return (1);
+}
