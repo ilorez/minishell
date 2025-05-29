@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 20:13:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/28 09:35:45 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/29 09:55:06 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	handle_sigint(int sig)
 	}
 }
 
-void	exec_routine(char *input, t_data *data)
+void	exec_routine(char *input, t_data **data)
 {
 	t_ast	*ast;
 	t_token	*token;
 
 	if (!input)
-		ft_exit(NULL, data);
+		ft_exit(NULL, *data);
 	if (*input)
 	{
 		add_history(input);
@@ -48,10 +48,10 @@ void	exec_routine(char *input, t_data *data)
 		if (!ft_grammar(token))
 		{
 			ast = ft_parse_ast(&token);
-			data = ft_setup_data(data, ast);
-			ft_executor(data, ast);
-			ft_waitpids(data->wpids);
-			handel_cmd_end(data);
+			*data = ft_setup_data(*data, ast);
+			ft_executor(*data, ast);
+			ft_waitpids((*data)->wpids);
+			handel_cmd_end((*data));
 		}
 		else
 			ft_free_tokens(&token);
@@ -76,7 +76,7 @@ int	main(int ac, char **av, char **env)
 		else
 			input = get_next_line(STDIN_FILENO);
 		g_mish.mode = M_EXECUTION;
-		exec_routine(input, data);
+		exec_routine(input, &data);
 		free(input);
 	}
 	ft_handel_exit(data, g_mish.exit_status);
