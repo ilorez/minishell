@@ -85,15 +85,15 @@ typedef struct s_ast
 		t_redir		*redir;
 	};
 	struct s_ast	*left;
-	struct s_ast *right;
+	struct s_ast	*right;
 }					t_ast;
 
 typedef struct s_data
 {
 	t_ast			*ast;
-	int fd[2];
-	int	pipein;
-	t_arr *wpids;
+	int				fd[2];
+	int				pipein;
+	t_arr			*wpids;
 }					t_data;
 
 typedef enum s_mode

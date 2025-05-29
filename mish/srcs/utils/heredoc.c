@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:56:32 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/27 12:12:59 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:19:00 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_redir	*ft_heredoc(char *eof)
 	int		status;
 
 	file = _randtmp_file("/tmp/", "mish_herdoc_");
-  if (!file)
-    return (NULL);
+	if (!file)
+		return (NULL);
 	pid = fork();
 	if (pid == -1)
 		return (unlink(file), free(file), perror("fork"), NULL);
@@ -43,8 +43,10 @@ t_redir	*ft_heredoc(char *eof)
 	status = 0;
 	waitpid(pid, &status, 0);
 	ft_check_status(status);
-  if (WIFSIGNALED(status))
-    return (free(file), free(r), NULL);
+	if (WIFSIGNALED(status))
+	{
+		return (free(file), free(r), NULL);
+	}
 	return (r);
 }
 

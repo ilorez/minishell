@@ -6,11 +6,12 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:15:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/23 12:09:52 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/29 09:46:55 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/buildins.h"
+#include "t_errno.h"
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -25,7 +26,7 @@ static void	_save_org(t_data *data, int *org, int std, int index)
 		*org = std;
 }
 
-static int	_run_buildin(t_buildin b, char **argv, t_data *data)
+static int	_run_buildin(t_buildin b, char **argv)
 {
 	if (b == B_CD)
 		return (ft_cd(argv));
@@ -33,8 +34,6 @@ static int	_run_buildin(t_buildin b, char **argv, t_data *data)
 		return (ft_echo(argv));
 	if (b == B_ENV)
 		return (ft_env(argv));
-	if (b == B_EXIT)
-		ft_exit(argv, data);
 	if (b == B_EXPORT)
 		return (ft_export(argv));
 	if (b == B_PWD)
@@ -49,12 +48,16 @@ int	ft_run_buildin(t_buildin b, char **argv, t_data *data)
 	int		*status;
 	t_iofd	org;
 
-	status = ft_calloc(1, sizeof(int));
 	if (b == B_UNKNOWN)
 		return (0);
+	if (b == B_EXIT)
+		ft_exit(argv, data);
 	_save_org(data, &(org.in), STDIN_FILENO, 0);
 	_save_org(data, &(org.out), STDOUT_FILENO, 1);
-	_run_buildin(b, argv, data);
+	status = ft_calloc(1, sizeof(int));
+	if (!status)
+		return (ft_perror("Error", ERR_MALLOC_FAIL), 1);
+	*status = _run_buildin(b, argv);
 	ft_change_fd(org.in, STDIN_FILENO, data);
 	ft_change_fd(org.out, STDOUT_FILENO, data);
 	*status *= -1;
