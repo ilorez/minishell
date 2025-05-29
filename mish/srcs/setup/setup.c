@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:27:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/24 15:11:05 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/29 09:29:47 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@
 //      - [x] memory leeks
 //      - [x] norminette
 //
-//  - Signals [ ] tested
+//  - Signals [x] tested
 //      - [x] intractive mode for CTRL+c\D
 //      - [x] CTRL+d
-//      - [ ] CTRL+c
-//      - [ ] CTRL+\
-//      - [ ] signal kill (killpids)
+//      - [x] CTRL+c
+//      - [x] CTRL+\
+//      - [x] signal kill (killpids)
 //  - link
-//      - [ ] link with parser
-//      - [ ] test
+//      - [x] link with parser
+//      - [x] test
 //      - [ ] push
 
 t_mish			g_mish;
