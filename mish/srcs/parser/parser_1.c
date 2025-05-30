@@ -17,7 +17,6 @@ t_ast	*parse_word(t_token **lst)
 {
 	t_arr	*exec;
 	char	*arg;
-	int		done;
 
 	if (match(lst, T_LPAR))
 		return (parse_list(lst));
@@ -26,20 +25,19 @@ t_ast	*parse_word(t_token **lst)
 	{
 		if (match(lst, T_WORD))
 		{
-			arg = (char *)malloc(((*lst)->word->len + 1) * sizeof(char));
+			arg = ft_calloc((*lst)->word->len + 1, sizeof(char));
 			if (!arg)
 				exit_err("malloc failed", 2);
 			ft_strlcpy(arg, (*lst)->word->ptr, (*lst)->word->len + 1);
 			arr_append(exec, arg);
 			next_token(lst);
-			done = 1;
 		}
 		else
 			*lst = (*lst)->next->next;
 	}
-	if (done == 1)
+	if (exec->index)
 		return (new_node(T_EXEC, arr_extract(&exec), NULL, NULL));
-	return (NULL);
+	return ((arr_clean(&exec)), NULL);
 }
 
 t_ast	*parse_list(t_token **lst)
