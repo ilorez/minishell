@@ -2,3 +2,4 @@
 mish/build
 mish/.cache
 mish/compile_commands.json
+mish/minishell*
