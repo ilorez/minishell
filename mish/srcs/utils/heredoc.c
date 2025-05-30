@@ -17,7 +17,7 @@
 static void	_here_doc(char *file, char *eof);
 static char	*_randtmp_file(char *dir, char *prefix);
 
-static void	fill_heredoc(t_redir **r, char file)
+static void	fill_heredoc(t_redir **r, char *file)
 {
 	(*r)->fpath = file;
 	(*r)->fd = 0;
