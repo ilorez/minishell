@@ -11,10 +11,20 @@
 /* ************************************************************************** */
 
 #include "../../includes/utils.h"
+#include "setup.h"
 #include <stdlib.h>
 
 static void	_here_doc(char *file, char *eof);
 static char	*_randtmp_file(char *dir, char *prefix);
+
+static void	fill_heredoc(t_redir **r, char file)
+{
+	(*r)->fpath = file;
+	(*r)->fd = 0;
+	(*r)->flags = O_RDONLY;
+	(*r)->mode = 0644;
+	(*r)->is_hd = 1;
+}
 
 t_redir	*ft_heredoc(char *eof)
 {
@@ -34,19 +44,13 @@ t_redir	*ft_heredoc(char *eof)
 	r = ft_calloc(1, sizeof(t_redir));
 	if (!r)
 		return (ft_perror("heredoc", ERR_MALLOC_FAIL), NULL);
-	r->fpath = file;
-	r->fd = 0;
-	r->flags = O_RDONLY;
-	r->mode = 0644;
-	r->is_hd = 1;
+	fill_heredoc(&r, file);
 	free(eof);
 	status = 0;
 	waitpid(pid, &status, 0);
 	ft_check_status(status);
-	if (WIFSIGNALED(status))
-	{
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 		return (free(file), free(r), NULL);
-	}
 	return (r);
 }
 

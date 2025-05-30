@@ -28,8 +28,16 @@ t_ast	*consume_redir(t_token **lst)
 	if (match_op(lst, 1))
 	{
 		redir = fill_redir(lst, redir);
-		node = consume_redir(lst);
-		node = new_node(T_REDIR, redir, NULL, node);
+		if (redir)
+		{
+			node = consume_redir(lst);
+			node = new_node(T_REDIR, redir, NULL, node);
+		}
+		while (!redir && *lst)
+		{
+			(*lst)->type = T_UNKNOWN;
+			*lst = (*lst)->next;
+		}
 	}
 	return (node);
 }
