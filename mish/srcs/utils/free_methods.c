@@ -32,7 +32,7 @@ void	ft_free_tokens(t_token **tks)
 	while ((*tks))
 	{
 		tmp = (*tks)->next;
-		if ((*tks)->type == T_WORD && (*tks)->word)
+		if ((*tks)->word && (*tks)->word)
 			free((*tks)->word);
 		free((*tks));
 		(*tks) = tmp;

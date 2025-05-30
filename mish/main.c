@@ -45,13 +45,16 @@ void	exec_routine(char *input, t_data **data)
 	{
 		add_history(input);
 		token = ft_get_tokens(input);
-		if (token  && !ft_grammar(token))
+		if (token && !ft_grammar(token))
 		{
 			ast = ft_parse_ast(&token);
-			*data = ft_setup_data(*data, ast);
-			ft_executor(*data, ast);
-			ft_waitpids((*data)->wpids);
-			handel_cmd_end((*data));
+			if (ast)
+			{
+				*data = ft_setup_data(*data, ast);
+				ft_executor(*data, ast);
+				ft_waitpids((*data)->wpids);
+				handel_cmd_end((*data));
+			}
 		}
 		else
 			ft_free_tokens(&token);

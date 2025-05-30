@@ -34,6 +34,7 @@ int		ft_wcoredump(int status);
 void	ft_free_data(t_data **data);
 void	ft_free_tokens(t_token **tks);
 void	ft_free_all(t_data **data);
+void	ft_free_ast(t_ast *ast);
 
 // command end
 int		ft_restore_std(int std, int flags, int status);

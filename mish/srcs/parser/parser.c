@@ -21,6 +21,11 @@ t_ast	*ft_parse_ast(t_token **lst)
 
 	lst_copy = *lst;
 	ast = parse_or_and(lst);
+	if (*lst)
+	{
+		ft_free_ast(ast);
+		ast = NULL;
+	}
 	ft_free_tokens(&lst_copy);
 	return (ast);
 }
