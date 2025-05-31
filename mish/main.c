@@ -54,7 +54,7 @@ void	exec_routine(char *input, t_data **data)
 			if (ast)
 			{
 				*data = ft_setup_data(*data, ast);
-				ft_executor(*data, ast);
+				g_mish.exit_status = ft_executor(*data, ast);
 				ft_waitpids((*data)->wpids);
 				handel_cmd_end((*data));
 			}
