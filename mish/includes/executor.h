@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:09:51 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/31 10:56:04 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:58:23 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 // executor
 int		ft_executor(t_data *data, t_ast *ast);
+
+// redir
+int		ft_redir(t_data *data, t_ast *ast, t_redir *r);
 
 // exec child
 void	ft_exec_child(t_data *data, t_ast *ast);

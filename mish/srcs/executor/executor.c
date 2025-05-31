@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/31 10:00:22 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:57:36 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int			ft_exec(t_data *data, t_ast *ast);
 int			ft_pipe(t_data *data, t_ast *ast);
-int			ft_redir(t_data *data, t_ast *ast, t_redir *r);
 static int	_or_and(t_data *data, t_ast *ast, int cond);
 
 // the "()" is for priority nothing else
@@ -110,38 +109,4 @@ int	ft_exec(t_data *data, t_ast *ast)
 	}
 	arr_append(data->wpids, pid);
 	return (0);
-}
-
-int	ft_redir(t_data *data, t_ast *ast, t_redir *r)
-{
-	int		fd;
-	t_arr	*lst;
-	int		org;
-	int		*status;
-	int		exec_status;
-
-	if (!r)
-		return (ft_executor(data, ast->left));
-	lst = ft_extract_arg(r->fpath);
-	if (!lst)
-		return (ft_perror(NULL, ERR_MALLOC_FAIL), 1);
-	if (lst->index > 1)
-		return (ft_perror(r->fpath, ERR_AMB_REDIR), arr_free(lst), 1);
-	free(r->fpath);
-	r->fpath = lst->content[0];
-	arr_free_body(lst);
-	fd = open(r->fpath, r->flags, r->mode);
-	if (fd < 0)
-	{
-		status = ft_calloc(1, sizeof(int));
-		*status = -1;
-		arr_append(data->wpids, status);
-		return (perror("open"), 1);
-	}
-	org = data->fd[r->fd];
-	data->fd[r->fd] = fd;
-	exec_status = ft_executor(data, ast->left);
-	close(fd);
-	data->fd[r->fd] = org;
-	return (exec_status);
 }
