@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 04:59:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/24 16:15:10 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 11:36:12 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // ==================================
 
 # include <linux/limits.h>
-# define FT_NAME "minishell> "
+# define FT_NAME "mish"
 # define FT_DELIMS "<>()|&"
 
 // ==================================
