@@ -6,12 +6,13 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 20:13:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/29 17:03:53 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 11:53:42 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/setup.h"
 #include "get_next_line.h"
+#include "libft.h"
 #include <unistd.h>
 
 // rl_on_new_line : Regenerate the prompt on a newline
@@ -63,6 +64,25 @@ void	exec_routine(char *input, t_data **data)
 	}
 }
 
+char	*get_input(void)
+{
+	char	*input;
+	char	*line;
+
+	g_mish.mode = M_INTRACTIVE;
+	if (isatty(STDIN_FILENO))
+		input = readline(FT_NAME "$ ");
+	else
+	{
+		line = get_next_line(STDIN_FILENO);
+		input = ft_strtrim(line, "\n");
+		if (line)
+			free(line);
+	}
+	g_mish.mode = M_EXECUTION;
+	return (input);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char	*input;
@@ -75,9 +95,7 @@ int	main(int ac, char **av, char **env)
 	ft_setup_mish(ac, av, env);
 	while (1)
 	{
-		g_mish.mode = M_INTRACTIVE;
-		input = readline(FT_NAME "$ ");
-		g_mish.mode = M_EXECUTION;
+		input = get_input();
 		exec_routine(input, &data);
 		free(input);
 	}
