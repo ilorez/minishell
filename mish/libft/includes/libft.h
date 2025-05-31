@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/29 09:58:08 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:49:33 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void		ft_striteri(char *s, void (*f)(unsigned int, char *));
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		*ft_strupcase(char *str);
 char		*ft_strlowcase(char *str);
+char		*ft_strjoin_list(char const **arr, char const *sep);
 
 // is functions
 int			ft_isalpha(int c);

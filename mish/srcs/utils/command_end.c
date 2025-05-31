@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:18:05 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/24 16:16:28 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:55:40 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,23 @@ void	ft_free_ast(t_ast *ast)
 		ft_free_ast(ast->left);
 	}
 	free(ast);
+}
+
+int	ft_killpids(t_arr *pid)
+{
+	int	i;
+	int	status;
+
+	i = -1;
+	status = 0;
+	while (++i < pid->index)
+	{
+		if (*(int *)(pid->content[i]) <= 0)
+			continue ;
+		kill(*(int *)(pid->content[i]), SIGTERM);
+	}
+	arr_empty(pid);
+	return (status);
 }
 
 int	handel_cmd_end(t_data *data)

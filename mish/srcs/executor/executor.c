@@ -6,11 +6,12 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 15:03:54 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/29 15:35:46 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:00:22 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executor.h"
+#include <stdlib.h>
 
 int			ft_exec(t_data *data, t_ast *ast);
 int			ft_pipe(t_data *data, t_ast *ast);
@@ -93,6 +94,8 @@ int	ft_exec(t_data *data, t_ast *ast)
 	ast->argv = ft_extract(ast->argv);
 	if (!ast->argv)
 		return (ft_perror(NULL, ERR_MALLOC_FAIL), ft_handel_exit(data, 1), 1);
+	if (!ast->argv[0][0])
+		return (0);
 	buildin = ft_is_buildin(ast->argv[0]);
 	if (buildin)
 		return (ft_run_buildin(buildin, &ast->argv[1], data));
@@ -101,10 +104,10 @@ int	ft_exec(t_data *data, t_ast *ast)
 	if (*pid == -1)
 		return (free(pid), perror("fork"), ft_free_data(&data), 1);
 	else if (*pid == 0)
-  {
-    free(pid);
+	{
+		free(pid);
 		ft_exec_child(data, ast);
-  }
+	}
 	arr_append(data->wpids, pid);
 	return (0);
 }
@@ -114,7 +117,7 @@ int	ft_redir(t_data *data, t_ast *ast, t_redir *r)
 	int		fd;
 	t_arr	*lst;
 	int		org;
-	int		status;
+	int		exec_status;
 
 	if (!r)
 		return (ft_executor(data, ast->left));
@@ -131,8 +134,8 @@ int	ft_redir(t_data *data, t_ast *ast, t_redir *r)
 		return (perror("open"), 1);
 	org = data->fd[r->fd];
 	data->fd[r->fd] = fd;
-	status = ft_executor(data, ast->left);
+	exec_status = ft_executor(data, ast->left);
 	close(fd);
 	data->fd[r->fd] = org;
-	return (status);
+	return (exec_status);
 }

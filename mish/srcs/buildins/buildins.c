@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 22:15:12 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/29 09:46:55 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:26:46 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_run_buildin(t_buildin b, char **argv, t_data *data)
 	if (b == B_UNKNOWN)
 		return (0);
 	if (b == B_EXIT)
-		ft_exit(argv, data);
+		return (ft_exit(argv, data), g_mish.exit_status);
 	_save_org(data, &(org.in), STDIN_FILENO, 0);
 	_save_org(data, &(org.out), STDOUT_FILENO, 1);
 	status = ft_calloc(1, sizeof(int));

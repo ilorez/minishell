@@ -6,10 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:43:27 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/01/12 11:31:13 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 08:47:16 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "./includes/libft.h"
+#include "t_str.h"
 
 /* ft_strjoin
  * this function is used to concatenate two strings
@@ -50,4 +51,23 @@ char	*ft_strjoin(char const *s1, char const *s2, char const *c)
 		dst[i++] = *s2++;
 	dst[i] = '\0';
 	return (dst);
+}
+
+char	*ft_strjoin_list(char const **arr, char const *sep)
+{
+	t_str	*dst;
+
+	if (!arr)
+		return (NULL);
+	dst = str_new_empty(40);
+	if (!dst)
+		return (NULL);
+	dst->i = -1;
+	while (arr[++dst->i])
+	{
+		str_append_list(dst, (char *)arr[dst->i]);
+		if (arr[dst->i + 1])
+			str_append_list(dst, (char *)sep);
+	}
+	return (str_extract(&dst));
 }

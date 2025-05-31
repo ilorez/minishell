@@ -6,19 +6,31 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:02:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/23 12:03:02 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:54:56 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executor.h"
+#include "utils.h"
+#include <sys/stat.h>
 #include <sys/wait.h>
 
-char	*ft_get_right_path(char *cmd)
+void	_check_is_file(t_data *data, char *path)
+{
+	struct stat	src;
+
+	if (stat(path, &src) != 0)
+		return (perror("stat"), ft_handel_exit(data, 127));
+	if (S_ISDIR(src.st_mode))
+		return (ft_perror(path, ERR_ISDIR), ft_handel_exit(data, 126));
+}
+
+char	*ft_get_right_path(t_data *data, char *cmd)
 {
 	char *(path), *(paths), *(start);
 	paths = ft_getenv("PATH");
 	if (ft_strchr(cmd, '/') || !paths)
-		return (ft_strdup(cmd));
+		return (_check_is_file(data, cmd), ft_strdup(cmd));
 	start = paths;
 	while (*start)
 	{
@@ -86,21 +98,4 @@ int	ft_waitpids(t_arr *pid)
 		if (ft_wcoredump(status))
 			printf("Quit (core dumped)\n");
 	return (is_normal_exit);
-}
-
-int	ft_killpids(t_arr *pid)
-{
-	int	i;
-	int	status;
-
-	i = -1;
-	status = 0;
-	while (++i < pid->index)
-	{
-		if (*(int *)(pid->content[i]) <= 0)
-			continue ;
-		kill(*(int *)(pid->content[i]), SIGTERM);
-	}
-	arr_empty(pid);
-	return (status);
 }
