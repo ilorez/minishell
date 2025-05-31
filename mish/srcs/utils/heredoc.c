@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 #include "../../includes/utils.h"
+#include "container.h"
 #include "setup.h"
+#include "t_arr.h"
 #include <stdlib.h>
 
 static void	_here_doc(char *file, char *eof);
@@ -40,7 +42,10 @@ t_redir	*ft_heredoc(char *eof)
 	if (pid == -1)
 		return (unlink(file), free(file), perror("fork"), NULL);
 	else if (pid == 0)
+	{
+		arr_clean(&g_mish.envp);
 		_here_doc(file, eof);
+	}
 	r = ft_calloc(1, sizeof(t_redir));
 	if (!r)
 		return (ft_perror("heredoc", ERR_MALLOC_FAIL), NULL);

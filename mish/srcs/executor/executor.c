@@ -117,6 +117,7 @@ int	ft_redir(t_data *data, t_ast *ast, t_redir *r)
 	int		fd;
 	t_arr	*lst;
 	int		org;
+	int		*status;
 	int		exec_status;
 
 	if (!r)
@@ -131,7 +132,12 @@ int	ft_redir(t_data *data, t_ast *ast, t_redir *r)
 	arr_free_body(lst);
 	fd = open(r->fpath, r->flags, r->mode);
 	if (fd < 0)
+	{
+		status = ft_calloc(1, sizeof(int));
+		*status = -1;
+		arr_append(data->wpids, status);
 		return (perror("open"), 1);
+	}
 	org = data->fd[r->fd];
 	data->fd[r->fd] = fd;
 	exec_status = ft_executor(data, ast->left);
