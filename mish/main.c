@@ -6,14 +6,11 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 20:13:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/31 11:53:42 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:02:24 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/setup.h"
-#include "get_next_line.h"
-#include "libft.h"
-#include <unistd.h>
+#include "./includes/container.h"
 
 // rl_on_new_line : Regenerate the prompt on a newline
 // rl_replace_line : Clear the previous text
