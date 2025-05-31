@@ -18,6 +18,9 @@ static int	_print_err(int err_n);
 
 int	ft_grammar(t_token *lst)
 {
+	int	old;
+
+	old = g_mish.exit_status;
 	g_mish.exit_status = 2;
 	if (!lst)
 		return (ft_perror("empty input", ERR_SYNTAX), 1);
@@ -27,7 +30,7 @@ int	ft_grammar(t_token *lst)
 		return (_print_err(0));
 	if (lst != NULL)
 		return (ft_perror("unexpected token at end", ERR_SYNTAX), 1);
-	g_mish.exit_status = 0;
+	g_mish.exit_status = old;
 	return (0);
 }
 
