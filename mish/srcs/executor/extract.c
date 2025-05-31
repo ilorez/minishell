@@ -6,11 +6,13 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:37:53 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 08:41:01 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 08:58:07 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/executor.h"
+#include "libft.h"
+#include "t_arr.h"
 
 // flags
 // 0: normal
@@ -21,21 +23,16 @@ static t_arr	*_fields_expand(t_arr *fields);
 
 char	**ft_extract(char **argv)
 {
-	int		i;
+	char	*join;
 	t_arr	*args;
-	t_arr	*tmp;
 
-	args = arr_new();
+	join = ft_strjoin_list((const char **)argv, " ");
+	if (!join)
+		return (ft_free_str_lst(argv), NULL);
+	args = ft_extract_arg(join);
+	free(join);
 	if (!args)
 		return (ft_free_str_lst(argv), NULL);
-	i = -1;
-	while (argv[++i])
-	{
-		tmp = ft_extract_arg(argv[i]);
-		if (!tmp)
-			return (ft_free_str_lst(argv), arr_free(args), NULL);
-		args = arr_merge(args, tmp);
-	}
 	return (ft_free_str_lst(argv), (char **)arr_extract(&args));
 }
 

@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 20:39:33 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/21 00:08:34 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:52:53 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,18 @@
 
 int	ft_export(char **argv)
 {
-	int		i;
 	char	*value;
-	int		status;
 
+	int (i), (status) = 0;
 	if (!argv || !*argv)
 		return (ft_env(argv));
 	i = -1;
-	status = 0;
 	while (argv[++i])
 	{
 		value = ft_strchr(argv[i], '=');
 		if (value)
 			*value = 0;
-		if (!ft_isvalid_id(argv[i]))
+		if (!ft_isvalid_id(argv[i]) || !argv[i][0])
 		{
 			if (value)
 				*value = '=';
@@ -48,7 +46,10 @@ int	ft_export(char **argv)
 			status = 1;
 			continue ;
 		}
-		ft_setenv(argv[i], (value + 1), 1);
+		if (value)
+			ft_setenv(argv[i], (value + 1), 1);
+		else
+			ft_setenv(argv[i], "", 1);
 	}
 	return (status);
 }

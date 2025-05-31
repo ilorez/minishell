@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:19:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/23 09:45:06 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/31 10:56:10 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_free_ast(t_ast *ast);
 // command end
 int		ft_restore_std(int std, int flags, int status);
 int		handel_cmd_end(t_data *data);
+int		ft_killpids(t_arr *pid);
 
 // helpers
 char	*ft_getenv(const char *name);

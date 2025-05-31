@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 20:13:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/29 09:55:06 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:03:53 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	if (isatty(STDIN_FILENO))
+	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
 	{
 		if (g_mish.mode == M_INTRACTIVE)
 		{
@@ -41,7 +41,9 @@ void	exec_routine(char *input, t_data **data)
 
 	if (!input)
 		ft_exit(NULL, *data);
-	if (*input)
+	else if (!*input)
+		;
+	else if (*input)
 	{
 		add_history(input);
 		token = ft_get_tokens(input);
@@ -74,10 +76,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		g_mish.mode = M_INTRACTIVE;
-		if (isatty(STDIN_FILENO))
-			input = readline("mish> ");
-		else
-			input = get_next_line(STDIN_FILENO);
+		input = readline(FT_NAME "$ ");
 		g_mish.mode = M_EXECUTION;
 		exec_routine(input, &data);
 		free(input);
