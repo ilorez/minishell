@@ -53,7 +53,6 @@ void	exec_routine(char *input, t_data **data)
 				*data = ft_setup_data(*data, ast);
 				g_mish.exit_status = ft_executor(*data, ast);
 				ft_waitpids((*data)->wpids);
-				handel_cmd_end((*data));
 			}
 		}
 		else
@@ -94,6 +93,7 @@ int	main(int ac, char **av, char **env)
 	{
 		input = get_input();
 		exec_routine(input, &data);
+		ft_free_data(&data);
 		free(input);
 	}
 	ft_handel_exit(data, g_mish.exit_status);
