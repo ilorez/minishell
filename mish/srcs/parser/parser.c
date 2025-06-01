@@ -71,7 +71,7 @@ t_ast	*parse_redir(t_token **lst)
 	copy_lst = *lst;
 	word = parse_word(lst);
 	if (word && word->type == T_SUBSH)
-		left = consume_redir(lst);
+			left = consume_redir(lst);
 	else
 		left = consume_redir(&copy_lst);
 	left = add_back_node(left, word);

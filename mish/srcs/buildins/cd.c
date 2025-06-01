@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:28:22 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/22 22:11:11 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:59:37 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_cd(char **argv)
 	char	*path;
 
 	if (!argv || !*argv)
-		path = getenv("HOME");
+		return (ft_perror("cd", ERR_RPATH), 1);
 	else if (argv[0] && argv[1])
 		return (ft_perror("cd", ERR_TO_MANY_ARG), 1);
 	else

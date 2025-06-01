@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 15:27:35 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/29 09:29:47 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:19:41 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ int	ft_setup_mish(int ac, char **av, char **envp)
 {
 	(void)ac, (void)av;
 	g_mish.exit_status = 0;
+	g_mish.envp = _create_lenv(envp);
 	if (!getcwd(g_mish.cwd, PATH_MAX))
 		return (0);
-	g_mish.envp = _create_lenv(envp);
 	if (!g_mish.envp)
 		return (0);
 	return (1);

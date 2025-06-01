@@ -19,6 +19,7 @@ int	ft_env(char **argv)
 		ft_ref_perror("env", NULL, ERR_TO_MANY_ARG);
 		return (1);
 	}
-	ft_print_str_arr((char **)(g_mish.envp->content));
+	if (g_mish.envp && g_mish.envp->content)
+		ft_print_str_arr((char **)(g_mish.envp->content));
 	return (0);
 }
