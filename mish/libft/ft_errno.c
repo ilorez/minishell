@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:51:57 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/31 10:20:28 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:07:19 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	_ft_create_err_list(char *lst[ERR_COUNT])
 	err_msgs[ERR_CMDNF] = "command not found";
 	err_msgs[ERR_NONUM] = "numeric argument required";
 	err_msgs[ERR_IDENT] = "not a valid identifier";
+	err_msgs[ERR_RPATH] = "a relative or absolute path is required";
 	err_msgs[ERR_ISDIR] = "Is a directory";
 	err_msgs[ERR_TO_MANY_ARG] = "too many arguments";
 	err_msgs[ERR_ENOENT] = "No such file or directory";
