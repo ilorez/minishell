@@ -70,6 +70,8 @@ re: fclean all
 
 vg:
 	 valgrind --suppressions=../ignore_readline_leaks.supp --track-fds=yes --leak-check=full --show-leak-kinds=all ./minishell
+vgb:
+	 valgrind --suppressions=../ignore_readline_leaks.supp --track-fds=yes --leak-check=full --show-leak-kinds=all bash
 d:
 	gdbgui ./$(NAME)
 
