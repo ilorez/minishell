@@ -56,29 +56,29 @@ int	match_op(t_token **lst, int is_redir)
 
 t_redir	*fill_redir(t_token **lst, t_redir *redir)
 {
-	t_type	tt;
+	t_token	*tt;
 	char	*str;
 
-	tt = (*lst)->type;
+	tt = *lst;
 	next_token(lst);
 	str = ft_calloc((*lst)->word->len + 1, sizeof(char));
 	if (!str)
 		exit_err("malloc failed", 2);
 	ft_strlcpy(str, (*lst)->word->ptr, (*lst)->word->len + 1);
 	next_token(lst);
-	if (tt != T_LLESS)
+	if (tt->type != T_LLESS)
 	{
 		redir = ft_calloc(1, sizeof(t_redir));
 		if (!redir)
 			exit_err("malloc failed fill_redir", 2);
 		redir->fpath = str;
-		redir->fd = 1 * (tt == T_GREAT || tt == T_GGREAT);
-		if (tt == T_LESS)
+		redir->fd = 1 * (tt->type == T_GREAT || tt->type == T_GGREAT);
+		if (tt->type == T_LESS)
 			redir->flags = O_RDONLY;
 		else
-			redir->flags = O_WRONLY | O_CREAT | O_APPEND * (tt == T_GGREAT);
+			redir->flags = O_WRONLY | O_CREAT | O_APPEND * (tt->type == T_GGREAT);
 		redir->mode = 0644;
 		return (redir);
 	}
-	return (ft_heredoc(str));
+	return (ft_heredoc(str, tt));
 }

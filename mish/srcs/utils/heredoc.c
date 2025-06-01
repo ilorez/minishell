@@ -28,7 +28,7 @@ static void	fill_heredoc(t_redir **r, char *file)
 	(*r)->is_hd = 1;
 }
 
-t_redir	*ft_heredoc(char *eof)
+t_redir	*ft_heredoc(char *eof, t_token *lst)
 {
 	t_redir	*r;
 	int		pid;
@@ -44,6 +44,7 @@ t_redir	*ft_heredoc(char *eof)
 	else if (pid == 0)
 	{
 		arr_clean(&g_mish.envp);
+		ft_free_tokens(&lst);
 		_here_doc(file, eof);
 	}
 	r = ft_calloc(1, sizeof(t_redir));
