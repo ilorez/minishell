@@ -22,7 +22,7 @@ static void	_here_doc(char *file, char *eof);
 int	ft_open_hds(t_ast *ast, t_ast *head)
 {
 	if (!ast)
-		return (0);
+		return (1);
 	else if (ast->type == T_AND || ast->type == T_OR || ast->type == T_PIPE)
 	{
 		if (!ft_open_hds(ast->left, head))
