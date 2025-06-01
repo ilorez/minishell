@@ -13,14 +13,14 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "./container.h"
+#include "container.h"
 
 // handel exit
 void	ft_handel_exit(t_data *data, int status);
 void	exit_err(char *msg, t_errno code);
 
 // heredoc
-t_redir	*ft_heredoc(char *eof);
+t_redir	*ft_heredoc(char *eof, t_token *lst);
 
 // get word
 char	*ft_get_word(char *str);
