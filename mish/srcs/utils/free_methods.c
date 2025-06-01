@@ -29,7 +29,7 @@ void	ft_free_tokens(t_token **tks)
 
 	if (!(*tks))
 		return ;
-	while((*tks)->prev)
+	while ((*tks)->prev)
 		*tks = (*tks)->prev;
 	while ((*tks))
 	{

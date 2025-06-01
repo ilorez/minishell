@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:56:32 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/27 20:19:00 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:01:46 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,68 +15,83 @@
 #include "setup.h"
 #include "t_arr.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 static void	_here_doc(char *file, char *eof);
-static char	*_randtmp_file(char *dir, char *prefix);
 
-static void	fill_heredoc(t_redir **r, char *file)
+int	ft_open_hds(t_ast *ast, t_ast *head)
 {
-	(*r)->fpath = file;
-	(*r)->fd = 0;
-	(*r)->flags = O_RDONLY;
-	(*r)->mode = 0644;
-	(*r)->is_hd = 1;
+	if (!ast)
+		return (0);
+	else if (ast->type == T_AND || ast->type == T_OR || ast->type == T_PIPE)
+	{
+		if (!ft_open_hds(ast->left, head))
+			return (0);
+		return (ft_open_hds(ast->right, head));
+	}
+	else if (ast->type == T_SUBSH)
+		return (ft_open_hds(ast->left, head));
+	else if (ast->type == T_REDIR)
+	{
+		if (ast->redir->is_hd)
+			if (!ft_heredoc(ast->redir, head))
+				return (0);
+		return (ft_open_hds(ast->left, head));
+	}
+	return (1);
 }
 
-t_redir	*ft_heredoc(char *eof, t_token *lst)
+int	ft_heredoc(t_redir *r, t_ast *ast)
 {
-	t_redir	*r;
-	int		pid;
-	char	*file;
-	int		status;
-
-	file = _randtmp_file("/tmp/", "mish_herdoc_");
+	int (pid), (status);
+	char *(file), *(eof);
+	file = ft_randtmp_file("/tmp/", "mish_herdoc_");
+	eof = ft_strdup(r->fpath);
 	if (!file)
-		return (NULL);
+		return (0);
 	pid = fork();
 	if (pid == -1)
-		return (unlink(file), free(file), perror("fork"), NULL);
+		return (free(file), perror("fork"), 0);
 	else if (pid == 0)
 	{
+		r->is_hd = 0;
+		ft_free_ast(ast);
 		arr_clean(&g_mish.envp);
-		ft_free_tokens(&lst);
 		_here_doc(file, eof);
 	}
-	r = ft_calloc(1, sizeof(t_redir));
-	if (!r)
-		return (ft_perror("heredoc", ERR_MALLOC_FAIL), NULL);
-	fill_heredoc(&r, file);
+	free(r->fpath);
 	free(eof);
+	r->fpath = file;
 	status = 0;
 	waitpid(pid, &status, 0);
 	ft_check_status(status);
 	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
-		return (free(file), free(r), NULL);
-	return (r);
+		return (0);
+	return (1);
 }
 
-static char	*_randtmp_file(char *dir, char *prefix)
+static void	_exit_hd(char *eof, int fd, int cmd)
 {
-	char	*random;
-	char	*path;
+	static char	*seof;
+	static int	sfd;
 
-	random = ft_itoa((unsigned long)(&tmpfile));
-	if (!random)
-		return (NULL);
-	path = ft_strjoin(dir, random, prefix);
-	free(random);
-	return (path);
+	if (cmd == 0)
+	{
+		seof = eof;
+		sfd = fd;
+	}
+	else if (cmd == 1)
+	{
+		free(seof);
+		close(sfd);
+	}
 }
 
 // here there is a probleme some info eof is not freed before exit
 void	handel_herdocsig(int sig)
 {
 	(void)sig;
+	_exit_hd(NULL, 0, 1);
 	exit(130);
 }
 
@@ -91,7 +106,8 @@ static void	_here_doc(char *file, char *eof)
 	free(file);
 	signal(SIGINT, handel_herdocsig);
 	if (fd == -1)
-		return (perror("open filed"));
+		return (perror("open"));
+	_exit_hd(eof, fd, 0);
 	line = readline(">");
 	hd_s = ft_strlen(eof);
 	line_s = ft_strlen(line);
@@ -104,7 +120,6 @@ static void	_here_doc(char *file, char *eof)
 		line_s = ft_strlen(line);
 	}
 	free(line);
-	close(fd);
-	free(eof);
+	_exit_hd(NULL, 0, 1);
 	exit(0);
 }
