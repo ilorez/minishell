@@ -24,7 +24,7 @@ RM = rm -rf
 # F_DEBUG = print_arr_str.c print_lexer.c print_ast.c lists.c components.c buildins_lists.c
 
 # folders
-F_UTILS = command_end.c free_methods.c get_word.c handel_exit.c wait_macros.c get_env.c get_paths.c set_env.c unset_env.c signals.c
+F_UTILS = command_end.c free_methods.c get_word.c handel_exit.c wait_macros.c get_env.c get_paths.c set_env.c unset_env.c signals.c randtmpfile.c
 F_SETUP = setup.c
 F_LEXER = lexer.c
 F_PARSER = grammar.c parser_1.c parser.c utils.c redir_utils.c heredoc.c

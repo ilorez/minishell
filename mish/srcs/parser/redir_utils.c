@@ -6,13 +6,15 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:16:37 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/06/01 14:56:39 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:17:02 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "container.h"
 #include "parser.h"
+#include "t_errno.h"
 #include "types.h"
+#include "utils.h"
 
 t_ast	*consume_redir(t_token **lst)
 {
@@ -55,12 +57,12 @@ t_redir	*fill_redir(t_token **lst, t_redir *redir)
 	next_token(lst);
 	str = ft_calloc((*lst)->word->len + 1, sizeof(char));
 	if (!str)
-		exit_err("malloc failed", 2);
+		return (ft_perror("ast", ERR_MALLOC_FAIL), NULL);
 	ft_strlcpy(str, (*lst)->word->ptr, (*lst)->word->len + 1);
 	next_token(lst);
 	redir = ft_calloc(1, sizeof(t_redir));
 	if (!redir)
-		exit_err("malloc failed fill_redir", 2);
+		return (ft_perror("ast", ERR_MALLOC_FAIL), NULL);
 	redir->fpath = str;
 	if (tt == T_LLESS)
 		redir->is_hd = 1;

@@ -6,16 +6,12 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/06/01 13:41:05 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:16:20 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/utils.h"
-
-void	exit_err(char *msg, t_errno code)
-{
-	ft_perror(msg, code);
-}
+#include "t_errno.h"
 
 void	ft_handel_exit(t_data *data, int status)
 {
