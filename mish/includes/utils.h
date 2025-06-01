@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:19:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/06/01 15:00:37 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:19:14 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 // handel exit
 void	ft_handel_exit(t_data *data, int status);
-void	exit_err(char *msg, t_errno code);
 
 // get word
 char	*ft_get_word(char *str);
