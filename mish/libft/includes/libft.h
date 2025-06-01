@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:06:37 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/31 10:49:33 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 15:05:14 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ void		ft_print_str_arr(char **arr);
 // arrays functions
 char		*ft_strjoin(char const *s1, char const *s2, char const *c);
 char		**ft_split(char const *s, char c);
-char		**ft_split_cond(char const *s, int(f)(int));
+char		**ft_split_cond(char const *s, int (f)(int));
 
 #endif

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handel_exit.c                                      :+:      :+:    :+:   */
+/*   randtmpfile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 02:16:07 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/06/01 13:41:05 by znajdaou         ###   ########.fr       */
+/*   Created: 2025/06/01 15:00:01 by znajdaou          #+#    #+#             */
+/*   Updated: 2025/06/01 15:00:21 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/utils.h"
+#include "utils.h"
 
-void	exit_err(char *msg, t_errno code)
+char	*ft_randtmp_file(char *dir, char *prefix)
 {
-	ft_perror(msg, code);
-}
+	char	*random;
+	char	*path;
 
-void	ft_handel_exit(t_data *data, int status)
-{
-	ft_free_all(&data);
-	rl_clear_history();
-	exit(status);
+	random = ft_itoa((unsigned long)(&tmpfile));
+	if (!random)
+		return (NULL);
+	path = ft_strjoin(dir, random, prefix);
+	free(random);
+	return (path);
 }

@@ -6,7 +6,7 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 12:05:53 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/16 14:22:10 by abdnasse         ###   ########.fr       */
+/*   Updated: 2025/06/01 14:41:44 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,9 @@ int		match_op(t_token **lst, int is_redir);
 t_ast	*consume_redir(t_token **lst);
 t_ast	*add_back_node(t_ast *lst, t_ast *end);
 void	consume_node(t_token *lst);
+
+// heredoc
+int		ft_heredoc(t_redir *r, t_ast *ast);
+int		ft_open_hds(t_ast *ast, t_ast *head);
 
 #endif

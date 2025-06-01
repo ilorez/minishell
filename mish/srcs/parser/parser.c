@@ -6,13 +6,11 @@
 /*   By: abdnasse <abdnasse@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 21:12:46 by abdnasse          #+#    #+#             */
-/*   Updated: 2025/05/27 11:51:34 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 14:58:23 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "container.h"
-#include "types.h"
-#include "utils.h"
 
 t_ast	*ft_parse_ast(t_token **lst)
 {
@@ -21,12 +19,12 @@ t_ast	*ft_parse_ast(t_token **lst)
 
 	lst_copy = *lst;
 	ast = parse_or_and(lst);
-	if (*lst)
+	ft_free_tokens(&lst_copy);
+	if (!ft_open_hds(ast, ast))
 	{
 		ft_free_ast(ast);
 		ast = NULL;
 	}
-	ft_free_tokens(&lst_copy);
 	return (ast);
 }
 
