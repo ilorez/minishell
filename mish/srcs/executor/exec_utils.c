@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:02:26 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/05/31 10:54:56 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:57:34 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*ft_get_right_path(t_data *data, char *cmd)
 {
 	char *(path), *(paths), *(start);
 	paths = ft_getenv("PATH");
+	if (!ft_strncmp(cmd, "..", 3) || !ft_strncmp(cmd, ".", 2))
+		return (ft_perror(cmd, ERR_CMDNF), NULL);
 	if (ft_strchr(cmd, '/') || !paths)
 		return (_check_is_file(data, cmd), ft_strdup(cmd));
 	start = paths;
@@ -49,8 +51,7 @@ char	*ft_get_right_path(t_data *data, char *cmd)
 		free(path);
 		start = paths;
 	}
-	ft_perror(cmd, ERR_CMDNF);
-	return (NULL);
+	return (ft_perror(cmd, ERR_CMDNF), NULL);
 }
 
 int	ft_dup2(int fd, int to, t_data *data)
