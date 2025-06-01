@@ -23,7 +23,7 @@ typedef enum s_errno
 	ERR_CMDNF,
 	ERR_NONUM,
 	ERR_IDENT,
-  ERR_RPATH,
+	ERR_RPATH,
 	ERR_ISDIR,
 	ERR_TO_MANY_ARG,
 	ERR_ENOENT,
