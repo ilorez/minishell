@@ -6,7 +6,8 @@ CC = cc
 LIBC = ar -rcs
 RM = rm -f
 
-
+FT_HEADERS = ./includes/ft_malloc.h ./includes/ft_linked_lst.h ./includes/get_next_line.h \
+						 ./includes/libft.h ./includes/t_arr.h ./includes/t_str.h ./includes/t_bool.h ./includes/t_errno.h
 
 SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			 ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c \
@@ -46,8 +47,6 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			 ./structs/array/ft_arr_free.c \
 			 ./structs/array/ft_arr_merge.c
 
-	
-
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -56,7 +55,7 @@ all: $(NAME)
 $(NAME):${OBJS}
 	${LIBC} ${NAME} ${OBJS}
 
-%.o: %.c
+%.o:  %.c $(FT_HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -68,3 +67,4 @@ fclean: clean
 re: fclean all
 
 .PHONY : all clean fclean re
+.SECONDARY: $(OBJS)

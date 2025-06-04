@@ -6,7 +6,7 @@
 /*   By: znajdaou <znajdaou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:28:22 by znajdaou          #+#    #+#             */
-/*   Updated: 2025/06/01 18:59:37 by znajdaou         ###   ########.fr       */
+/*   Updated: 2025/06/01 21:46:37 by znajdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_cd(char **argv)
 		path = argv[0];
 	if (chdir(path) != 0)
 	{
-		perror("cd");
+		perror(path);
 		return (1);
 	}
 	if (!getcwd(g_mish.cwd, PATH_MAX))
